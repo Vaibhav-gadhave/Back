@@ -1,0 +1,7 @@
+
+seq start end
+seq end step start
+
+echo {1..10}
+echo {10..1}
+echo {10..1..2}

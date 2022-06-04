@@ -1,0 +1,7 @@
+
+
+rsync -vtr --progress --exclude debug/ rsync://mirror.pnl.gov/epel/7/x86_64/ epel       #### little slow
+
+reposync --repoid=epel --download_path=/run/media/vaibhavg/Backup2/IMAGES/             #### fast (Centos 7)
+
+dnf reposync  --repoid=epel -p /run/media/vaibhavg/Backup2/IMAGES/REPO_centos_8/	   #### fast (Centos 8)

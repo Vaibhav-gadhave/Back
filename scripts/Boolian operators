@@ -1,0 +1,11 @@
+Boolean Operators
+
+The following Boolean operators are supported by the Bourne Shell.
+
+Assume variable a holds 10 and variable b holds 20 then −
+
+Show Examples
+Operator 	Description 	Example
+! 	This is logical negation. This inverts a true condition into false and vice versa. 	                                    [ ! false ] is true.
+-o 	This is logical OR. If one of the operands is true, then the condition becomes true.                                	[ $a -lt 20 -o $b -gt 100 ] is true.
+-a 	This is logical AND. If both the operands are true, then the condition becomes true otherwise false.                 	[ $a -lt 20 -a $b -gt 100 ] is false. 

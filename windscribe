@@ -1,0 +1,31 @@
+2. Download and install the repo as root
+
+wget https://repo.windscribe.com/centos/windscribe.repo -O /etc/yum.repos.d/windscribe.repo
+
+3. Update yum
+
+yum update
+
+4. Install epel-release
+
+yum install epel-release
+
+5. Install windscribe-cli
+
+yum install windscribe-cli
+
+6. Switch to non-root user
+
+exit
+
+7. Login to Windscribe
+
+windscribe login
+
+8. Connect to Windscribe
+
+windscribe connect
+
+Need help?
+
+windscribe --help

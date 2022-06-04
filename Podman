@@ -1,0 +1,78 @@
+#List local Images 
+podman images
+
+#Log in to a remote registry 
+podman login RegistryURL -u user -p password
+
+#Pull an image from a remote registry
+podman pull registry.redhat.io/rhel8/httpd-24
+
+#Run a container with Podman  
+podman run -d -it -p 80:80 -v /nfs:/var/www/html registry.redhat.io/rhel8/httpd-24
+
+#List the running containers 
+podman ps
+
+#Execute a command in a running container 
+podman exec -it containerid /bin/bash
+
+#Display the logs of a container 
+podman logs containerid
+
+#Save an image 
+podman save -o /path containerid
+
+#Load an image 
+podman load -i /path
+
+#Start an existing container 
+podman start containerid
+
+#Stop an existing container 
+podman stop containerid
+
+#Restart an existing container 
+podman restart containerid
+
+#Remove a container 
+podman rm containerid
+
+#Remove a container image 
+podman rmi containerimages
+
+#Podman version 
+podman version
+
+#Log out 
+podman logout
+
+#Create a new image based on the current state of a running container 
+podman run –rm -it [–name name] image:tag command  
+
+#Create a new image based on the current state of a running container 
+podman commit container newImage:tag 
+
+#Create (but don’t start) a container from an image 
+podman create [–name name] image:tag
+
+#Restart an existing container 
+podman restart container
+
+#Wait on one or more containers to stop 
+podman wait container1 [container2…]
+
+#Stop a running container gracefully 
+podman stop container
+
+#Send a signal to a running container 
+podman kill container
+
+#Remove a container (use -f if the container is running) 
+podman rm [-f] container
+
+#Display a live stream of a container’s resource usage 
+podman stats container
+
+#Return metadata (in JSON) about a running container 
+podman inspect container
+

@@ -1,0 +1,7 @@
+#!/bin/bash
+echo "######Centos-8 and Server are getting started#####"
+virsh start Client && virsh start Server 
+echo "######Virtual Viewer are getting started#####"
+virt-viewer Client &
+virt-viewer Server &
+echo "######Server and client are started#####"

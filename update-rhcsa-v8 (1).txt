@@ -1,0 +1,87 @@
+       RHCSA(EX200) EXAM-PAPER
+  Three machines are there on your exam environment
+       1. Base Machine – base.net.example.com
+              a. Primary – primary.netX.example.com
+              b. Secondary – secondary.netX.example.com
+
+On Primary Machine:
+Q1.) setup an ip address for Primary virtual machine.
+ip addr 172.25.X.11 subnet mask 255.255.255.0 Default gateway 172.25.X.254 nameserver
+172.25.254.254 and hostname as primary.netX.example.com.
+
+Q2.) Yum repository configuration on both machines
+     content.example.com/rhel8.0/x86_64/dvd/BaseOS
+     content.example.com/rhel8.0/x86_64/dvd/AppStream
+
+Q3.) Configure a cron job on Primary machine
+a. The user natasha must configure a cron job that runs daily at 14:23 local time and executes /bin/echo hiya
+OR
+b. The user natasha must configure a cron job that runs daily at every 3 minute local time and executes /bin/echo hiya
+
+Q4.) SELinux must be running in the Enforcing mode. (given in instructions)
+
+
+Q5.) Create the following users, groups, and group memberships:-
+A group named sysadmin. A user natasha who belongs to sysadmin as a secondary group. A user sarah
+who also belongs to sysadmin as a secondary group. A user harry who does not have access to an
+interactive shell on the system, and who is not a member of sysadmin. Natasha, Sarah and Harry should
+all have the password of thuctive.
+
+Q6). Create a collaborative directory “/common/admin” with the following characteristics:
+Group ownership of /common/admin is sysadmin. The directory should be readable, writable, and
+accessible to members of sysadmin, but not to any other user. (It is understood that root has access to
+all files and directories on the system.) Files created in /common/admin automatically have group
+ownership set to the sysadmin group.
+
+Q7). Copy the file /etc/fstab to /var/tmp. Configure the permissions of/var/tmp/fstab so that:-
+The file /var/tmp/fstab is owned by the root user. The file /var/tmp/fstab belong to the group root. The
+file /var/tmp/fstab should not be executable by anyone. The user natasha is able to read and write/var/tmp/fstab. The user sarah can neither write nor read /var/tmp/fstab. [Note: all other users
+(current or future) have the ability to read/var/tmp/fstab.]
+
+Q8). Configure NTP in your system so that it is an NTP client of classroom.example.com.
+
+Q9). Find the files in your system which is owned by Simone user & copy all the files on /root/found
+directory
+
+Q10). Find the string strato from /usr/share/dict/words/file and save the result in /searchfile.
+
+Q11.) Using automounter service mount RemoteuserX onto the provided folder
+/ourhome/RemoteuserX
+
+Q12.) debug selinux : Web server already configure, no any changes on config file should be run your web server, all web pages run on web browsers web content available under web documents. and run also web pages run on port 83 
+ Ans.: change all file context of  /var/www/html/ and set port context of port no 83 and added port on firewall use port no given on exam Question. 
+
+
+
+On Secondary Machine:
+
+Q1.) First step is to crack password of Secondary Machine.
+
+
+
+Q2.) Yum repository configuration on both machines
+     content.example.com/rhel8.0/x86_64/dvd/BaseOS
+     content.example.com/rhel8.0/x86_64/dvd/AppStream
+
+
+Q3). Set a recommended tuning profile for your system. (profile already available)
+
+
+Q4). Create a SWAP partition of 250 megabyte and make available at next reboot. Partition already
+available.
+
+Q5). Create the volume group with name myvol with 32 MiB P.E. and create the lvm name mydatabase
+with the 50 L.E. and format this lvm with vfat and create a directory /database and mount this lvm
+permanently on /database.
+
+
+Q6). Resize the Lvm partition "/remote" to 450MiB.
+
+
+Q7). You have been provided with a disk drive attached to your system, make use of it to create a
+VDO device with a logical size of 50GB. Vdo name disk1 and mounts /mnt/vdo_disk
+
+Q8). Create a backup.tar.(bz2 or gz) of /etc directory in /home location.
+
+
+Q9).

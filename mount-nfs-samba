@@ -1,0 +1,12 @@
+***************How to mount nfs in linux system(client system)****************
+
+mkdir /nfsshare
+mount -t nfs 192.168.12.10:/run/media/vaibhavg/Backup2/IMAGES /nfsshare
+
+***************How to mount nfs in windows system(client system)****************
+
+mount -o anon 92.168.12.10:/run/media/vaibhavg/Backup2/IMAGES Z:
+
+***************How to mount samba in linux system(client system)****************
+
+

@@ -1,0 +1,85 @@
+
+                                                       How to Configure kibana server
+
+Note : Please turn-off your firewall at both client and serverside
+
+reference link :
+1. https://gitlab.com/LabIT/elasticsearch/-/blob/master/elk_manual_configuration/elastic_manual_install.md
+2. https://phoenixnap.com/kb/how-to-install-elk-stack-on-ubuntu
+---------------------------------------------------------------------------------------------------------------------
+
+1. sudo apt-get install openjdk-8-jdk -y
+
+2. sudo apt-get install nginx -y
+
+3. Download and install public signing key
+wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+
+4. Install apt-transport-https package
+sudo apt-get install apt-transport-https -y
+
+5. Save directory definitions
+echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
+
+6. Update and Install elasticsearch
+sudo apt-get update && sudo apt-get install elasticsearch && sudo apt-get install logstash && sudo apt-get install kibana
+
+7. configure elasticsearch
+sudo nano /etc/elasticsearch/elasticsearch.yml
+
+#change cluster name
+cluster.name: demo-elk  
+
+#give the cluster a descriptive name
+node.name: elk-1 
+
+#change network binding
+network.host: 0.0.0.0  
+
+#custom port for http
+http.port: 9200
+
+#setup discovery.type as single node
+discovery.type: single-node   ## add this line at the bottom
+
+8. Make some changes in jvm file
+sudo nano /etc/elasticsearch/jvm.options
+
+-Xms512m                      ##uncomment this lines and edit
+-Xmx512m                      ##uncomment this lines and edit
+
+9. Start Elasticsearch service
+sudo systemctl start elasticsearch
+sudo systemctl enable elasticsearch
+
+10. validate Elasticsearch cluster health
+curl -XGET http://localhost:9200/_cluster/health?pretty
+
+11. configure kibana
+sudo nano /etc/kibana/kibana.yml
+
+#uncomment server.port
+server.port: 5601
+
+#change server.host
+server.host: "0.0.0.0"
+
+#change server.name
+server.name: "demo-kibana"
+
+#uncomment elasticsearch.host
+elasticsearch.hosts: ["http://localhost:9200"]
+
+12. Start Kibana service
+sudo systemctl start kibana
+sudo systemctl enable kibana
+
+13. Add in firewall
+sudo ufw allow 5601/tcp
+sudo ufw allow 5900/tcp
+
+14. Test kibana
+http://localhost:5601  OR http:ip-address:5601
+ 
+
+

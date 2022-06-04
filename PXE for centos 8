@@ -1,0 +1,90 @@
+###################Installing PXE in centos-8#############################
+
+dnf install -y dnsmasq syslinux httpd tftp-server vsftpd
+mv -v /etc/dnsmasq.conf /etc/dnsmasq.conf.backup
+vim /etc/dnsmasq.conf
+
+************************************************************ 
+interface=ens33
+bind-interfaces
+domain=linuxhint.local
+dhcp-range=ens33,192.168.15.100,192.168.15.240,255.255.255.0,8h
+dhcp-option=option:router,192.168.15.1
+dhcp-option=option:dns-server,192.168.15.1
+dhcp-option=option:dns-server,8.8.8.8
+dhcp-boot=pxelinux.0,pxeserver,192.168.15.1
+
+pxe-prompt="Press F8 for menu.", 60
+pxe-service=x86PC, "Install CentOS 8 from network server 192.168.15.1", pxelinux
+enable-tftp
+tftp-root=/var/lib/tftpboot
+**************************************************************
+
+cp -r /usr/share/syslinux/* /var/lib/tftpboot
+mkdir /var/lib/tftpboot/pxelinux.cfg
+vim /var/lib/tftpboot/pxelinux.cfg/default
+
+**************************************************************
+
+default menu.c32
+label install_centos8
+menu label ^Install CentOS 8
+menu default
+kernel centos8/vmlinuz
+append initrd=centos8/initrd.img ip=dhcp inst.repo=http://192.168.15.1/centos8/
+
+label install_centos8_kickstart
+menu label ^Install CentOS 8 Kickstart
+kernel centos8/vmlinuz
+append initrd=centos8/initrd.img method=http://192.168.15.1/centos8/anaconda/anaconda-ks.cfg devfs=nomount
+
+******************************************************************
+
+wget http://centos.mirrors.estointernet.in/8.2.2004/isos/x86_64/CentOS-8.2.2004-x86_64-dvd1.iso
+mount -o loop CentOS-8.2.2004-x86_64-dvd1.iso /mnt
+mkdir /var/lib/tftpboot/centos8
+cp /mnt/images/pxeboot/vmlinuz /var/lib/tftpboot/centos8
+cp /mnt/images/pxeboot/initrd.img /var/lib/tftpboot/centos8
+vim /etc/httpd/conf/pxe.conf
+
+*******************************************************************
+Alias /centos8 /var/www/centos8/
+
+<Directory /var/www/centos8/>
+Options Indexes FollowSymLinks
+Order Deny,Allow
+Allow from all
+</Directory>
+
+*******************************************************************
+mkdir /var/www/centos8
+cp -r /mnt/* /var/www/centos8
+chmod -R 755 /var/www/centos8
+systemctl start dnsmasq
+systemctl status dnsmasq
+systemctl start vsftpd
+systemctl status vsftpd
+systemctl enable dnsmasq
+systemctl enable vsftpd
+systemctl start httpd
+systemctl status httpd
+systemctl enable httpd
+firewall-cmd --add-service=ftp --permanent  	## Port 21
+firewall-cmd --add-service=dns --permanent  	## Port 53
+firewall-cmd --add-service=dhcp --permanent  	## Port 67
+firewall-cmd --add-port=69/udp --permanent  	## Port for TFTP
+firewall-cmd --add-port=4011/udp --permanent  ## Port for ProxyDHCP
+firewall-cmd --add-service={http,tftp} --permanent
+firewall-cmd --reload
+
+
+
+
+
+
+
+
+
+
+
+

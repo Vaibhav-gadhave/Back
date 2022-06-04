@@ -1,0 +1,2 @@
+Purpose: This script is using to give sudo access to domain admin groups and as well as local anibrain user.
+sh /aslan/projects/Custom_scripts/IT_SCRIPTS/SUDOERS/sudo-access-add.sh

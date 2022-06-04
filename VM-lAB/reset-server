@@ -1,0 +1,5 @@
+#!/bin/bash
+echo "################################### VIRTUAL MACHINE MANAGER ###########################"
+virsh snapshot-revert Centos8-Server Server
+virsh start Centos8-Server
+echo "################################### SERVER STARTED  ###########################"

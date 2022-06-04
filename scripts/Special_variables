@@ -1,0 +1,20 @@
+#!/bin/bash
+#Purpose : Use of special variable
+#Created date :  06:52:45 PM IST
+#Modified date : 
+#Author: Vaibhav Gadhave
+#Start
+echo "'$*' output is $*"
+echo "'$#' output is $#"
+echo "'$1 & $2' output is $1 and $2"
+echo "'$@' output is $@"
+echo "'$?' output is $?"
+echo "'$$' output is $$"
+sleep 400 &
+echo "'$!' output is $!"
+echo "'$0' your output program name is $0"
+
+
+
+
+#End

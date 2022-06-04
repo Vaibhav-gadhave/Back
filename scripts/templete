@@ -1,0 +1,15 @@
+#!/bin/bash
+
+read -p "Please provide the file name that you want to create: " filename
+touch /run/media/vaibhavg/Backup/PC/DOCS/scripts/$filename
+chmod -R 777 $filename
+echo '#!/bin/bash' > /run/media/vaibhavg/Backup/PC/DOCS/scripts/$filename
+echo '#Purpose : ' >> /run/media/vaibhavg/Backup/PC/DOCS/scripts/$filename
+echo '#Created date : ' `date +"%Y-%m-%d %r"` >> /run/media/vaibhavg/Backup/PC/DOCS/scripts/$filename
+echo '#Modified date : ' >> /run/media/vaibhavg/Backup/PC/DOCS/scripts/$filename
+echo '#Author: Vaibhav Gadhave' >> /run/media/vaibhavg/Backup/PC/DOCS/scripts/$filename
+echo '#Start' >> /run/media/vaibhavg/Backup/PC/DOCS/scripts/$filename
+echo '#End' >> /run/media/vaibhavg/Backup/PC/DOCS/scripts/$filename
+sleep 1 
+vim $filename
+

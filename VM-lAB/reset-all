@@ -1,0 +1,10 @@
+#!/bin/bash
+echo "################################### VIRTUAL MACHINE MANAGER ###########################"
+virsh snapshot-revert Server Myserver
+virsh start Server
+virsh snapshot-revert Client Myclient
+virsh start Client
+#virsh snapshot-revert Server-centos-7.0 Server
+#virsh start Server
+echo "################################### SERVER And CLIENT STARTED  ###########################"
+ 

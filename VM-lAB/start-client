@@ -1,0 +1,3 @@
+#!/bin/bash
+virsh start centos8-Client
+virt-viewer centos8-Client

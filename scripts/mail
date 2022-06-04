@@ -1,0 +1,9 @@
+#!/bin/bash
+TO="vvgadhave@gmail.com"
+ram_free=$(free -mt | grep Total: | awk '{print $4}')
+
+if [ $ram_free -le 14000 ]
+then 
+	echo "sending mail beacuase ram is less"
+	echo "subject:warning, ram free size low"|sendmail $TO  
+fi

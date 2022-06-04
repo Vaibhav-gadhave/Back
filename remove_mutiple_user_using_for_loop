@@ -1,0 +1,1 @@
+for u in user1 user2 user3 user4; do echo "$u"; userdel -r "$u"; done

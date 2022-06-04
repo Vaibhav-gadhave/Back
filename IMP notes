@@ -1,0 +1,7 @@
+IMP Notes
+
+Create encrypted passwords : openssl passwd -1 -stdin <<< Passwd@123#
+Create ssh key : ssh-keygen -t rsa -b 4096 -C "vvgadhave@gmail.com"
+Copy ssh key on other system : ssh-copy-id -i ~/.ssh/id_rsa.pub vaibhavg@192.168.122.202
+Change docker password : docker exec -u root -it --workdir / 9f0486bd4470 bash
+Create tag for image : docker tag $ID reponame/name:0.10.24

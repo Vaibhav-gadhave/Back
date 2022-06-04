@@ -1,0 +1,4 @@
+#!/bin/bash
+
+sshpass -p "1" ssh -o StrictHostKeyChecking=no vaibhavg@192.168.122.201
+
