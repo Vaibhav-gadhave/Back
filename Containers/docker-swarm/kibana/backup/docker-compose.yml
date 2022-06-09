@@ -41,7 +41,7 @@ services:
       endpoint_mode: dnsrr
     deploy:
       placement:
-        constraints: [node.labels.name == sham]
+        constraints: [node.labels.name == ram]
 
   heartbeat:
     image: docker.elastic.co/beats/heartbeat:7.11.1
