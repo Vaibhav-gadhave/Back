@@ -88,6 +88,9 @@ docker volume prune
 #Delete container forcefully
 docker container prune
 
+#Build docker images
+docker build -t yourusername/repository-name .
+
 #Specify the docker file if having other name
 docker build -f dockerfile.dev .
 
