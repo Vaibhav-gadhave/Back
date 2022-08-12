@@ -1,0 +1,242 @@
+[18:43, 6/25/2019] R Shail Shekh Eng: 
+1. Boot process of Linux
+2. Directory structure
+3. Kind of permission
+4. How to edit a file
+5. Read Basic of nfs and ftp
+6. Different between ftp and afro
+7. File system of Linux
+8. LVM overview.
+9. ?? firewall in Linux
+10.Different between ftp and sftp
+
+
+
+
+Interview Technical Questions
+
+1. What is sticky bit ( SUID,SGID,ACL)
+2. Port # for protocols FTP, SFTP, HTTP,SMTP,Rsync, DHCP,SSH,SNMP?
+3. What is tcpdump ? Why it is used?
+4. What is OS Hardening? Tell me different OS Hardening points ?
+5. What is difference between Apache and Tomcat ? How it works ?
+6. Difference between RHEL 6 & 7 ?
+7. What is DRBD ?
+8. What is cluster what are its services ? What is the use of corosync and pacemaker ?
+9. What is kernel compilation ?
+10. What is a she bang value ?	
+11. From where and how to check system logs ?
+12. Once error logs given to development team what additional information you will provide them ?
+13. What kind of query DNS understands ?
+14. What will you use to view a specific users 3 days back activities?
+15. If I have 8 core CPU out of which 4 CPUs are in use what will be the load average?
+16. In top command what does three numerical fields indicate ?
+17. If in load average all three fields shows as 4,4,4 what does that mean?
+18. How will you reduce the load average in top command ?
+19. What is patching how often it should be done ? Is it done manually or automatically?
+20. What is swap ? What maximum size can be assigned to swap memory ?
+21. How to monitor servers using Nagios ?
+22. Difference between snapshot revert and snapshot backup ? Can we recover after deleting vmware with snapshot ?
+23. What is a quorum?
+24. Why is fencing used in redhat cluster ?
+25. What is audit logging ?
+26. Difference between /bin and /sbin files ?
+27. What will you see in dev directory?
+28. What is a umask value ? What umask value does root and a normal used contains ?
+29. What is runlevel ? What is startup script? What is sudo command used for ?
+30. 10 tar files are downloaded how can I extract only 1 single file in any directory?
+31. What is Multipathing? How to do lun mapping ? Which storage you have used in previous company?
+32. How to use OpenLDAP for centralized authentication?
+33. Explain about symlink and Hardlink ?
+34. Explain about firewalls & IPtables?
+35. How SAMBA works ? What it is used for ?
+36. What is network bonding or teaming?
+37. What is XINETD and TCPWrapper?
+38. What is KVM or virtualization?
+39. What is grub boot configuration? How to use system rescue?
+40. What is the difference between TCP and UDP ?
+41. What is IP Routing / HA and Load balancer used for ?
+42. Different types of RAIDS ? Which is the best raid to use ?
+43. Difference between Load Average and CPU Usage ?
+44. If a system has crashed and KDump file has generated how would you up the system ?
+45. What is inode number ? Difference between PID and Inode number ?
+46. What all commands you have used for network management ?
+47. Difference between fdisk and LVM ?
+48. What precautions would you take before reducing a LVM ?
+49. If df cmd shows my /var is used 8GB out of 10GB and du command shows 9GB out of 10GB ? What could be the reason?
+50. In crontab how many fields are there and what are they ?
+51. When you create a normal user what all files are modified?
+52. If a client complains that resources are very slow how will you solve that issue ?
+53. For running FTP which service need to disable first ?
+54. How to configure OpenLDAP server ?
+
+Interview
+
+1) boot process
+2) difference between yum and rpm
+3) Sql, HTTP, SSH, telnet, samba, DNS, NFS, https, FTP port no
+4) what is yum 
+5) where is the configuration file of yum
+6) ext2, ext3, ext4 difference 
+7) how to rename file name
+8) how to copy file from one server to other server
+9) difference between telnet and ping 
+10) use of cat command 
+11) Sql configuration file
+12) difference between tar and bzip
+13) what is buffer in top command 
+14) how to check previous load of the system
+15) how to reduce lvm
+16) how to extend LVM 
+17) how to check running process 
+18) how to set the sticky bit permission 
+19) how to set the permission of the file that is user have all access and other have read only permission 
+20) what is ACL and how to set the ACL 
+21) where is network configuration file
+22) how to check the ip
+23) how to check getway
+24) how to check user login status 
+25) what does these command PS, head, tail, less, more, grep
+26) how to check how many characters is in the file
+27) explain all runlevel 
+28) use of ssh
+29) how to check Kernel Arcturus?
+30) how to check mount point 
+31) how to check number of HDD connected to system 
+32) how to check disk usage 
+33) how to check RAM
+34) if I have a user in the name of Mumbai can o create a group as a same name.
+
+1) told me about your internship, what was your work in Sutra info tech
+2) which distribution you have used
+3) what is NFS and how it's we can use NFS
+4) how to create a LVM
+5) how to create a file system 
+6) how to extend LV 
+7) what is yum
+8) where is configuration file of yum
+9) how to create a repositories 
+10) what is base URL 
+11) how to add connection in RHEL 7
+12) scenario of RPM:
+I have 5 files a b c d e and all I have downloaded, when I am going to a file it is asking for dependency b when I am going to b it is asking for c file, if doing it is asking d and doing d is asking for e it all in the loop like these 5 files but if it is going to install e it is asking for f this dependency is going on continue, so how we can install?
+13) what is kik start
+14) what is 7 permission 
+15) what is that 7 permission 
+16) explain the value of the rwx
+17) port no of FTP
+18) what are the different types of the permission 
+19) how to set sticky bit permission 
+20) what is ACL, and how we can now the ACL for particular users
+21) how to add a user in particular group 
+22) boot process of Linux 
+23) what is compilation 
+24) what is Kernel tuning 
+25) how to extract bgip file
+26) how many partition we can create in HDD
+27) how to switch GUI to single user mode
+28) how we can set permanently boot the machine in single user mode
+29) path of the changing the runlevel 
+30) how DNS work
+31) how DHCP work
+32) difference between TCP and UDP
+33) how to know which all process is running in Linux 
+34) what is nmculi (something this they ask) 
+35) what is the port no of HTTP
+36) port no of SSH how it's work
+37) what is active directory 
+38) network layers
+
+
+Update Interview Questions
+1) what Is dns NS Server.
+2)what is service name,configuration file name of dns and what Is pkg Name and version.
+3)How can do load balancing in apache.
+4)what are step for server hardling.
+5)How to scan lun. 
+6) LVM Increase and Reducing.
+7) what is SUID, SGID and sticky bit.
+8) How can do source code installation and what can do 3 commands of sources code installation.
+9) what are resource records in dns.
+10) Grub Set password was forget so how can resolve it. 
+11) boot processes of rhel7. 
+12) different between rhel7 and rhel6
+
+Reliance JIO
+Interview Question
+1- How to disabled iptables.
+2- how to configure Kick start And PXE Boot and what protocal are used.
+3- what is difference between Regular partition and LVM partition.
+4- how can partition size increase and Reduce of LVM.
+5- what are the limitation of fdisk.
+6- how to manitoring CPU Load Average and Memory used.
+7- how can do patching server in linux and also ubuntu server.
+8- any idea about clustering.
+9- Brief Info of DNS and Resource Recored.
+10- What is NIC Bonding.
+11- what is multipathing and whenever scan LUN showing two device driver in fdisk so which device driver is used for formating.
+12 - How to monitoring NIC Bonding.
+
+
+Redhat interview Questions
+1) what's is journalctl, How is the work journalctl command.
+2) what is initramfs file.
+3) where is kernel file present in os.
+4) How to Useradd with home directory name is /abc 
+6) which single service has two port.
+7) what is systemd and how run service parallel while booting.
+8) what is .ko
+9) what is kdump and what type of log capture.
+10) How to getting process priority.
+11) we have two rpm example a.rpm and b.rpm both rpm depending each other so how to resolve and there is not configure yum. Only do using rpm.
+12) what is chroot.
+13)How can seen logs from system boot to login console.
+
+Ftp& vsftp , file system, boot process ,file  permission, ext4 and xfs Defence
+
+IT source interview questions
+1.Boot process
+2.explain fstab file
+3.where the runlevel file are stored
+4.Explain how to configure samba
+5.Port of samba
+6.Can we add vitual user in samba 
+7.How to create a virtual user 
+8.explain how to configure DNS
+9. Explain steps  to create zone file
+10.Port of DNS
+11.Explain how to configure apache
+12.Port of apache
+13.how to access a web page using different port eg:813.what changes u will do in conf file of apache?
+14.Explain about apache cluster
+15.Explain how to configure mysql
+
+ACL Mobile Limited Interview questions
+1.Explain boot process
+2.Explain kernel tunning
+3.How to upgrade kernel
+4.After upgrading kernel and after rebooting, in the splash screen it is showing kernel version after pressing enter it is not moving further what is the problem,what will u do??
+5.How to extend lvm?
+6.What is the difference between L and l in lvm
+7.Explain the parameters of fstab?
+8.What is filesystem
+9.What is inode
+10.What is the difference between ssh and scp
+11.If ssh server is stopped will scp work?
+12.How to configure a yum server?
+13.Port  Of nfs
+14.Port of ftp
+15.Port of ssh
+16.Port of telnet
+17.Difference between hardlink and symlink
+
+TCS
+1. what is command to check nfs shared file on client machine?
+2. what is 22 port is not working on clientmachine... how will you access?
+3. how to check which directory is utilizing how much space?
+4. scripting you know? 
+5. netstat command to check port.
+6. how server load is related to processor (no of cores)?
+7. how you will troubleshoot what causing CPU load on server?
+8. your day to day task?
+9. nagios showing alerts due to nrpe not working on client machine, how you will troubleshoot?

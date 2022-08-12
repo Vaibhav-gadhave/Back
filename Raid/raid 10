@@ -1,0 +1,69 @@
+
+
+fdisk -l | grep sd
+ls -l /dev | grep sd
+yum install mdadm
+fdisk /dev/sdb
+
+    Press ‘n‘ for creating new partition.
+    Then choose ‘P‘ for Primary partition.
+    Next select the partition number as 1.
+    Give the default full size by just pressing two times Enter key.
+    Next press ‘p‘ to print the defined partition.
+    Press ‘L‘ to list all available types.
+    Type ‘t‘to choose the partitions.
+    Choose ‘fd‘ for Linux raid auto and press Enter to apply.
+    Then again use ‘p‘ to print the changes what we have made.
+    Use ‘w‘ to write the changes.
+
+fdisk /dev/sdc
+
+    Press ‘n‘ for creating new partition.
+    Then choose ‘P‘ for Primary partition.
+    Next select the partition number as 1.
+    Give the default full size by just pressing two times Enter key.
+    Next press ‘p‘ to print the defined partition.
+    Press ‘L‘ to list all available types.
+    Type ‘t‘to choose the partitions.
+    Choose ‘fd‘ for Linux raid auto and press Enter to apply.
+    Then again use ‘p‘ to print the changes what we have made.
+    Use ‘w‘ to write the changes.
+
+fdisk /dev/sdd
+
+    Press ‘n‘ for creating new partition.
+    Then choose ‘P‘ for Primary partition.
+    Next select the partition number as 1.
+    Give the default full size by just pressing two times Enter key.
+    Next press ‘p‘ to print the defined partition.
+    Press ‘L‘ to list all available types.
+    Type ‘t‘to choose the partitions.
+    Choose ‘fd‘ for Linux raid auto and press Enter to apply.
+    Then again use ‘p‘ to print the changes what we have made.
+    Use ‘w‘ to write the changes.
+
+fdisk /dev/sde
+
+    Press ‘n‘ for creating new partition.
+    Then choose ‘P‘ for Primary partition.
+    Next select the partition number as 1.
+    Give the default full size by just pressing two times Enter key.
+    Next press ‘p‘ to print the defined partition.
+    Press ‘L‘ to list all available types.
+    Type ‘t‘to choose the partitions.
+    Choose ‘fd‘ for Linux raid auto and press Enter to apply.
+    Then again use ‘p‘ to print the changes what we have made.
+    Use ‘w‘ to write the changes.
+
+mdadm -E /dev/sd[b-e]
+mdadm --examine /dev/sd[b-e]1
+mdadm --create /dev/md1 --metadata=1.2 --level=1 --raid-devices=2 /dev/sd[b-c]1
+mdadm --create /dev/md2 --metadata=1.2 --level=1 --raid-devices=2 /dev/sd[d-e]1
+cat /proc/mdstat  OR watch -n1 cat /proc/mdstat
+mdadm --create /dev/md0 --level=0 --raid-devices=2 /dev/md1 /dev/md2
+cat /proc/mdstat
+mdadm --detail --scan --verbose >> /etc/mdadm.conf
+
+
+
+

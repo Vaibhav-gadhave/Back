@@ -1,0 +1,130 @@
+                         SQUID-2.5.STABLE1-2
+			  by Duane Wessels
+
+                      Setting Up a Transparent  
+                       HTTP [WebProxy] / FTP 
+                            Caching 
+                          Proxy server 
+                          using SQUID 
+=============================================================================
+Is Squid installed ? Version ?    # rpm -q squid 
+Install it !                      # rpm -ivh squid-2.5.STABLE1-5.i386.rpm 
+=============================================================================
+
+Squid is...  
+
+  Offshoot of the Harvest Project
+  a full-featured Web/FTP Proxy and Cache server
+  designed to run on Unix systems  
+  free, open-source software  
+  the result of many contributions by unpaid (and paid) volunteers  
+
+=============================================================================
+With Squid you can...
+
+   Use less bandwidth on your connection when surfing the Web
+   Reduce latency [time taken to load a web page]
+   Protect hosts on your intranet by proxying their web traffic
+   Collect statistics about web traffic on your NW
+   Prevent uses from visiting illegal sites
+   Ensure that valid users only surf the net
+   Enhance user's privacy by filtering sensitive info from web requests
+   Reduce the load on your web servers
+   Convert encrypted [HTTPS] requests on one side, to unencrypted [HTTP]
+   requests on the other
+   
+=============================================================================
+With Squid you CANNOT...
+
+    Proxy email [SMTP], instant messaging, or IRC
+
+=============================================================================
+Squid supports...  
+
+       proxying and caching of HTTP, FTP, and other   
+       proxying for SSL encrypted traffic 
+       cache hierarchies  
+       ICP, HTCP, CARP, Cache Digests  
+       transparent caching  
+       WCCP (Squid v2.3 and above)  
+       extensive sophisticated access controls  
+       HTTP server acceleration aka surrogate mode  
+       HTTP Interception Caching
+       SNMP  
+       caching of DNS lookups 
+       URL redirection 
+       traffic shaping
+       numerous external auth modules
+       advanced disk storage options
+
+=============================================================================
+H/W Requirements :
+
+       Runs of all NIXes, Windoze etc
+       FreeBSD is the best OSS for Squid 
+       SCSI is better than ATA
+
+       Bcos Squid uses a small amt of memory for every cached resource on the
+       disk, there is a relationship between Disk Space and Memory which we
+       will soon examine comprehensively
+
+=============================================================================
+Config File : /etc/squid/squid.conf
+Testing     : squidclient* [formerly client*]
+Cache Files : /var/spool/squid/
+Log Files   : /var/log/squid/access.log  
+              /var/log/squid/cache.log	       
+
+=============================================================================
+* Squid's job is both as a Proxy and Cache server [Webcache]
+* It speaks many protocols, HTTP and FTP amongst them
+* Squid has two faces - 
+                       Client-side talks to browsers and user-agents.
+		       The Client understands only HTTP and HTTPS [i.e. HTTP
+		       encrypted with SSL/TLS.]
+		       This means that you can't make a FTP Client talk to 
+		       Squid unless the FTP Client is also a HTTP Client
+		       And a Browser is BOTH anyway!
+
+                       Server-side talks to HTTP,FTP servers which are also
+		       called Origin Servers, since the data originates from
+		       them
+=============================================================================
+                             SQUID Terminology 
+
+What is Internet object caching?
+
+   Internet object caching is a way to store requested Internet objects
+   (i.e., data available via the HTTP, FTP, and gopher protocols) on a system
+   closer to the requesting site than to the source. 
+          Web browsers can then use the local Squid cache as a proxy HTTP 
+   server, reducing access time as well as bandwidth consumption.
+
+Web Caching      : Storing certain web resources [pages,data] for future use
+   
+Cache Hit        : Each time a HTTP request is satisfied by Squid from its cache
+                   instead of accessing the Origin server
+		 
+Cache Hit Ratio/ : % of all requests satisfied as hits. Typically 30-60%
+          Rate
+	  
+Byte Hit Ratio   : Volume of data [no of bytes] served from the cache
+         Rate      
+
+Cache Miss       : When Squid cannot satisfy a request from the cache and has
+                   to access the origin server
+
+		   This can happen for a no of reasons viz :
+		   
+		   * Obviously the first time a request is recd, it IS a cache
+		     miss
+		   * Squid may have purged the cached copy to make way for new
+		     objects
+		   * Resource is uncacheable eg credit card no on a web page
+		   * Data may have a cacheable time limit set by the origin
+		     server
+		   
+Cache Validation  : Process by which Squid ensures that stale data is never
+                    served
+
+=============================================================================

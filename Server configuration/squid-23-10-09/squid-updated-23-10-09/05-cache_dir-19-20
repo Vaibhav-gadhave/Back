@@ -1,0 +1,329 @@
+                         =======================
+                     03-  The cache_dir directive 
+                           The most IMP directive 
+                              in SQUID
+                         ========================
+                         
+                            19. cache_dir 
+                            20. store_dir_select_algorithm 
+
+===============>   19. cache_dir ufs /var/spool/squid 100 16 256       
+
+    Main Q: How much cache_dir must I have if I know, obviously, how much 
+            RAM I have ?
+            or
+            How much RAM does SQUID require ?
+
+            In other words how much disk space must I allocate and how much RAM 
+            must I have to configure SQUID for that allocated diskspace ?
+
+    SQUID has 5 diff Disk Storage Schemes : 
+    
+                         ufs [def]
+                         aufs
+                         diskd
+                         coss
+                         null
+                         
+          The first 3 have the same dir layout and are interchangeable
+          coss is a new FS optimized for SQUID, while null is a min
+          implementation which cannot do r/w
+
+    Do not confuse Linux FileSystems : UFS [Unix FS or BFFS] xfs, ext2, ext3, 
+                                       reiserfs, jfs etc
+   
+                            1       2        3   4  5    6         
+    Syntax :    cache_dir scheme directory size L1 L2 [options]
+    ======                
+
+1      scheme : ufs,aufs,diskd,coss,null                 Def: ufs
+       ======
+                Proxying Only. No Caching
+                =========================
+       If you do not want SQUID to do ANY caching whatsoever ONLY proxying :
+
+       One way     :  cache_dir null /tmp
+       
+       Another way :  acl all src 0/0
+                      no_cache deny all
+
+2      directory : where SQUID stores cached objects     Def: /var/spool/squid
+       =========
+                        
+Note:       a. Can be dir, partition or whole disk
+            b. Put one only per one physical disk
+            c. This dir must exist. SQUID will not create it for you
+            d. This dir must be "w" by the squid process [23/23]
+               Actually /var/spool/'squid' dir should be owned by 'squid'
+               See # ls -ld /var/spool/squid
+
+Best:       e. Do with 2 disks so you will have 2 cache_dirs on each one :
+               See also # 27 next 
+
+	       sda ----> You Linux m/c 
+
+	       After you have installed min, with std Linux partitions
+	       format the 2 other HDDs
+
+	       sdc1 ----> hdc1 - whole disk as one partition, formatted jfs
+	       sdd1 ----> hdd1 - whole disk as one partition, formatted jfs
+
+              On /dev/hda :
+
+                 mkfs.jfs  /dev/sda1   which is the whole /dev/sdc
+                 mkfs.jfs  /dev/sdd1   which is the whole /dev/sdd
+
+                 mkdir /cache0 
+		 mkdir /cache1
+
+                 mount /dev/sdc1 /cache0
+                 mount /dev/sdd1 /cache1
+
+                 And finally tell SQUID about it :
+
+                 cache_dir ufs /cache0 100 16 256
+                 cache_dir ufs /cache1 100 16 256
+                            
+                 Configure /etc/fstab to permanentize
+
+		 Select round-robin or least-load :
+
+         20. store_dir_select_algorithm least-load/round-robin
+
+    Note : 
+                 All this is done at install time or better still after 
+                 installation using unclaimed disk space
+
+		 What will your /var/spool/squid/ dir contain ?
+
+		 Nothing !!
+
+ 3     size : Upper Limit on how much space SQUID can use to cache
+       ====   objects
+
+       VIMP:  SO HOW MUCH SHOULD WE MAKE THIS ?
+        
+            =======================================================
+            Calculating Cache Disk Space size from Memory Installed
+            =======================================================
+            
+        EXAMPLE :
+
+          Question : I have 1 GB RAM 
+
+                     How much should I make the cache_dir ?
+                     --------------------------------------
+
+          Answer   :  cache_dir = 25.6 GB
+                      2.56 million files can be cached on disk, where else!
+                      This will be the disk space allocated to SQUID to cache 
+                      objects
+                      So choose carefully !
+
+                      How ? Read on !
+
+FACT A. Now, 1 GB cache disk space requires 32 MB RAM 
+FACT B. 1 Linux file = 1 inode = 4 K of ext3 disk space / per file [default]
+FACT C. I cached file by SQUID requires [mean] 10 KB HD space [ufs]
+FACT D. Every cached file on disk requires 76 bytes RAM for indexing [32bit]
+                                         or 112 bytes [64 bit]
+         [Relationship between cached disk space and process size]
+FACT E : Analysis shows that smaller dirs can be searched faster
+         Hence each L2 dir should not be more than a few hundred KB
+
+
+ FACT:  A.  1 GB RAM requires 32 GB - [20% 32 GB] = 25.6 GB space = cache_dir
+ =========           
+            Hence, for 1 GB RAM, cache_dir must be 25.6 GB
+            
+          How ? 
+          
+          1 GB RAM is 32 * 32 MB 
+
+          Since 1 GB requires 32 MB ...
+
+              it follows 32 GB disk size required for 1 GB RAM
+
+          Reserve 10 % for SQUID's UFS storage scheme's  overheads 
+                        i.e. 'minfree' space
+          10% for SQUID's swap.state and temp files
+
+          Note: If you are using an entire disk as a partition and
+                you make the mt pt of that partition the cache_dir,
+                THEN subtract 20% of the partition size first
+                and then assign it to cache_dir
+
+          Hence I am left now with :
+          
+                   32 GB - [ 20% of 32 GB] 
+                   
+                 = 32 GB - 6.4 GB 
+
+          Hence my cache_dir must be = 25.6 GB for 1 GB RAM
+
+FACT: B. 1 Linux file = 1 inode = 4 K of ext3 disk space / per file [default]
+========
+          Now 1 Linux file = 1 inode = occupies 4 KB of disk space 
+                                                      [Def: for Linux ext3]
+                  See df -i [Total inodes on a FS is always divisible by 4]
+                  You could make an inode = 8 MB but that is done at the 
+                  partition's FS creation time with mke2fs 
+
+          i.e. A file created in Linux uses 4 KB instantly even if the file is 
+               1 byte long which is wasted space 
+               |||'ly a 5.5 KB file uses 2 inodes with 2.5 KB wasted
+
+FACT: C.  1 cached file by SQUID requires [mean] 10 KB space
+========
+           Research shows that Caching Proxies have a mean file size on disk
+           of 10 KB
+
+           Hence you could store :
+
+                       25.6 GB allocated cache dir / 10 KB per cached file
+                       
+                     =  25,600 MB  / 10 KB 
+                     
+                     =  25,600,000 KB / 10 KB
+
+                     =  2,560,000 
+
+                     = 2.56 million files 
+
+FACT: D. Every cached file on disk requires 76 bytes RAM for indexing [32bit]
+=======  Relationship between cached disk space and process size
+
+     IMP   Now for every file cached on disk an entry is made for it in
+           SQUID's indexed database in MEMORY
+           Note this point. SQUID uses a little RAM for every disk file cached!
+
+           How much is that ?
+                                                  
+             For 32 bit systems :  76 bytes for the index in RAM of every
+                                   cache file on disk
+             For 64 bit systems : 112 bytes
+
+            We saw that 1 GB RAM would handle a max of 25.6 GB of cache disk
+            and a total of 2.56 million files on disk cache at FULL HOUSE !
+
+            Hence 2.56 million files cached on disk [cache full] would require
+
+                       2.56 mil files * 76 bytes of MEM for 2.56 mil indexes
+
+                     = 2,560,000 * 76 = 194560000 bytes of RAM
+
+                     = 194560000/1024 
+
+                     = 190000 KB 
+
+                     = 190000/1024
+
+                     = 185 MB of RAM
+
+VIMP            Hence, a disk cache of 25.6 GB for 1 GB RAM would hold max 
+                     2.56 million files on disk and use 185 RAM for managing
+                     its in-memory indexes
+===============================================================================
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+===============================================================================
+  SUMMARY :
+               If I have 1 GB of RAM, make
+
+               cache_dir = 25.6 GB
+
+               The cache can store a max of 2.56 million files at full load
+
+               which will themselves use up 185 MB of your RAM when the 
+               cache on disk is full
+
+MORAL      :    So the more RAM / Disk Space, the faster SQUID goes
+
+===============================================================================
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+===============================================================================
+
+4      L1 and L2 : Cache Dir Stru for ufs-based storage systems 
+5
+         L1   : is the number of first-level subdirectories which will
+                be created under cache_dir                         Def:16
+
+         L2   : is the number of second-level subdirectories which will
+                be created under each first-level directory        Def:256
+                             
+        Checking :
+
+        # cd /var/spool/squid/  <====== cache_dir  
+        # ls | wc -l
+        > 16                    <====== 16 L1 [first level dirs]
+
+        # cd /var/spool/squid/01/
+        # ls | wc -l
+        > 256                   <====== 256 L2 [second level dirs]
+                
+FACT E : Analysis shows that smaller dirs can be searched faster
+         Hence L1 and L2 should be large enough so that each L2 dir has no more
+         than a few hundred KB of cache objects [data]
+
+         Example: Now my cache_dir = 25.6 GB 
+                            
+                  with a capacity of 2.56 million files of 10 KB each 
+                  in the cache hierarchy
+
+                  Now L1 =  16 [default]
+                  Now L2 = 256 [default]
+
+                  With these defaults of 16 L1 and 256 L2 dirs per L1 dir,
+                  there are a total of 16 * 256 = 4,096 total 2nd level dirs.
+                  
+                  [ # cd /var/spool/squid ; tree -d |wc -l ==> 4,096 dirs
+                       
+                  Therefore,
+                  
+                      2.56 mill files / 4,096 dirs 
+                      
+                      = 625 files in each L2 dir 
+
+                      = 625 * 10 KB per cached file 
+
+                      = 6,250 KB per L2 dir
+                      
+                      = 6.25 MB per L2 dir
+
+                  Note : 6.25 MB per L2 * 4096 = 25.6 GB which was the original
+                         cache_dir size
+
+                  Note : # squid -z                      
+
+                           which creates the cache dirs is much faster if the 
+                           L1 L2 values are smaller
+
+                  Note : Never change L1 L2 values once created and active
+
+6      options : There are two : read-only and max-size
+
+                 read-only makes the cache_dir R/O but SQUID cannot store
+                           any objects anymore. Mostly for migration
+
+                 max-size is the max obj size that can be stored in the cache 
+                          dir 
+                          eg max-size=1048576 bytes [1MB]
+
+
+         Allocating Objects to Cache Dirs when you have more than one
+         ============================================================
+
+===============>   20. store_dir_select_algorithm Def:  least-load
+                                                        or round-robin
+
+      If you have multiple cache_dirs, then only use this
+
+      The algorithm SQUID uses when selecting a cache_dir when there 
+      are multiple cache_dirs i.e. least-load v/s round-round-robin algorithm
+
+      In least-load, SQUID select the cache_dir which has the smallest workload
+      i.e. free space or max obj size etc as tie-breakers
+
+      round-robin just selects the next cache_dir in rotatable order
+
+                                 ****************
+

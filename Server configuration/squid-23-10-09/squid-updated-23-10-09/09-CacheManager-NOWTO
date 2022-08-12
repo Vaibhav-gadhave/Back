@@ -1,0 +1,120 @@
+                        SQUID Cache Manager 
+			====================
+                                    
+http://docstore.mik.ua/squid/FAQ-8.html
+http://wiki.squid-cache.org/SquidFaq/CacheManager
+
+				    Setup 
+				    =====
+
+1. # mkdir /var/www/squid-cgi/
+
+   This is under the home of user apache - /var/www/
+
+2. # cp /usr/lib/squid/cachemgr.cgi  /var/www/squid-cgi/   
+
+3. Configure httpd.conf :
+
+   ScriptAlias /squid-cgi/ "/var/www/squid-cgi/"  [Line 578]
+
+4. Restart Apache  # service httpd restart
+
+5. Restart SQUID   # service squid restart
+
+6. There are 2 ways to access the cache mgr info
+
+     CLI :
+        a. The squidclient CLI prg
+	b. The cachemgr.cgi prg
+
+        a. squidclient cache_object://cache.host.name/info
+	   or simply 
+        a. squidclient mgr:info
+
+     Browser:
+     
+	b. The cachemgr.cgi prg
+	
+           lynx www.vashi.com/squid-cgi/cachemgr.cgi
+           or 
+           konqueror www.vashi.com/squid-cgi/cachemgr.cgi
+   
+        # squidclient mgr:info
+
+HTTP/1.0 200 OK
+Server: squid/2.5.STABLE1
+Mime-Version: 1.0
+Date: Wed, 16 Feb 2005 19:26:17 GMT
+Content-Type: text/plain
+Expires: Wed, 16 Feb 2005 19:26:17 GMT
+Last-Modified: Wed, 16 Feb 2005 19:26:17 GMT
+X-Cache: MISS from ganesh.bom.labs.net
+Proxy-Connection: close
+
+Squid Object Cache: Version 2.5.STABLE1
+Start Time:     Wed, 16 Feb 2005 19:15:55 GMT
+Current Time:   Wed, 16 Feb 2005 19:26:17 GMT
+Connection information for squid:
+        Number of clients accessing cache:      1
+        Number of HTTP requests received:       17
+        Number of ICP messages received:        0
+        Number of ICP messages sent:    0
+        Number of queued ICP replies:   0
+        Request failure ratio:   0.00%
+        Average HTTP requests per minute since start:   1.6
+        Average ICP messages per minute since start:    0.0
+        Select loop called: 995 times, 625.227 ms avg
+Cache information for squid:
+        Request Hit Ratios:             5min:   0.0%, 60min:   0.0%
+        Byte Hit Ratios:                5min: 100.0%, 60min: 100.0%
+        Request Memory Hit Ratios:      5min:   0.0%, 60min:   0.0%
+        Request Disk Hit Ratios:        5min:   0.0%, 60min:   0.0%
+        Storage Swap size:      0 KB
+        Storage Mem size:       88 KB
+        Mean Object Size:       0.00 KB
+        Requests given to unlinkd:      0
+Median Service Times (seconds)  5 min    60 min:
+        HTTP Requests (All):   0.00000  0.00000
+        Cache Misses:          0.00000  0.00000
+        Cache Hits:            0.00000  0.00000
+        Near Hits:             0.00000  0.00000
+        Not-Modified Replies:  0.00000  0.00000
+        DNS Lookups:           0.00000  0.00000
+        ICP Queries:           0.00000  0.00000
+Resource usage for squid:
+        UP Time:        622.101 seconds
+        CPU Time:       0.550 seconds
+        CPU Usage:      0.09%
+        CPU Usage, 5 minute avg:        0.00%
+        CPU Usage, 60 minute avg:       0.09%
+        Maximum Resident Size: 0 KB
+        Page faults with physical i/o: 516
+Memory usage for squid via mallinfo():
+        Total space in arena:    1932 KB
+        Ordinary blocks:         1925 KB      6 blks
+        Small blocks:               0 KB      0 blks
+        Holding blocks:           200 KB      1 blks
+        Free Small blocks:          0 KB
+        Free Ordinary blocks:       6 KB
+        Total in use:            2125 KB 100%
+        Total free:                 6 KB 0%
+        Total size:              2132 KB
+Memory accounted for:
+        Total accounted:          134 KB
+        memPoolAlloc calls: 3114
+        memPoolFree calls: 2497
+File descriptor usage for squid:
+        Maximum number of file descriptors:   1024
+        Largest file desc currently in use:     13
+        Number of file desc currently in use:   10
+        Files queued for open:                   0
+        Available number of file descriptors: 1014
+        Reserved number of file descriptors:   100
+        Store Disk files open:                   0
+Internal Data Structures:
+            22 StoreEntries
+            22 StoreEntries with MemObjects
+            21 Hot Object Cache Items
+             0 on-disk objects
+
+                          ********************************

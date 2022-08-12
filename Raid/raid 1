@@ -1,0 +1,59 @@
+
+
+
+fdisk -l | grep sd
+ls -l /dev | grep sd
+yum install mdadm
+fdisk /dev/sdb
+
+    Press ‘n‘ for creating new partition.
+    Then choose ‘P‘ for Primary partition.
+    Next select the partition number as 1.
+    Give the default full size by just pressing two times Enter key.
+    Next press ‘p‘ to print the defined partition.
+    Press ‘L‘ to list all available types.
+    Type ‘t‘to choose the partitions.
+    Choose ‘fd‘ for Linux raid auto and press Enter to apply.
+    Then again use ‘p‘ to print the changes what we have made.
+    Use ‘w‘ to write the changes.
+
+fdisk /dev/sdc
+
+    Press ‘n‘ for creating new partition.
+    Then choose ‘P‘ for Primary partition.
+    Next select the partition number as 1.
+    Give the default full size by just pressing two times Enter key.
+    Next press ‘p‘ to print the defined partition.
+    Press ‘L‘ to list all available types.
+    Type ‘t‘to choose the partitions.
+    Choose ‘fd‘ for Linux raid auto and press Enter to apply.
+    Then again use ‘p‘ to print the changes what we have made.
+    Use ‘w‘ to write the changes.
+
+mdadm -E /dev/sd[b-c]
+mdadm --examine /dev/sd[b-c]1
+mdadm --create /dev/md0 --level=mirror --raid-devices=2 /dev/sd[b-c]1  OR mdadm -C /dev/md0 -l raid0 -n 2 /dev/sd[b-c]1
+cat /proc/mdstat  OR watch -n1 cat /proc/mdstat
+mdadm -E /dev/sd[b-c]1
+mdadm --detail /dev/md0
+mkfs.ext4 /dev/md0
+mkdir /mnt/raid1
+mount /dev/md0 /mnt/raid1/
+touch /mnt/raid1/vaibhav.txt
+echo "Anibrain it" > /mnt/raid1/vaibhav.txt
+vim /etc/fstab
+/dev/md0                /mnt/raid1              ext4    defaults        0 0
+mount -av
+mdadm --detail --scan --verbose >> /etc/mdadm.conf  >>  to save the configuration before system reboot. If the configuration is saved it will be loaded to the kernel during the system reboot and RAID will also gets loaded.
+mdadm --detail /dev/md0
+
+
+
+
+
+
+
+
+
+
+

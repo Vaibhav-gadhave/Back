@@ -1,0 +1,1 @@
+http://www.cyberciti.biz/tips/benchmarking-squid-and-other-caching-proxy-servers.html

@@ -1,0 +1,252 @@
+                         squid-2.5.STABLE1-2
+
+     ===================
+     I - NETWORK OPTIONS
+     ===================
+     1  #  TAG: http_port
+     2  #  TAG: https_port
+     3  #  TAG: ssl_unclean_shutdown
+     4  #  TAG: icp_port
+     5  #  TAG: htcp_port
+     6  #  TAG: mcast_groups
+     7  #  TAG: tcp_outgoing_address
+     8  #  TAG: udp_incoming_address
+     9  #  TAG: udp_outgoing_address
+    ==========================================================
+    II - OPTIONS WHICH AFFECT THE NEIGHBOR SELECTION ALGORITHM
+    ==========================================================
+    10  #  TAG: cache_peer
+    11  #  TAG: cache_peer_domain
+    12  #  TAG: neighbor_type_domain
+    13  #  TAG: icp_query_timeout                 (msec)
+    14  #  TAG: maximum_icp_query_timeout         (msec)
+    15  #  TAG: mcast_icp_query_timeout           (msec)
+    16  #  TAG: dead_peer_timeout                 (seconds)
+    17  #  TAG: hierarchy_stoplist
+    18  #  TAG: no_cache
+    =========================================
+    III - OPTIONS WHICH AFFECT THE CACHE SIZE
+    =========================================
+    19  #  TAG: cache_mem                         (bytes)
+    20  #  TAG: cache_swap_low                    (percent, 0-100)
+    21  #  TAG: cache_swap_high                   (percent, 0-100)
+    22  #  TAG: maximum_object_size               (bytes)
+    23  #  TAG: minimum_object_size               (bytes)
+    24  #  TAG: maximum_object_size_in_memory     (bytes)
+    25  #  TAG: ipcache_size                      (number of entries)
+    26  #  TAG: ipcache_low                       (percent)
+    27  #  TAG: ipcache_high                      (percent)
+    28  #  TAG: fqdncache_size                    (number of entries)
+    29  #  TAG: cache_replacement_policy
+    30  #  TAG: memory_replacement_policy
+    ============================================
+    IV - LOGFILE PATHNAMES AND CACHE DIRECTORIES
+    ============================================
+    31  #  TAG: cache_dir
+    32  #  TAG: cache_access_log
+    33  #  TAG: cache_log
+    34  #  TAG: cache_store_log
+    35  #  TAG: cache_swap_log
+    36  #  TAG: emulate_httpd_log                       on|off
+    37  #  TAG: log_ip_on_direct                        on|off
+    38  #  TAG: mime_table
+    39  #  TAG: log_mime_hdrs                           on|off
+    40  #  TAG: useragent_log
+    41  #  TAG: referer_log
+    42  #  TAG: pid_filename
+    43  #  TAG: debug_options
+    44  #  TAG: log_fqdn                                on|off
+    45  #  TAG: client_netmask
+    =========================================
+    V - OPTIONS FOR EXTERNAL SUPPORT PROGRAMS
+    =========================================
+    46  #  TAG: ftp_user
+    47  #  TAG: ftp_list_width
+    48  #  TAG: ftp_passive
+    49  #  TAG: ftp_sanitycheck
+    50  #  TAG: cache_dns_program
+    51  #  TAG: dns_children
+    52  #  TAG: dns_retransmit_interval
+    53  #  TAG: dns_timeout
+    54  #  TAG: dns_defnames                            on|off
+    55  #  TAG: dns_nameservers
+    56  #  TAG: hosts_file
+    57  #  TAG: diskd_program
+    58  #  TAG: unlinkd_program
+    59  #  TAG: pinger_program
+    60  #  TAG: redirect_program
+    61  #  TAG: redirect_children
+    62  #  TAG: redirect_rewrites_host_header
+    63  #  TAG: redirector_access
+    64  #  TAG: auth_param
+    65  #  TAG: authenticate_program
+    66  #  TAG: authenticate_children
+    67  #  TAG: authenticate_cache_garbage_interval
+    68  #  TAG: authenticate_ttl
+    69  #  TAG: authenticate_ip_ttl
+    70  #  TAG: authenticate_ip_ttl_is_strict
+    71  #  TAG: external_acl_type
+    =================================
+    VI - OPTIONS FOR TUNING THE CACHE
+    =================================
+    72  #  TAG: wais_relay_host
+    73  #  TAG: wais_relay_port
+    74  #  TAG: request_header_max_size        (KB)
+    75  #  TAG: request_body_max_size          (KB)
+    76  #  TAG: reply_body_max_size            (KB)
+    77  #  TAG: refresh_pattern
+    78  #  TAG: reference_age   
+    79  #  TAG: quick_abort_min                (KB)
+    80  #  TAG: quick_abort_max                (KB)
+    81  #  TAG: quick_abort_pct                (percent)
+    82  #  TAG: negative_ttl                   time-units
+    83  #  TAG: positive_dns_ttl               time-units
+    84  #  TAG: negative_dns_ttl               time-units
+    85  #  TAG: range_offset_limit             (bytes)
+    ==============
+    VII - TIMEOUTS
+    ==============
+    86  #  TAG: connect_timeout                time-units
+    87  #  TAG: peer_connect_timeout           time-units
+    88  #  TAG: read_timeout                   time-units
+    89  #  TAG: request_timeout
+    90  #  TAG: persistent_request_timeout
+    91  #  TAG: client_lifetime                time-units
+    92  #  TAG: half_closed_clients
+    93  #  TAG: pconn_timeout
+    94  #  TAG: ident_timeout
+    95  #  TAG: shutdown_lifetime              time-units
+    ======================
+    VIII - ACCESS CONTROLS
+    ======================
+    96  #  TAG: acl
+    97  #  TAG: http_access
+    98  #  TAG: http_reply_access
+    99  #  TAG: icp_access
+   100  #  TAG: miss_access
+   101  #  TAG: cache_peer_access
+   102  #  TAG: ident_lookup_access
+   103  #  TAG: tcp_outgoing_tos
+   104  #  TAG: tcp_outgoing_address
+   105  #  TAG: reply_body_max_size            bytes allow|deny acl acl...
+   106  #  TAG: proxy_auth_realm
+   ==============================
+   IX - ADMINISTRATIVE PARAMETERS
+   ==============================
+   107  #  TAG: cache_mgr
+   108  #  TAG: cache_effective_user
+   109  #  TAG: cache_effective_group
+   110  #  TAG: visible_hostname
+   111  #  TAG: unique_hostname
+   112  #  TAG: hostname_aliases
+   ==============================================
+   X - OPTIONS FOR THE CACHE REGISTRATION SERVICE
+   ==============================================
+   113  #  TAG: announce_period
+   114  #  TAG: announce_host
+   115  #  TAG: announce_file
+   116  #  TAG: announce_port
+   ==============================
+   XI - HTTPD-ACCELERATOR OPTIONS
+   ==============================
+   117  #  TAG: httpd_accel_host
+   118  #  TAG: httpd_accel_port
+   119  #  TAG: httpd_accel_single_host                on|off
+   120  #  TAG: httpd_accel_with_proxy                 on|off
+   121  #  TAG: httpd_accel_uses_host_header           on|off
+   ===================
+   XII - MISCELLANEOUS
+   ===================
+   122  #  TAG: dns_testnames
+   123  #  TAG: logfile_rotate
+   124  #  TAG: append_domain
+   125  #  TAG: tcp_recv_bufsize                       (bytes)
+   126  #  TAG: err_html_text
+   127  #  TAG: deny_info
+   128  #  TAG: memory_pools                           on|off
+   129  #  TAG: memory_pools_limit                     (bytes)
+   130  #  TAG: forwarded_for                          on|off
+   131  #  TAG: log_icp_queries                        on|off
+   132  #  TAG: icp_hit_stale                          on|off
+   133  #  TAG: minimum_direct_hops
+   134  #  TAG: minimum_direct_rtt
+   135  #  TAG: cachemgr_passwd
+   136  #  TAG: store_avg_object_size                 (kbytes)
+   137  #  TAG: store_objects_per_bucket
+   138  #  TAG: client_db                             on|off
+   139  #  TAG: netdb_low
+   140  #  TAG: netdb_high
+   141  #  TAG: netdb_ping_period
+   142  #  TAG: query_icmp                            on|off
+   143  #  TAG: test_reachability                     on|off
+   144  #  TAG: buffered_logs                         on|off
+   145  #  TAG: reload_into_ims                       on|off
+   146  #  TAG: always_direct
+   147  #  TAG: never_direct
+   148  #  TAG: header_access
+   149  #  TAG: header_replace
+   150  #  TAG: anonymize_headers
+   151  #  TAG: fake_user_agent 
+   152  #  TAG: icon_directory
+   153  #  TAG: error_directory
+   154  #  TAG: minimum_retry_timeout                  (seconds)
+   155  #  TAG: maximum_single_addr_tries
+   156  #  TAG: snmp_port
+   157  #  TAG: snmp_access
+   158  #  TAG: snmp_incoming_address
+   159  #  TAG: snmp_outgoing_address
+   160  #  TAG: as_whois_server
+   161  #  TAG: wccp_router
+   162  #  TAG: wccp_version
+   163  #  TAG: wccp_incoming_address
+   164  #  TAG: wccp_outgoing_address
+   =========================================================================
+   XIII - DELAY POOL PARAMETERS (all require DELAY_POOLS compilation option)
+   =========================================================================
+   165  #  TAG: delay_pools
+   166  #  TAG: delay_class
+   167  #  TAG: delay_access
+   168  #  TAG: delay_parameters
+   169  #  TAG: delay_initial_bucket_level            (percent, 0-100)
+   170  #  TAG: incoming_icp_average
+   171  #  TAG: incoming_http_average
+   172  #  TAG: incoming_dns_average
+   173  #  TAG: min_icp_poll_cnt
+   174  #  TAG: min_dns_poll_cnt
+   175  #  TAG: min_http_poll_cnt
+   176  #  TAG: max_open_disk_fds
+   177  #  TAG: offline_mode
+   178  #  TAG: uri_whitespace
+   179  #  TAG: broken_posts
+   180  #  TAG: mcast_miss_addr
+   181  #  TAG: mcast_miss_ttl
+   182  #  TAG: mcast_miss_port
+   183  #  TAG: mcast_miss_encode_key
+   184  #  TAG: nonhierarchical_direct
+   185  #  TAG: prefer_direct
+   186  #  TAG: strip_query_terms
+   187  #  TAG: coredump_dir
+   188  #  TAG: redirector_bypass
+   189  #  TAG: ignore_unknown_nameservers
+   190  #  TAG: digest_generation
+   191  #  TAG: digest_bits_per_entry
+   192  #  TAG: digest_rebuild_period                      (seconds)
+   193  #  TAG: digest_rewrite_period                      (seconds)
+   194  #  TAG: digest_swapout_chunk_size                  (bytes)
+   195  #  TAG: digest_rebuild_chunk_percentage            (percent, 0-100)
+   196  #  TAG: chroot
+   197  #  TAG: client_persistent_connections
+   198  #  TAG: server_persistent_connections
+   199  #  TAG: pipeline_prefetch
+   201  #  TAG: extension_methods
+   202  #  TAG: request_entities
+   203  #  TAG: high_response_time_warning                 (msec)
+   204  #  TAG: high_page_fault_warning
+   205  #  TAG: high_memory_warning
+   206  #  TAG: store_dir_select_algorithm
+   207  #  TAG: forward_log
+   208  #  TAG: ie_refresh      on|off
+   209  #  TAG: vary_ignore_expire                         on|off
+   210  #  TAG: sleep_after_fork                           (microseconds)
+
+             **************************************************

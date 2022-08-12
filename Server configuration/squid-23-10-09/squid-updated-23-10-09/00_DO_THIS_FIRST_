@@ -1,0 +1,60 @@
+                Before you Start configuring SQUID 
+		do these following things to make an
+		already difficult life a bit easier 
+		====================================
+
+
+1. Append the foll file - "squid_bash_profile"- to your /root/.bash_profile 
+   and refresh it
+
+   # cat squid_bash_profile >> /root/.bash_profile
+   # . /root/.bash_profile
+
+   The "squid_bash_profile"  contains :
+
+   alias sq='squid -k reconfigure;[ $? = 0 ] && echo OK || echo Uh-OH'
+   alias tailsquidaccess="tail -3f /var/log/squid/access.log"
+   alias tailsquidcache="tail -3f /var/log/squid/cache.log"
+   alias tailsquidstore="tail -3f /var/log/squid/store.log"
+
+   Why ?
+
+   # sq              will refresh squid everytime you change the config file
+   # tailsquidaccess will show the access.log's last 3 lines in Real Time
+   # tailsquidcache  will show the cache.log's last 3 lines in Real Time
+   # tailsquidstore  will show the store.log's last 3 lines in Real Time
+
+2. Copy the following files 
+
+   porn
+   noporn
+   sa-blacklist.current.domains
+
+   from the 4th CD in the workingconfigs/squid/ dir
+   to /usr/local/squid/etc/ after, of course, creating the dir :
+
+   # mkdir -p /usr/local/squid/etc/
+   # cp -f /mnt/cdrom/workingconfigs/squid/porn /usr/local/squid/etc/
+   # cp -f /mnt/cdrom/workingconfigs/squid/noporn /usr/local/squid/etc/
+   # cp -f /mnt/cdrom/workingconfigs/squid/sa-blacklist.current.domains 
+       /usr/local/squid/etc/
+
+3. Copy the following file to /etc/pam.d/ :
+
+   # cp squid-pam  /etc/pam.d/squid
+
+4. Finally, the most important of ALL :
+   
+     Backup the canned squid.conf :
+   
+   # mv /etc/squid/squid.conf /etc/squid/squid.conf.redhat
+
+     Replace it with our customized squid.conf.final :
+     
+   # cp squid.vadapav.final /etc/squid/squid.conf
+
+     This is the file we will work with henceforth !
+
+                         ******************
+			 
+   
