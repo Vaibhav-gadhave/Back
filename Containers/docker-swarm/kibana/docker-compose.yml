@@ -19,7 +19,8 @@ services:
 #      - esnet
     deploy:
       placement:
-        constraints: [node.labels.name == ram]
+#        constraints: [node.labels.name == ram]
+        constraints: [node.role==manager]
       restart_policy:
         condition: on-failure
         delay: 10s
@@ -37,18 +38,18 @@ services:
       - node01
     deploy:
       mode: replicated
-      replicas: 2
+      replicas: 1
       endpoint_mode: dnsrr
     deploy:
       placement:
-        constraints: [node.labels.name == sham]
+        constraints: [node.role==manager]
 
   heartbeat:
     image: docker.elastic.co/beats/heartbeat:7.11.1
     environment:
       ELASTICSEARCH_HOSTS: http://node01:9200
     volumes:
-      - /run/media/vaibhavg/Backup2/Backup/Containers/docker-swarm/kibana/heartbeat.yml:/usr/share/heartbeat/heartbeat.yml:ro
+      - /run/media/vaibhavg/Backup/DOC/Back/Containers/docker-swarm/kibana/heartbeat.yml:/usr/share/heartbeat/heartbeat.yml:ro
 #    networks:
 #      - esnet
     depends_on:
