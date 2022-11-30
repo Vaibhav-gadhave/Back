@@ -19,8 +19,8 @@ services:
 #      - esnet
     deploy:
       placement:
-#        constraints: [node.labels.name == ram]
         constraints: [node.role==manager]
+#        constraints: [node.labels.name==ram]
       restart_policy:
         condition: on-failure
         delay: 10s
@@ -42,7 +42,8 @@ services:
       endpoint_mode: dnsrr
     deploy:
       placement:
-        constraints: [node.role==manager]
+        constraints: [node.labels.name==ram]
+#        constraints: [node.role==manager]
 
   heartbeat:
     image: docker.elastic.co/beats/heartbeat:7.11.1
