@@ -1,0 +1,8 @@
+# Open Fusion RPM Repository
+[of]
+name = CentOS 6 - Open Fusion
+baseurl = http://repo.openfusion.net/centos6-$basearch
+enabled = 1
+gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-openfusion
+gpgcheck = 1
+
