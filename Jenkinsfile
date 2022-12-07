@@ -11,7 +11,7 @@ node {
         /* This builds the actual image; synonymous to
          * docker build on the command line */
 
-        app = docker.build("nginx-server/Trial01")
+        app = docker.build("nginx-server/trial01")
     }
 
     stage('Test image') {
