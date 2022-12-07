@@ -30,3 +30,5 @@ stage('Docker Push') {
           sh 'docker push vvgadhave/nginx-server:latest'
         }
       }
+}
+}
