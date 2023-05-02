@@ -1,0 +1,8 @@
+How to trouble shoot grub issue, it its not showing while startup
+
+$ cd /etc/default/grub
+$ cat /etc/default/grub
+$ update-grub
+$ grub-install /dev/nvme0n1
+$ grub-mkconfig -o /boot/grub/grub.cfg
+
