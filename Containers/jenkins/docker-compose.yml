@@ -7,7 +7,7 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - jenkins1_home:/var/jenkins_home
+      - jenkins_home:/var/jenkins_home
 
 volumes:
   jenkins1_home:
