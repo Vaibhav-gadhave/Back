@@ -9,14 +9,5 @@ services:
     volumes:
       - jenkins1_home:/var/jenkins_home
 
-  jenkins2:
-    image: jenkins/jenkins:lts
-    container_name: jenkins2
-    ports:
-      - "8081:8080"
-    volumes:
-      - jenkins2_home:/var/jenkins_home
-
 volumes:
   jenkins1_home:
-  jenkins2_home:
