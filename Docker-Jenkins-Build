@@ -1,0 +1,170 @@
+
+URL: https://sweetcode.io/how-to-build-and-push-docker-images-to-docker-hub-using-jenkins-pipeline/
+
+###First we need to configure jenkins####
+
+### Type 1 ####
+
+cd /media/vaibhavg/Live-Backup/REPOS/Containers/jenkins/Type1
+
+vim docker-compose.yml
+---------------------------------------------------------------
+version: '3'
+
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins
+    user: root
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - jenkins_home:/var/jenkins_home
+    command: >
+      sh -c "curl https://get.docker.com/ > /var/jenkins_home/dockerinstall &&
+      chmod 777 /var/jenkins_home/dockerinstall &&
+      ./var/jenkins_home/dockerinstall &&
+      chmod 666 /var/run/docker.sock &&
+      /usr/local/bin/jenkins.sh"
+
+volumes:
+  jenkins_home:
+-------------------------------------------------------------------
+
+docker-compose up ##To turn on the server
+
+### Type 2 ###
+
+cd /media/vaibhavg/Live-Backup/REPOS/Containers/jenkins/Type2
+
+vim docker-compose.yml
+---------------------------------------------------------------
+version: '3'
+
+services:
+  jenkins:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: jenkins
+    user: root
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - jenkins_home:/var/jenkins_home
+
+volumes:
+  jenkins_home:
+---------------------------------------------------------------
+
+vim Dockerfile
+---------------------------------------------------------------
+FROM jenkins/jenkins:lts
+
+USER root
+
+RUN apt-get update \
+    && apt-get -y install curl vim \
+    && curl https://get.docker.com/ > /var/jenkins_home/dockerinstall \
+    && chmod 777 /var/jenkins_home/dockerinstall \
+    && sh /var/jenkins_home/dockerinstall
+
+USER jenkins
+-----------------------------------------------------------------
+
+docker-compose up ##To turn on the server
+
+#####Now once jenkins is up you need to create Jenkins file and docker file of your project######
+
+cd /media/vaibhavg/Live-Backup/REPOS/Builder
+
+vim Jenkinsfile
+--------------------------------------------------------------------
+pipeline {
+  agent any
+  environment {
+    DOCKERHUB_CREDENTIALS = credentials('Jenkins')
+  }
+  stages {
+    stage('Build') {
+      steps {
+        sh 'docker build -t jenkins-docker-hub .'
+        sh 'docker tag jenkins-docker-hub vvgadhave/jenkins-docker'
+      }
+    }
+    stage('Login') {
+      steps {
+        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+      }
+    }
+    stage('Push') {
+      steps {
+        sh 'docker push vvgadhave/jenkins-docker'
+      }
+    }
+  }
+}
+-------------------------------------------------------------------------
+
+vim Dockerfile
+------------------------------------------------------------------------
+FROM quay.io/centos/centos:stream9
+MAINTAINER ServerWorld <admin@srv.world>
+
+RUN dnf -y install nginx
+RUN echo "Nginx on node01" > /usr/share/nginx/html/index.html
+
+EXPOSE 80
+CMD ["/usr/sbin/nginx", "-g", "daemon off;"]
+
+-------------------------------------------------------------------------
+
+### Now configure Jenkins with the help of URL ###
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
