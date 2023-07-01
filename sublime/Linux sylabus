@@ -1,0 +1,29 @@
+
+     Redhat certified System Administrator
+
+Basic Introduction, Distributions and Advantage/Disadvantages of linux
+Installation of different Distributions
+Basic Commands
+Directories in linux
+User and Group Management
+Permission Management
+Recovery of root password
+Network Management
+Remote Management in linux
+Kernel Management
+Cronjob
+Archiving files in linux
+Process Management in linux
+Files system in linux
+Selinux/Security Management
+YUM configuration / Software installations
+Storage Management (LVM, Stratis, VDO, Raid)
+Swap Management 
+Managing services
+find, grep, sed, awk
+Mounting of file system
+Containers in linux using Podman
+
+     Redhat Certified Engineer
+
+Network Storage Configuration(NFS, Samba, FTP)

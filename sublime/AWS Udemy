@@ -1,0 +1,346 @@
+AWS Udemy
+
+1. What is IAM
+AWS Identity and Access Management (IAM) enables you to manage access to AWS services and resources securely. Using IAM, you can create and manage AWS users and groups, and use permissions to allow and deny their access to AWS resources. IAM is a feature of your AWS account offered at no additional charge.
+
+2.What is CLI
+The AWS Command Line Interface (CLI) is a unified tool to manage your AWS services. With just one tool to download and configure, you can control multiple AWS services from the command line and automate them through scripts.
+
+3. What is cloud shell
+AWS CloudShell is a browser-based shell that makes it easy to securely manage, explore, and interact with your AWS resources. ... With CloudShell, you can quickly run scripts with the AWS Command Line Interface (AWS CLI)
+
+4. What are EC2 instances in AWS?
+An Amazon EC2 instance is a virtual server in Amazon's Elastic Compute Cloud (EC2) for running applications on the Amazon Web Services (AWS) infrastructure.
+
+5. 	What is Spot instance fleet?
+A Spot Fleet is set of Spot Instances and optionally On-Demand Instances that is launched based on criteria that you specify. The Spot Fleet selects the Spot capacity pools that meet your needs and launches Spot Instances to meet the target capacity for the fleet.
+
+6. What is a Spot instance AWS?
+A Spot Instance is an instance that uses spare EC2 capacity that is available for less than the On-Demand price. Because Spot Instances enable you to request unused EC2 instances at steep discounts, you can lower your Amazon EC2 costs significantly. The hourly price for a Spot Instance is called a Spot price.
+
+7. What is security group rule in AWS?
+Security group rules enable you to filter traffic based on protocols and port numbers. Security groups are stateful—if you send a request from your instance, the response traffic for that request is allowed to flow in regardless of inbound security group rules.
+
+8. What is the difference between private and public IP?
+A public IP address identifies you to the wider internet so that all the information you're searching for can find you. A private IP address is used within a private network to connect securely to other devices within that same network. Each device within the same network has a unique private IP address
+
+9. What is an EC2 Placement Group?
+A cluster placement group is a logical grouping of instances within a single Availability Zone that benefit from low network latency, high network throughput. A spread placement group places instances on distinct hardware.
+
+
+10. What is the use of ENI in AWS?
+ENIs are virtual network cards you can attach to your EC2 instances. They are used to enable network connectivity for your instances, and having more than one of them connected to your instance allows it to communicate on two different subnets.
+
+11.What is EBS service in AWS?
+Amazon Elastic Block Store (Amazon EBS) is an easy-to-use, scalable, high-performance block-storage service designed for Amazon Elastic Compute Cloud (Amazon EC2).
+
+12.What is difference between EC2 and EBS?
+Amazon EC2 (Elastic Compute Cloud) is a virtual machine hosted in the cloud. Amazon EBS (Elastic Block Store) is a virtual disk for your virtual machine, like your C: and D: Amazon S3 (Simple Storage Service) stores files, making them available on the Internet if you wish
+
+13.What is AWS EBS used for?
+AWS Elastic Block Store (EBS) is Amazon's block-level storage solution used with the EC2 cloud service to store persistent data. This means that the data is kept on the AWS EBS servers even when the EC2 instances are shut down.
+
+14.What is AWS EFS used for?
+Amazon EFS provides scalable file storage for use with Amazon EC2. You can use an EFS file system as a common data source for workloads and applications running on multiple instances. For more information, see the Amazon Elastic File System product page . Amazon EFS is not supported on Windows instances.
+
+15.What is EFS and EBS in AWS?
+EBS is a high-performance per-instance block storage system designed to act as storage for a single EC2 instance (most of the time) EFS is a highly scalable file storage system designed to provide flexible storage for multiple EC2 instances.
+
+16. What is an AMI in EC2?
+An Amazon Machine Image (AMI) is a special type of virtual appliance that is used to create a virtual machine within the Amazon Elastic Compute Cloud ("EC2"). It serves as the basic unit of deployment for services delivered using EC2.
+
+17.What is an ELB?
+An Elastic Load Balancer (ELB) has the ability to scale load balancers and applications based on real-time traffic automatically. Due to elasticity, it's usually implemented as a software load balancer.
+
+ALB — Layer 7 (HTTP/HTTPS traffic), Flexible.
+NLB — Layer 4 (TLS/TCP/UDP traffic), Static IPs.
+CLB — Layer 4/7 (HTTP/TCP/SSL traffic), Legacy, Avoid.
+
+18.What is ALB?
+Application Load Balancer operates at the request level (layer 7), routing traffic to targets (EC2 instances, containers, IP addresses, and Lambda functions) based on the content of the request.
+ALBs are typically used for web applications. If you have a microservices architecture, ALB can be used as an internal load balancer in front of EC2 instances or Docker containers that implement a given service.
+
+19.What is CLB?	
+The AWS Classic Load Balancer (CLB) operates at Layer 4 of the OSI model. What this means is that the load balancer routes traffic between clients and backend servers based on IP address and TCP port.
+
+20.What is NLB?
+The Network Load Balancing (NLB) feature distributes traffic across several servers by using the TCP/IP networking protocol. By combining two or more computers that are running applications into a single virtual cluster, NLB provides reliability and performance for web servers and other mission-critical servers.
+A typical use case would be a near real-time data streaming service (video, stock quotes, etc.) Another typical case is that you would need to use an NLB if your application uses non-HTTP protocols.
+
+21.What is GWLB?
+Gateway Load Balancer combines a transparent network gateway (that is, a single entry and exit point for all traffic) and a load balancer that distributes traffic and scales your virtual appliances with the demand. You can send traffic to GWLB by making simple configuration updates in your VPCs' route tables.
+
+22.How does AWS ASG work?
+AWS Auto Scaling automatically creates all of the scaling policies and sets targets for you based on your preference. AWS Auto Scaling monitors your application and automatically adds or removes capacity from your resource groups in real-time as demands change.
+
+23.What is the use of RDS in AWS?
+Amazon Relational Database Service (Amazon RDS) makes it easy to set up, operate, and scale a relational database in the cloud. It provides cost-efficient and resizable capacity while automating time-consuming administration tasks such as hardware provisioning, database setup, patching and backups.
+
+24.How does AWS RDS works?
+Amazon RDS supports an array of database engines to store and organize data. It also helps with relational database management tasks, such as data migration, backup, recovery and patching. Amazon RDS facilitates the deployment and maintenance of relational databases in the cloud.
+
+25.How does AWS Aurora work?
+Amazon Aurora allows you to encrypt your databases using keys you manage through AWS Key Management Service (KMS). On a database instance running with Amazon Aurora encryption, data stored at rest in the underlying storage is encrypted, as are its automated backups, snapshots, and replicas in the same cluster.
+
+26.What is the use of Amazon ElastiCache?
+You can use ElastiCache for caching, which accelerates application and database performance, or as a primary data store for use cases that don't require durability like session stores, gaming leaderboards, streaming, and analytics.
+
+27.What is AWS Route 53 used for?
+Amazon Route 53 is a highly available and scalable cloud Domain Name System (DNS) web service. It is designed to give developers and businesses an extremely reliable and cost effective way to route end users to Internet applications by translating names like www.example.com into the numeric IP addresses like 192.0.*.*
+
+28.What is simple routing policy?
+Simple Routing Policy is the most basic routing policy defined using an A record to resolve to a single resource always without any specific rules. For instance, a DNS record can be created to resolve the domain to an ALIAS record that routes the traffic to an ELB load balancing a set of EC2 instances.
+
+29.What is a beanstalk instance?
+When you create a web server environment, AWS Elastic Beanstalk creates one or more Amazon Elastic Compute Cloud (Amazon EC2) virtual machines, known as Instances. The instances in your environment are configured to run web apps on the platform that you choose.
+
+30.What is beanstalk used for?
+AWS Elastic Beanstalk is an easy-to-use service for deploying and scaling web applications and services developed with Java, . NET, PHP, Node. js, Python, Ruby, Go, and Docker on familiar servers such as Apache, Nginx, Passenger, and IIS.
+
+31. What does SDK mean?
+SDK is the acronym for “Software Development Kit”. The SDK brings together a group of tools that enable the programming of mobile applications. This set of tools can be divided into 3 categories: SDKs for programming or operating system environments (iOS, Android, etc.) Application maintenance SDKs.
+
+32.What is S3 Cross region replication?
+Amazon S3 now supports cross-region replication, a new feature that automatically replicates data across AWS regions. With cross-region replication, every object uploaded to an S3 bucket is automatically replicated to a destination bucket in a different AWS region that you choose.
+
+33.What is S3 replication?
+Amazon S3 replication provides an automatic mechanism to make identical copies of your objects in a destination Region of your choice. Replication enables automatic, asynchronous copying of objects across S3 buckets. The same AWS account or different accounts can own buckets configured for object replication.
+
+34.what is Amazon Athena? 
+Amazon Athena is an interactive query service that makes it easy to analyze data in Amazon S3 using standard SQL. Athena is serverless, so there is no infrastructure to manage, and you pay only for the queries that you run.
+
+35.what is S3 Pre-signed URLs in aws
+A presigned URL is a URL that you can provide to your users to grant temporary access to a specific S3 object. Using the URL, a user can either READ the object or WRITE an Object (or update an existing object). The URL contains specific parameters which are set by your application
+
+36.What is a lifecycle rule AWS?
+A rule can archive an object to Amazon Glacier, delete an object, or both. The action associated with a rule specifies a time constraint on it, acting on the objects that are either older than a specific number of days, or after a particular date.
+
+37.What is CloudFront and how does it work?
+CloudFront delivers your content through a worldwide network of data centers called edge locations. When a user requests content that you're serving with CloudFront, the request is routed to the edge location that provides the lowest latency (time delay), so that content is delivered with the best possible performance.
+
+38.What is Amazon Global Accelators
+AGA is a networking service that improves the performance of your users’ traffic by up to 60% using Amazon Web Services’ global network infrastructure.
+On the back end, add or remove your AWS application endpoints, such as Application Load Balancers, Network Load Balancers, EC2 Instances, and Elastic IPs without making user facing changes. Global Accelerator automatically re-routes your traffic to your nearest healthy available endpoint to mitigate endpoint failure.
+
+39.What is the AWS Snow family?
+The AWS Snow Family is a collection of physical devices that help migrate large amounts of data into and out of the cloud without depending on networks. This helps you apply the wide variety of AWS services for analytics, file systems, and archives to your data.
+
+40.What is ECS used for?
+Amazon Elastic Container Service (ECS) is a cloud computing service in Amazon Web Services (AWS) that manages containers and allows developers to run applications in the cloud without having to configure an environment for the code to run in.
+
+41.How does AWS ECR work?
+Amazon ECR uses Amazon S3 for storage to make your container images highly available and accessible, allowing you to deploy new containers for your applications reliably. Amazon ECR transfers your container images over HTTPS and automatically encrypts your images at rest.
+
+42.What is meant by serverless?
+Serverless computing is a method of providing backend services on an as-used basis. Servers are still used, but a company that gets backend services from a serverless vendor is charged based on usage, not a fixed amount of bandwidth or number of servers.
+
+43.What is Lambda AWS used for?
+AWS Lambda is a serverless compute service that runs your code in response to events and automatically manages the underlying compute resources for you. You can use AWS Lambda to extend other AWS services with custom logic, or create your own back end services that operate at AWS scale, performance, and security.
+
+44. What is DynamoDB used for?
+DynamoDB is an Amazon Web Services database system that supports data structures and key-valued cloud services. It allows users the benefit of auto-scaling, in-memory caching, backup and restore options for all their internet-scale applications using DynamoDB
+DynamoDB uses hashing and B-trees to manage data. Upon entry, data is first distributed into different partitions by hashing on the partition key. Each partition can store up to 10GB of data and handle by default 1,000 write capacity units (WCU) and 3,000 read capacity units (RCU).
+
+45.What is AWS config?
+AWS Config is a service that enables you to assess, audit, and evaluate the configurations of your AWS resources. Config continuously monitors and records your AWS resource configurations and allows you to automate the evaluation of recorded configurations against desired configurations.
+
+46. What is CloudWatch used for?
+CloudWatch enables you to monitor your complete stack (applications, infrastructure, and services) and leverage alarms, logs, and events data to take automated actions and reduce Mean Time to Resolution (MTTR). This frees up important resources and allows you to focus on building applications and business value.
+
+47. What is CloudWatch vs CloudTrail?
+CloudWatch is a monitoring service for AWS resources and applications. CloudTrail is a web service that records API activity in your AWS account. They are both useful monitoring tools in AWS. ... With CloudWatch, you can collect and track metrics, collect and monitor log files, and set alarms.
+
+48.What is AWS Event Bridge?
+Amazon EventBridge is a serverless event bus that makes it easy to connect applications together using data from your own applications, Software-as-a-Service (SaaS) applications, and AWS services. ... EventBridge supports 10 SaaS application partners and 90+ AWS Services as event sources
+
+49.What is SQS in AWS
+Amazon Simple Queue Service (Amazon SQS) offers a secure, durable, and available hosted queue that lets you integrate and decouple distributed software systems and components. Amazon SQS offers common constructs such as dead-letter queues and cost allocation tags. It provides a generic web services API that you can access using any programming language that the AWS SDK supports.
+ 
+50.What is SNS in AWS
+Amazon Simple Notification Service (Amazon SNS) is a fully managed messaging service for both application-to-application (A2A) and application-to-person (A2P) communication.
+The A2A pub/sub functionality provides topics for high-throughput, push-based, many-to-many messaging between distributed systems, microservices, and event-driven serverless applications. Using Amazon SNS topics, your publisher systems can fanout messages to a large number of subscriber systems including Amazon SQS queues, AWS Lambda functions and HTTPS endpoints, for parallel processing, and Amazon Kinesis Data Firehose. The A2P functionality enables you to send messages to users at scale via SMS, mobile push, and email.
+
+51.What is kinesis
+Amazon Kinesis makes it easy to collect, process, and analyze real-time, streaming data so you can get timely insights and react quickly to new information. Amazon Kinesis offers key capabilities to cost-effectively process streaming data at any scale, along with the flexibility to choose the tools that best suit the requirements of your application.
+
+52.What is API gateway in AWS
+Amazon API Gateway is a fully managed service that makes it easy for developers to create, publish, maintain, monitor, and secure APIs at any scale. APIs act as the "front door" for applications to access data, business logic, or functionality from your backend services. Using API Gateway, you can create RESTful APIs and WebSocket APIs that enable real-time two-way communication applications. API Gateway supports containerized and serverless workloads, as well as web applications.
+
+53.What is Cognito
+Amazon Cognito is a simple user identity and data synchronization service that helps you securely manage and synchronize app data for your users across their mobile devices. You can create unique identities for your users through a number of public login providers (Amazon, Facebook, and Google) and also support unauthenticated guests. 
+Amazon Cognito is available to all AWS customers. 
+
+54.What is Identity federation 
+Identity federation is a system of trust between two parties for the purpose of authenticating users and conveying information needed to authorize their access to resources. In this system, an identity provider (IdP) is responsible for user authentication, and a service provider (SP), such as a service or an application, controls access to resources.
+
+55.What is AWS Directory Service
+The AWS Directory Service is an Amazon Web Services tool that allows enables an IT administrator to run Microsoft Active Directory (AD) in the public cloud, easing setup of user and group data and giving an end user access to AWS cloud services.
+
+56.What is Organizations in AWS 
+AWS Organizations is an account management service that enables you to consolidate multiple AWS accounts into an organization that you create and centrally manage. AWS Organizations includes account management and consolidated billing capabilities that enable you to better meet the budgetary, security, and compliance needs of your business. As an administrator of an organization, you can create accounts in your organization and invite existing accounts to join the organization.
+
+57.What is Single Sign-On (AWS SSO)
+AWS Single Sign-On (AWS SSO) is a cloud service that allows you to grant your users access to AWS resources, such as Amazon EC2 instances, across multiple AWS accounts. By default, AWS SSO now provides a directory that you can use to create users, organize them in groups, and set permissions across those groups.
+
+58.What is RAM
+AWS Resource Access Manager (RAM) helps you securely share your resources across AWS accounts, within your organization or organizational units (OUs) in AWS Organizations, and with IAM roles and IAM users for supported resource types. ... With AWS RAM, you don't need to create duplicate resources in multiple AWS accounts.
+
+59.What is KMS 
+AWS Key Management Service (KMS) makes it easy for you to create and manage cryptographic keys and control their use across a wide range of AWS services and in your applications.
+
+60.What is SSM
+AWS Systems Manager (formerly known as SSM) is an AWS service that you can use to view and control your infrastructure on AWS. Using the Systems Manager console, you can view operational data from multiple AWS services and automate operational tasks across your AWS resources. Systems Manager helps you maintain security and compliance by scanning your managed instances and reporting on (or taking corrective action on) any policy violations it detects.
+
+61.What is Parameter Store 
+Parameter Store, a capability of AWS Systems Manager, provides secure, hierarchical storage for configuration data management and secrets management. You can store data such as passwords, database strings, Amazon Machine Image (AMI) IDs, and license codes as parameter values. You can store values as plain text or encrypted data. You can reference Systems Manager parameters in your scripts, commands, SSM documents, and configuration and automation workflows by using the unique name that you specified when you created the parameter.
+
+62.What is WAF
+AWS WAF is a web application firewall that helps protect your web applications or APIs against common web exploits and bots that may affect availability, compromise security, or consume excessive resources. AWS WAF gives you control over how traffic reaches your applications by enabling you to create security rules that control bot traffic and block common attack patterns, such as SQL injection or cross-site scripting. 
+
+63.What is Amazon Inspector
+Amazon Inspector is an automated security assessment service that helps improve the security and compliance of applications deployed on AWS. Amazon Inspector automatically assesses applications for exposure, vulnerabilities, and deviations from best practices. 
+
+64.What is Macie
+Amazon Macie is a fully managed data security and data privacy service that uses machine learning and pattern matching to discover and protect your sensitive data in AWS.
+Amazon Macie automates the discovery of sensitive data at scale and lowers the cost of protecting your data
+
+65.What is VPC
+Amazon Virtual Private Cloud (Amazon VPC) enables you to launch AWS resources into a virtual network that you've defined. This virtual network closely resembles a traditional network that you'd operate in your own data center, with the benefits of using the scalable infrastructure of AWS.
+
+66.What is NAT Gateway
+NAT Gateway is a highly available AWS managed service that makes it easy to connect to the Internet from instances within a private subnet in an Amazon Virtual Private Cloud (Amazon VPC). Previously, you needed to launch a NAT instance to enable NAT for instances in a private subnet.
+
+67.What is DNS?
+DNS, or the Domain Name System, translates human readable domain names (for example, www.amazon.com) to machine readable IP addresses (for example, 192.0.2.44).
+
+68.What is VPC peering
+A VPC peering connection is a networking connection between two VPCs that enables you to route traffic between them using private IPv4 addresses or IPv6 addresses.
+
+69.What is NACL
+A network access control list (ACL) is an optional layer of security for your VPC that acts as a firewall for controlling traffic in and out of one or more subnets. You might set up network ACLs with rules similar to your security groups in order to add an additional layer of security to your VPC. 
+
+70.What is VPC Reachability Analyzer
+VPC Reachability Analyzer is a configuration analysis tool that enables you to perform connectivity testing between a source resource and a destination resource in your virtual private clouds (VPCs). 
+
+71.What is AWS Site-to-Site VPN?
+By default, instances that you launch into an Amazon VPC can't communicate with your own (remote) network. You can enable access to your remote network from your VPC by creating an AWS Site-to-Site VPN (Site-to-Site VPN) connection, and configuring routing to pass traffic through the connection.
+
+72.What is PrivateLink
+AWS PrivateLink provides private connectivity between VPCs, AWS services, and your on-premises networks, without exposing your traffic to the public internet. AWS PrivateLink makes it easy to connect services across different accounts and VPCs to significantly simplify your network architecture.
+
+73.What is egress 
+An egress-only internet gateway is stateful: it forwards traffic from the instances in the subnet to the internet or other AWS services, and then sends the response back to the instances.
+You can use a network ACL to control the traffic to and from the subnet for which the egress-only internet gateway routes traffic.
+
+74.What is Disaster recovery.
+Disaster recovery options in the cloud
+Disaster recovery strategies available to you within AWS can be broadly categorized into four approaches, ranging from the low cost and low complexity of making backups to more complex strategies using multiple active Regions. It is critical to regularly test your disaster recovery strategy so that you have confidence in invoking it, should it become necessary.
+
+75.What is On-premises
+An on-premises instance is any physical device that is not an Amazon EC2 instance that can run the CodeDeploy agent and connect to public AWS service endpoints.
+
+76.AWS Devops
+An integral part of DevOps is adopting the culture of continuous integration and continuous delivery/deployment (CI/CD), where a commit or change to code passes through various automated stage gates, all the way from building and testing to deploying applications, from development to production environments.
+
+77.AWS CloudFormation quotas
+Your AWS account has AWS CloudFormation quotas that you might need to know when authoring templates and creating stacks. By understanding these quotas, you can avoid limitation errors that would require you to redesign your templates or stacks.
+
+78.Waht is EMR
+Amazon EMR is a platform for rapidly processing, analyzing, and applying machine learning (ML) to big data using open-source frameworks.
+
+79.What is AWS OpsWorks
+AWS OpsWorks is a configuration management service that provides managed instances of Chef and Puppet. Chef and Puppet are automation platforms that allow you to use code to automate the configurations of your servers. OpsWorks lets you use Chef and Puppet to automate how servers are configured, deployed, and managed across your Amazon EC2 instances or on-premises compute environments. OpsWorks has three offerings, AWS Opsworks for Chef Automate, AWS OpsWorks for Puppet Enterprise, and AWS OpsWorks Stacks.
+
+80.What is Amazon WorkSpaces
+Amazon WorkSpaces is a fully managed desktop virtualization service for Windows and Linux that enables you to access resources from any supported device.
+
+81.What is AWS AppSync
+AWS AppSync is a fully managed service that makes it easy to develop GraphQL APIs by handling the heavy lifting of securely connecting to data sources like AWS DynamoDB, Lambda, and more. Adding caches to improve performance, subscriptions to support real-time updates, and client-side data stores that keep off-line clients in sync are just as easy. Once deployed, AWS AppSync automatically scales your GraphQL API execution engine up and down to meet API request volumes.
+
+82.What is Cost Explorer
+AWS Cost Explorer has an easy-to-use interface that lets you visualize, understand, and manage your AWS costs and usage over time.
+Get started quickly by creating custom reports that analyze cost and usage data. Analyze your data at a high level (for example, total costs and usage across all accounts) or dive deeper into your cost and usage data to identify trends, pinpoint cost drivers, and detect anomalies.
+
+83. What is Cloud whitepapers
+Cloud whitepapers explain the technology underlying our products and services or examine topics such as security, architecture, and total cost of ownership
+
+84.What is AWS Well-Architected
+AWS Well-Architected helps cloud architects build secure, high-performing, resilient, and efficient infrastructure for their applications and workloads. Based on five pillars — operational excellence, security, reliability, performance efficiency, and cost optimization — AWS Well-Architected provides a consistent approach for customers and partners to evaluate architectures, and implement designs that can scale over time.
+
+85.What is AWS Trusted Advisors
+AWS Trusted Advisors provides recommendations that help you follow AWS best practices. Trusted Advisor evaluates your account by using checks. These checks identify ways to optimize your AWS infrastructure, improve security and performance, reduce costs, and monitor service quotas. You can then follow the check recommendations to optimize your services and resources.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

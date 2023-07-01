@@ -1,0 +1,26 @@
+auditd
+The audit daemon is responsible for writing the audit messages that were generated through the audit kernel interface and triggered by application and system activity to disk. The way the audit daemon is started is controlled by systemd. The audit system functions (when started) are controlled by /etc/audit/auditd.conf. For more information about auditd and its configuration, refer to Section 31.2, “Configuring the Audit Daemon”.
+
+auditctl
+The auditctl utility controls the audit system. It controls the log generation parameters and kernel settings of the audit interface and the rule sets that determine which events are tracked. For more information about auditctl, refer to Section 31.3, “Controlling the Audit System Using auditctl”.
+
+audit rules
+The file /etc/audit/audit.rules contains a sequence of auditctl commands that are loaded at system boot time immediately after the audit daemon is started. For more information about audit rules, refer to Section 31.4, “Passing Parameters to the Audit System”.
+
+aureport
+The aureport utility allows you to create custom reports from the audit event log. This report generation can easily be scripted, and the output can be used by various other applications, for example, to plot these results. For more information about aureport, refer to Section 31.5, “Understanding the Audit Logs and Generating Reports”.
+
+ausearch
+The ausearch utility can search the audit log file for certain events using various keys or other characteristics of the logged format. For more information about ausearch, refer to Section 31.6, “Querying the Audit Daemon Logs with ausearch”.
+
+audispd
+The audit dispatcher daemon (audispd) can be used to relay event notifications to other applications instead of (or in addition to) writing them to disk in the audit log. For more information about audispd, refer to Section 31.9, “Relaying Audit Event Notifications”.
+
+autrace
+The autrace utility traces individual processes in a fashion similar to strace. The output of autrace is logged to the audit log. For more information about autrace, refer to Section 31.7, “Analyzing Processes with autrace”.
+
+aulast
+Prints a list of the last logged-in users, similarly to last. aulast searches back through the audit logs (or the given audit log file) and displays a list of all users logged in and out based on the range of time in the audit logs.
+
+aulastlog
+Prints the last login for all users of a machine similar to the way lastlog does. The login name, port, and last login time will be printed.  

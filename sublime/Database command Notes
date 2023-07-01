@@ -1,0 +1,93 @@
+Database command Notes
+
+*Create User with Password: CREATE USER mirai WITH PASSWORD 'AvG3N321';
+
+*Change user role to Super: ALTER USER mirai WITH SUPERUSER;
+
+*Grant the role that you created rds_superuser permissions:�
+postgres=> GRANT rds_superuser TO new_master;
+
+* Drop Database:	drop database mirai_dev;
+
+* Create Database: 	create database mirai_uat;
+
+
+* Grant Access on DB:	GRANT CONNECT ON DATABASE mirai TO mirai;
+					GRANT ALL PRIVILEGES ON DATABASE mirai to mirai;
+
+* Rename datbase:		ALTER DATABASE mirai_dev1 RENAME TO mirai_dev;
+
+* Change owner of DB:	ALTER DATABASE cw_datbase OWNER TO cw_user;
+
+
+* Take Backup of DB:	�pg_dump -U mirai -h optimus-infra-db.myclinic.miraihealth.com datamart_myclinic_staging > ~/datamart_myclinic_staging.sql
+
+
+* Terminate connection to database:
+
+		SELECT pg_terminate_backend(pg_stat_activity.pid)
+		FROM pg_stat_activity
+		WHERE pg_stat_activity.datname = ‘mirai’ AND pid <> pg_backend_pid();
+
+
+* Restore database from dump/backup:
+
+psql -U mirai -h optimus-infra-db.myclinic.miraihealth.com datamart_myclinic_dev < ~/datamart_myclinic_staging.sql
+
+* Restore database from dump/backup with gz extension:
+
+zcat optimus_dev_20210408-091741.sql.gz | psql -U mirai -h production_db_in.healthmachine.io -W mirai
+
+* Restore database from dump/backup with xz extension:
+
+xzcat anon_db_1612234702.sql.xz | psql postgresql://mirai@optimus-infra-db.myclinic.miraihealth.com/mirai_staging
+
+
+* Restore table from dump/backup with xz extension:
+pg_dump postgresql://postgres:PASSWD@localhost/mirai -t reminders > xz - > reminders.sql.xz
+
+
+
+
+
+
+=============================================================================================================================================================
+
+
+
+take database backup from uat to staging
+
+
+1. ssh login to uat rails0 and enter below command
+
+ pg_dump -U mirai -h db.uat.myclinic.miraihealth.com datamart_myclinic_uat > ~/datamart_myclinic_uat.sql
+
+2. backup the *datamart_myclinic_uat.sql* on AWS
+
+ aws s3 cp datamart_myclinic_uat.sql  s3://avegen-logs/$(dig +short myip.opendns.com @resolver1.opendns.com)/$(hostname)/$(date +%Y%m)/
+
+3. Download the backup in staging rails0
+
+ aws s3 cp s3://avegen-logs/34.240.40.164/uat_rails0.healthmachine.io/202109/datamart_myclinic_uat.sql /home/optimus/apps/optimus/shared/reports
+
+4. Change the ownership of data
+
+ chown optimus:optimus /home/optimus/apps/optimus/shared/reports/datamart_myclinic_uat.sql
+
+5. ssh login to staging rails0 and enter below command to login psql
+
+ psql -U mirai -h optimus-infra-db.myclinic.miraihealth.com datamart_myclinic_staging
+
+6. Once you loged in psql then drop the old table
+
+ drop database datamart_myclinic_uat_backup
+
+7. Create new database (Refer link : https://drive.google.com/file/d/1_VlE_ob5SmtXTcFxeQkWF6yNR5VfZcXB/view?usp=sharing )
+
+ create database datamart_myclinic_uat_backup
+
+8. Restore the data
+
+ psql -U mirai -h optimus-infra-db.myclinic.miraihealth.com datamart_myclinic_uat_backup < datamart_myclinic_uat.sql
+
+

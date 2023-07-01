@@ -1,0 +1,318 @@
+IMP
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+How to set hostname in Mac
+
+sudo scutil --set HostName <new host name>
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+Create a banner
+Create a plain text (.txt) or rich text (.rtf) document that contains your banner.
+Choose File > Save, then enter PolicyBanner for the document name.
+Copy the PolicyBanner file to the /Library/Security/ folder. 
+
+
+By using this device, you accept Avegen's Acceptable Usage Policy and Access Control Policy.
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+How to send comment for updating sheet
+
+Good Morning @sandhya@avegenhealth.com
+
+Can you please help me update this sheet as we need it for audit 
+You can refer other sub sheet OR can reach out to me in you have any query
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+How to close ticket for new joinee
+
+I have assigned AVEGEN-00218 to Rajanikant Ghate.
+I have installed Chrome, Bitdefender, RVM and Ruby, also i have provided him administrative access to his laptop for one week for installation of software's required for development.  
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+Vendor List
+
+Vendor List
+1. Ravi Joshi - enzigma.solutions@gmail.com / +91 9881911119
+(All Hardware, Office 365, windows OS, Bitdefender antivirus, Office infrastructure including Firewall, inverter, fire alarm, biometric, camera, gen-set, smoke detector, wifi, etc)
+ 
+2. Mr Kale - +91 9850949708 (Access Card) FYI
+ 
+3. Satish Aralkar - satisharalkar@gmail.com / +91 9922432531 (ERP)
+ 
+ 
+Camera - (Can access on firefox on windows)
+URL- http://192.168.1.170
+Login ID - admin
+Password - admin12345
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+How to locate your product key in windows 10
+wmic path softwarelicensingservice get OA3xOriginalProductKey
+By using this device, you accept Avegen’s Acceptable Usage Policy and Access Control Policy.	
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+How to check certificarte expirt date
+
+
+sudo su
+cd /etc/letsencrypt/live/assets.dev.togetherforher.com
+sudo openssl x509 -dates -noout -in cert.pem
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+How to renew multiple websites
+
+sudo certbot --force-renewal -d testlink.avegenhealth.com,testlink.healthmachine.io
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+How do I buy additional GSuite licences?
+
+1. Login with your email ID
+https://helpdesk.refractiv.co.uk/hc/en-us/requests/new
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+How to check logs for optimus?
+
+Logs are located in 
+/home/optimus-dev/apps/optimus/shared/log
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+How to check staging issue
+
+
+# run this command on staging0 on optimus login
+rvm default do bundle exec puma -C /home/optimus/apps/optimus/shared/puma.rb
+
+\curl -sSL https://get.rvm.io | bash
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Location for database credentials
+
+# First locate the conf file
+
+cd /var/www/wordpress_staging
+
+# configuration files will be stored in the below file
+
+cat wp-config.php
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+How to patch wordpress dervers
+
+Step 1. take the AMI backup
+Step 2. take the backup of plugins 
+step 3. update the plugins on wp
+step 4. Ask to add if any think else required
+step 5. Patch the server by script
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Hoew to connect database  Password "AvG3N321"
+
+psql -U mirai -h optimus-infra-db.myclinic.miraihealth.com datamart_myclinic_staging
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+How to backup postgres
+
+pg_dump -U mirai -h db.uat.myclinic.miraihealth.com datamart_myclinic_uat > ~/datamart_myclinic_uat.sql
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+How to restore postgres
+
+psql -U mirai -h optimus-infra-db.myclinic.miraihealth.com datamart_myclinic_uat < datamart_myclinic_uat.sql
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1. Monthly Incident Report
+project = ISD AND status in (Closed, resolved) AND createdDate > 2020-12-01 AND updatedDate <= 2021-1-1
+
+2. Onboarding Report
+project = ISD AND labels = Onboarding AND createdDate > 2020-12-01 AND updatedDate <= 2021-1-1
+
+3. Off-boarding Report
+project = ISD AND labels = Offboarding AND createdDate > 2020-12-01 AND updatedDate <= 2021-1-1
+
+You can change labels (for 2 and 3) and date range while getting all data/reports from JIRA.
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Clear Swap ram
+
+sudo swapoff -a; sudo swapon -a
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+How to resolve permission issue for support user in production database
+
+psql postgresql://mirai:@tesla-production-infra-db.myclinic.miraihealth.com/mirai
+
+GRANT SELECT ON patient_strata_cohort_assignments TO support;
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Steps to check 
+
+Step 1: Login to server 
+Step 2: cd /var/log
+Step 3: vim auth.log (check which public key used to login at a specific time)
+Step 4: login with user
+Step 5: go ~/.ssh/ and run below command to match the Public SHA
+ssh-keygen -lf authorized_keys
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+How to check the active services in ubuntu 
+
+systemctl --type=service --state=active
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+How to check active services without login in the system
+
+ssh staging1 sudo systemctl --type=service --state=active | grep -i optimus
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Youbroadband : 
+ip : 123.201.125.94
+Netmask : 255.255.255.252
+gateway : 123.201.125.93
+DNS : 
+
+
+TATA : 
+ip : 114.143.130.126
+netmask : 255.255.255.252
+gateway : 114.143.130.125
+DNS : 103.8.45.5
+DNS : 103.8.46.5
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Command is used to search a word in multiple files (.sh as extension)
+
+grep -Rnw --include=\*.sh /home/vaibhavg/ -e 'xyz'
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+SHA256:HtZIS0/Nd199aA75hY7pMf3LwglT9c/mynCihox5dek
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1. Vulnerability Scans frequency will be increased to twice a week. 
+SOP-22 (SOP-22 Operation Security-V1.7) to be updated and followed.
+
+2. Networking devices to retain logs for last 90 days or more.
+
+3. configure wireless networks with WPA3 protocol by JAN2022 and update SOP accordingly.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+The syntax is as follows for executing commands over ssh:
+
+ssh user1@server1 command1
+ssh user1@server1 'command2'
+# pipe #
+ssh user1@server1 'command1 | command2'
+# multiple commands (must enclose in quotes #
+ssh admin@box1 "command1; command2; command3"
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+location of all the services
+
+/lib/systemd/system/optimus-sidekiq-uat.service
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Policy to provide only s3 access to user
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetBucketLocation",
+                "s3:ListAllMyBuckets"
+            ],
+            "Resource": "arn:aws:s3:::*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": "s3:*",
+            "Resource": [
+                "arn:aws:s3:::sumiti-gsuite-drive-backup",
+                "arn:aws:s3:::sumiti-gsuite-drive-backup/*"
+            ]
+        }
+    ]
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Camera - (Can access on firefox on windows)
+URL- http://192.168.1.170
+Login ID - admin
+Password - admin12345
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1. Upgrade setup Step by Step till PG 12.8. 
+2. Login to servers: 
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" |sudo tee  /etc/apt/sources.list.d/pgdg.list
+sudo apt-get update
+sudo apt-get remove postgresql-client-9.6
+sudo apt-get install -y postgresql-client-12 postgresql-12
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+forms database,user password and role 
+
+CREATE USER health_machine_forms WITH PASSWORD 'Hea1ThM@chInE';
+create database health_machine_forms_production_in;
+GRANT CONNECT ON DATABASE health_machine_forms_production_in TO health_machine_forms;
+GRANT ALL PRIVILEGES ON DATABASE health_machine_forms_production_in to health_machine_forms;
+ALTER DATABASE health_machine_forms_production_in OWNER TO health_machine_forms;
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

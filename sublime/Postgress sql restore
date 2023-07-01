@@ -1,0 +1,17 @@
+Postgress sql restore
+-------------------------------------------------------------------------------
+ssh ubuntu@pgadmin.avegenhealth.com
+
+sudo su - avegen
+
+cd /data/home/avegen/healthmachine-scripts/db_restore
+
+aws s3 cp s3://myclinic-database-backups/2021/05/29/08/prod_1622275202.sql.xz .
+
+screen -S restore
+
+psql -U postgres -h localhost < drop_mirai_db.sql
+
+xzcat prod_*.xz| psql -U postgres -h localhost mirai
+
+-------------------------------------------------------------------------------

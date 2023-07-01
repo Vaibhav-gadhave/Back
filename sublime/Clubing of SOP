@@ -1,0 +1,31 @@
+Clubing of SOP
+
+
+SOP-42 : Logical Security                             --added
+SOP-09 : Network and mobile Networking                --added 
+SOP-34 : Access Control                               --added 
+SOP-17 : Patch Management                             --added 
+SOP-26 : Network and Computer Maintenance             --added
+SOP-22 : Operation Security                           --added
+SOP-10 : System Monitoring and Logging                --added    
+SOP-27 : Health machine Data backup and Restore       ------------------cant be added
+SOP-43 : Dynamic vulnerabilities                      --added 
+SOP-37 : Cryptography control                         --added
+SOP-11 : Incident Management – Jira Service Desk      ------------------cant be added  
+
+
+
+                                         Operation Security      22 = 22+42+43      -- done
+Network, Computer Maintenance Access control & Cryptography      09 = 09+26+34+37   -- done
+                  Patching, logging and computer monitering      10 = 10+17         -- done
+                     Health machine Data backup and Restore      27                 -- done  
+                                        Incident Management      11                 -- done
+
+
+
+
+
+
+May Audit Link : https://docs.google.com/spreadsheets/d/1Y_duc4cDgIxPbJJkssK8LBi9nlODuZ1O/edit#gid=1327795372
+Sept Audit link : https://docs.google.com/spreadsheets/d/1ZTKlE06xsXYhOQa5_LeSga2wjF9eekTr/edit#gid=1327795372
+

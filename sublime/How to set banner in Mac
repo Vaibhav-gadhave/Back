@@ -1,0 +1,34 @@
+How to set banner in Mac, Linux and Windows
+
+=======================================MAC============================================
+Create a plain text (.txt) or rich text (.rtf) document that contains your banner.
+Choose File > Save, then enter PolicyBanner for the document name.
+Copy the PolicyBanner file to the /Library/Security/ folder. 
+
+sudo vim /Library/Security/PolicyBanner.txt
+
+By using this device, you accept Avegen's Acceptable Usage Policy and Access Control Policy.	
+
+=======================================Windows=========================================
+I found that under the following registry entry:
+HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\winlogon\
+
+There you have two String values:
+LegalNoticeCaption
+LegalNoticeText
+
+Edit the LegalNoticeCaption and put a title text like “Warning” and,
+edit the LegalNoticeText and put a message like “By using this device, you accept Avegen's Acceptable Usage Policy and Access Control Policy.”
+and save it, and close the Windows® Registry.
+
+==================================================Centos===============================
+sudo vi /Library/Security/PolicyBanner.txt
+By using this device, you accept Avegen’s Acceptable Usage Policy and Access Control Policy.	
+
+==================================================Ubuntu===============================
+
+
+https://c-nergy.be/blog/?p=15628
+
+======================================================================================
+

@@ -1,0 +1,11 @@
+Bitnami Cert renewal process 
+
+https://miraihealth.atlassian.net/browse/OI-573
+
+
+1.   cd /root/certbot
+2.  sudo /opt/bitnami/ctlscript.sh stop
+3. ./letsencrypt-auto certonly -d testlink.avegenhealth.com
+4.  cp /etc/letsencrypt/live/testlink.avegenhealth.com/*pem /opt/bitnami/apps/testlink/conf/certs/
+5. sudo /opt/bitnami/ctlscript.sh start
+6. sudo /opt/bitnami/ctlscript.sh status

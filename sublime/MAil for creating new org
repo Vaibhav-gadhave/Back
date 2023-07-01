@@ -1,0 +1,27 @@
+Hi Vedant,
+
+We have created a new S3 bucket for the healthmachine-sunha staging/dev, uat, production org. 
+
+Please use the attached key for healthmachine-sunha Only.
+
+Other details:
+Production:
+"attachment_bucket_name" => "healthmachine-sunha-prod",
+"attachment_bucket_region" => "eu-west-1",
+
+UAT:
+
+"attachment_bucket_name" => "healthmachine-sunha-uat",
+"attachment_bucket_region" => "eu-west-1",
+
+staging/dev:
+
+"attachment_bucket_name" => "healthmachine-sunha-staging-dev",
+"attachment_bucket_region" => "us-west-2",
+
+
+Note - The keys are separate based on Orgs and environments
+
+Please let me know if you have any questions.
+
+Thanks and Regards,Vaibhav GadhaveSystem Administrator+918796228490

@@ -1,0 +1,35 @@
+What to do after during off-boarding
+
+Revoke all the below access
+
+
+Transfer the ownership of the documents -- Done  (To respective manager)       
+Dactivate Mail Account/ suspend as per the requirement -- Done
+Deactivate Bitdefender account --  NA
+Deactivate Office 365 account -- NA
+Deactivate Windows Licence account -- NA
+Deactivate JIRA account / Service desk account -- Done
+Deactivate Workplace account -- 
+Delete ERP account -- 
+Archive asset from asset register -- Done
+Deactivate Linode account -- NA
+AWS account -- NA
+SSh Keys -- Done
+Jenkins --  Na
+Delete BitBucket account -- Done
+
+
+Tickets for every month
+
+1. [Compliance]Update Compliance sheet and Log Review(NOV-2021)
+2. [Compliance]Update Master-sheet and IAM Check and Policy (NOV-2021)
+3. [AWS]Clean unwanted files from staging,uat,prod server
+4. [AWS]Check server-backup and logs-backup on AWS S3
+
+----------------------------------------------------------------------------------------------------
+
+1. Log review
+2. compliance sheet
+3. audit documents
+4. backup of all servers
+

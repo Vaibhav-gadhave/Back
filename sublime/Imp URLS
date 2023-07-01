@@ -1,0 +1,23 @@
+Imp URLS
+
+Description:#HealthMachine-Staging-Dev-CMS
+content.d.myclinic.miraihealth.com
+content.s.myclinic.miraihealth.com
+
+#TFH CMS
+infra-cms-wordpress0.togetherforher.com
+infra-cms-wordpress1.togetherforher.com
+
+#HealthMachine-Staging-Dev
+http://s.app.healthmachine.io/
+http://s.app.healthmachine.io/check
+http://d.app.healthmachine.io/
+http://d.app.healthmachine.io/check
+
+#Swagger
+http://s.app.healthmachine.io/swagger/
+http://d.app.healthmachine.io/swagger/
+
+#Jarvis
+https://s.jarvis.healthmachine.io/
+https://d.jarvis.healthmachine.io/

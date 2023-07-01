@@ -1,0 +1,3 @@
+How to set hostname in Mac
+
+sudo scutil --set HostName <new host name>
