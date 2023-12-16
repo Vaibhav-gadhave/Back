@@ -1,8 +1,15 @@
+Things that we need to do after the intallation on git.
+-----------------------------------------------------------------------------
+
 mkdir test1
 
 cd test1
 
 git init .
+
+git config --global user.name "Vaibhav-gadhave"
+
+git config --global user.email "vvgadhave@gmail.com"
 
 touch qwerty
 
@@ -14,3 +21,354 @@ git remote set-url origin https://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@githu
 
 git push --set-upstream origin master
 
+-----------------------------------------------------------------------------
+Branching:
+
+List Branches:
+git branch
+Lists all local branches.
+
+Create a New Branch:
+git branch <branch_name>
+Example: git branch feature-branch
+
+Switch to a Branch:
+git checkout <branch_name>
+Example: git checkout feature-branch
+(Note: In Git version 2.23 and later, you can use git switch <branch_name> instead.)
+
+Create and Switch to a New Branch:
+git checkout -b <branch_name>
+Example: git checkout -b new-feature
+
+Merge Branch:
+git merge <branch_name>
+Example: git merge feature-branch
+
+Rebase Branch:
+git rebase <branch_name>
+Example: git rebase master
+
+Interactive Rebase:
+git rebase -i <commit_hash>
+Allows interactive rebase for squashing, reordering, and editing commits.
+
+Delete a Branch (locally):
+git branch -d <branch_name>
+Example: git branch -d feature-branch
+(Use -D instead of -d to force delete a branch without checking for unmerged changes.)
+
+Remote Branching:
+List Remote Branches:
+git branch -r
+Lists remote branches.
+
+Fetch Remote Branches:
+git fetch <remote>
+Example: git fetch origin
+
+Create and Checkout a Remote Tracking Branch:
+git checkout -t <remote>/<branch_name>
+Example: git checkout -t origin/feature-branch
+
+Delete a Remote Branch:
+git push <remote> --delete <branch_name>
+Example: git push origin --delete feature-branch
+
+Rename a Branch:
+git branch -m <old_branch_name> <new_branch_name>
+Example: git branch -m feature-branch new-feature
+
+Set Upstream Branch:
+git branch --set-upstream-to=<remote>/<branch_name>
+Example: git branch --set-upstream-to=origin/master
+
+List Remote Tracking Branches:
+git branch -a
+Lists both local and remote branches.
+
+Create an Orphan Branch:
+git checkout --orphan <new_branch>
+Creates a new branch with no commit history.
+
+View Commit History Graph:
+git log --graph --oneline --all
+Displays a compact commit history graph.
+
+Cherry-Pick a Commit:
+git cherry-pick <commit_hash>
+Applies the changes introduced by a specific commit.
+
+Remote Repositories:
+Configuring Remote Repositories:
+Add a Remote Repository:
+git remote add <name> <url>
+Example: git remote add origin https://github.com/user/repo.git
+
+List Remote Repositories:
+git remote -v
+Lists the names and URLs of the remote repositories.
+
+Remove a Remote Repository:
+git remote remove <name>
+Example: git remote remove origin
+
+Rename a Remote Repository:
+git remote rename <old_name> <new_name>
+Example: git remote rename origin upstream
+
+Fetching and Pulling Changes:
+Fetch Changes from a Remote Repository:
+git fetch <remote>
+Example: git fetch origin
+
+Pull Changes from a Remote Repository:
+git pull <remote> <branch>
+Example: git pull origin master
+Pushing Changes:
+
+Push Changes to a Remote Repository:
+git push <remote> <branch>
+Example: git push origin master
+
+Push Tags to a Remote Repository:
+git push <remote> --tags
+Example: git push origin --tags
+
+Remote Branch Management:
+List Remote Branches:
+git branch -r
+Lists remote branches.
+
+Delete a Remote Branch:
+git push <remote> --delete <branch>
+Example: git push origin --delete feature-branch
+
+Remote URL Management:
+Show Remote URL:
+git remote show <remote>
+Example: git remote show origin
+
+Change Remote URL:
+git remote set-url <remote> <new_url>
+Example: git remote set-url origin https://new-url.git
+
+Cloning:
+Clone a Repository:
+git clone <repository>
+Example: git clone https://github.com/user/repo.git
+
+Miscellaneous:
+Prune Remote Tracking Branches:
+git remote prune <remote>
+Example: git remote prune origin
+
+Show Remote Repository Information:
+git remote show <remote>
+Example: git remote show origin
+
+Updating and Undoing:
+Staging Changes:
+Add Changes to Staging Area:
+git add <file>
+Example: git add myfile.txt
+
+Add All Changes to Staging Area:
+git add .
+or
+git add -A
+Adds all changes to the staging area.
+
+Committing Changes:
+Commit Staged Changes:
+git commit -m "Commit message"
+Example: git commit -m "Add new feature"
+
+Unstaging Changes:
+Unstage a File:
+git reset <file>
+Example: git reset myfile.txt
+
+Discarding Changes:
+Discard Changes in Working Directory:
+git checkout -- <file>
+Example: git checkout -- myfile.txt
+
+Discard Uncommitted Changes (Hard Reset):
+git reset --hard
+Discards all changes in the working directory.
+
+Amending Commits:
+Amend the Last Commit:
+git commit --amend
+Combines staged changes with the previous commit.
+
+Reverting Commits:
+Revert a Commit:
+git revert <commit_hash>
+Creates a new commit that undoes the changes introduced by a previous commit.
+
+Resetting to a Specific Commit:
+Reset to a Specific Commit:
+git reset --hard <commit_hash>
+Resets the branch and working directory to a specific commit.
+
+Soft Reset to a Specific Commit:
+git reset --soft <commit_hash>
+Resets the branch to a specific commit, keeping changes in the working directory staged.
+
+Cleaning Untracked Files:
+Clean Untracked Files:
+git clean -df
+Removes untracked files and directories from the working directory.
+
+Cherry-Picking Changes:
+Cherry-Pick a Commit:
+git cherry-pick <commit_hash>
+Applies the changes introduced by a specific commit.
+
+Tagging:
+Creating Tags:
+Create Lightweight Tag:
+git tag <tag_name>
+Example: git tag v1.0.0
+
+Create Annotated Tag:
+git tag -a <tag_name> -m "Tag message"
+Example: git tag -a v1.0.0 -m "Release version 1.0.0"
+
+Create Tags for Specific Commits:
+git tag <tag_name> <commit_hash>
+Example: git tag v1.0.0 abc123
+
+Listing and Showing Tags:
+List Tags:
+git tag
+Lists all tags.
+
+List Tags Matching a Pattern:
+git tag -l "v1.*"
+Lists tags matching a pattern.
+
+Show Tag Information:
+git show <tag_name>
+Example: git show v1.0.0
+
+Pushing and Pulling Tags:
+Push Single Tag to Remote Repository:
+git push <remote> <tag_name>
+Example: git push origin v1.0.0
+
+Push All Tags to Remote Repository:
+git push <remote> --tags
+Example: git push origin --tags
+
+Delete a Local Tag:
+git tag -d <tag_name>
+Example: git tag -d v1.0.0
+
+Delete a Remote Tag:
+git push <remote> --delete <tag_name>
+Example: git push origin --delete v1.0.0
+
+Checking Out Tags:
+Checkout a Tag:
+git checkout <tag_name>
+Example: git checkout v1.0.0
+
+Create a New Branch from a Tag:
+git checkout -b <branch_name> <tag_name>
+Example: git checkout -b release-1.0 v1.0.0
+
+Miscellaneous:
+Verify Tag GPG Signature:
+git tag -v <tag_name>
+Example: git tag -v v1.0.0
+
+Tagging a Specific Commit with a Message:
+git tag -a <tag_name> -m "Tag message" <commit_hash>
+Example: git tag -a v1.0.0 -m "Release version 1.0.0" abc123
+
+Remote Branches:
+List Remote Branches:
+git branch -r
+Lists remote branches.
+
+Fetch Remote Branches:
+git fetch <remote>
+Example: git fetch origin
+
+Create and Checkout a Remote Tracking Branch:
+git checkout -t <remote>/<branch_name>
+Example: git checkout -t origin/feature-branch
+
+Show Remote Branch Information:
+git show-branch -a
+Shows information about remote branches.
+
+Show Remote Tracking Branches:
+git branch -a
+Lists both local and remote branches.
+
+Delete a Remote Branch:
+git push <remote> --delete <branch_name>
+Example: git push origin --delete feature-branch
+
+Push Local Branch to Remote:
+git push <remote> <local_branch>:<remote_branch>
+Example: git push origin feature-branch:feature-branch
+
+Set Upstream Branch:
+git branch --set-upstream-to=<remote>/<branch_name>
+Example: git branch --set-upstream-to=origin/master
+
+git push -u <remote> <branch_name>
+Example: git push -u origin feature-branch
+
+Fetch Changes from a Remote Branch:
+git fetch <remote> <branch_name>
+Example: git fetch origin feature-branch
+
+Pull Changes from a Remote Branch:
+git pull <remote> <branch_name>
+Example: git pull origin feature-branch
+
+Rename a Remote Branch:
+git push <remote> <old_branch_name>:<new_branch_name> && git push <remote> --delete <old_branch_name>
+Example: git push origin feature-branch:new-feature && git push origin --delete feature-branch
+
+Stashing:
+git stash
+Stashes the changes in your working directory.
+
+Stash Changes with a Message:
+git stash save "Your stash message"
+Stashes changes with a descriptive message.
+
+List Stashes:
+git stash list
+Lists all stashes.
+
+Apply the Latest Stash:
+git stash apply
+Applies the changes from the latest stash.
+
+Apply a Specific Stash:
+git stash apply stash@{n}
+Applies the changes from a specific stash (replace n with the stash index).
+
+Pop the Latest Stash:
+git stash pop
+Applies and removes the changes from the latest stash.
+
+Pop a Specific Stash:
+git stash pop stash@{n}
+Applies and removes the changes from a specific stash.
+
+Drop a Stash:
+git stash drop stash@{n}
+Deletes a specific stash (replace n with the stash index).
+
+Clear All Stashes:
+git stash clear
+Removes all stashes.
