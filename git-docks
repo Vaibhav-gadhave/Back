@@ -1,0 +1,16 @@
+mkdir test1
+
+cd test1
+
+git init .
+
+touch qwerty
+
+git add .
+
+git commit -m "Test update"
+
+git remote set-url origin https://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@github.com/Vaibhav-gadhave/Test1.git
+
+git push --set-upstream origin master
+
