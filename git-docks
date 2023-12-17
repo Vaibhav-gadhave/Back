@@ -29,62 +29,63 @@ big dot == file staged
 Branching:
 
 List Branches:
-git branch --
+git branch
 Lists all local branches.
 
 Create a New Branch:
-git branch <branch_name> --
+git branch <branch_name>
 Example: git branch feature-branch
 Create a new branch
 
 Switch to a Branch:
-git checkout <branch_name> --
+git checkout <branch_name>
 Example: git checkout feature-branch
 (Note: In Git version 2.23 and later, you can use git switch <branch_name> instead.)
 This command will help to swith from one branch to other
 
 Create and Switch to a New Branch:
-git checkout -b <branch_name> --
+git checkout -b <branch_name>
 Example: git checkout -b new-feature
 This command will create a new branch and also switch to new branch
 
 Merge Branch:
-git merge <branch_name> --
+git merge <branch_name>
 Example: git merge feature-branch
 This command will merge all the changes in present branch from feature-branch
+It will store both the commits ie. mainbranch and subbranch
 
 Rebase Branch:
-git rebase <branch_name> ##
+git rebase <branch_name> 
 Example: git rebase master
-
+Similar to merge but it will create a new commit while earising the old commits.
 
 Interactive Rebase:
 git rebase -i <commit_hash> ##
 Allows interactive rebase for squashing, reordering, and editing commits.
 
 Delete a Branch (locally):
-git branch -d <branch_name> --
+git branch -d <branch_name>
 Example: git branch -d feature-branch
 (Use -D instead of -d to force delete a branch without checking for unmerged changes.)
 
 Remote Branching:
 List Remote Branches:
-git branch -r --
+git branch -r
 
 Fetch Remote Branches:
-git fetch <remote> --
+git fetch <remote>
 Example: git fetch origin
 
 Delete a Remote Branch:
-git push <remote> --delete <branch_name> --
+git push <remote> --delete <branch_name>
 Example: git push origin --delete feature-branch
 
 Rename a Branch:
-git branch -m <old_branch_name> <new_branch_name> --
+git branch -m <old_branch_name> <new_branch_name>
 Example: git branch -m feature-branch new-feature
 
 List Remote Tracking Branches:
-git branch -a --
+git branch -a
 Lists both local and remote branches.
 
 Create an Orphan Branch:
@@ -92,121 +93,121 @@ git checkout --orphan <new_branch> ##
 Creates a new branch with no commit history.
 
 View Commit History Graph:
-git log --graph --oneline --all --
+git log --graph --oneline --all
 Displays a compact commit history graph.
 
 Cherry-Pick a Commit:
-git cherry-pick <commit_hash> --
+git cherry-pick <commit_hash>
 It is mainly us if you dont want to merge the whole branch but you just want to some commits from that branch.
 
 -----------------------------------------------------------------------------
 Remote Repositories:
 Configuring Remote Repositories:
 Add a Remote Repository:
-git remote add <name> <url> --
+git remote add <name> <url>
 Example: git remote add origin https://github.com/user/repo.git
 
 List Remote Repositories:
-git remote -v --
+git remote -v
 Lists the names and URLs of the remote repositories.
 
 Remove a Remote Repository:
-git remote remove <name> --
+git remote remove <name>
 Example: git remote remove origin
 
 Rename a Remote Repository:
-git remote rename <old_name> <new_name> --
+git remote rename <old_name> <new_name>
 Example: git remote rename origin upstream
 
 Fetching and Pulling Changes:
 Fetch Changes from a Remote Repository:
-git fetch <remote> --
+git fetch <remote>
 Example: git fetch origin
 
 Pull Changes from a Remote Repository:
-git pull <remote> <branch> --
+git pull <remote> <branch>
 Example: git pull origin master
 Pushing Changes:
 
 Push Changes to a Remote Repository:
-git push <remote> <branch> --
+git push <remote> <branch>
 Example: git push origin master
 
 Push Tags to a Remote Repository:
-git push <remote> --tags --
+git push <remote> --tags
 Example: git push origin --tags
 
 Remote Branch Management:
 
 Remote URL Management:
 Show Remote URL:
-git remote show <remote> --
+git remote show <remote>
 Example: git remote show origin
 
 Change Remote URL:
-git remote set-url <remote> <new_url> --
+git remote set-url <remote> <new_url>
 Example: git remote set-url origin https://new-url.git
 
 Cloning:
 Clone a Repository:
-git clone <repository> --
+git clone <repository>
 Example: git clone https://github.com/user/repo.git
 
 Prune Remote Tracking Branches:
-git remote prune <remote> --
+git remote prune <remote>
 Example: git remote prune origin
 
 Show Remote Repository Information:
-git remote show <remote> --
+git remote show <remote>
 Example: git remote show origin
 
 Updating and Undoing:
 Add All Changes to Staging Area:
-git add .  --
+git add .
 or
-git add -A --
+git add -A
 Adds all changes to the staging area.
 
 Commit Staged Changes:
-git commit -m "Commit message" --
+git commit -m "Commit message"
 Example: git commit -m "Add new feature"
 
 Unstaging Changes:
 Unstage a File:
-git reset <file> --
+git reset <file>
 Example: git reset myfile.txt
 
 -----------------------------------------------------------------------------
 Discarding Changes:
 Discard Changes in Working Directory:
-git checkout -- <file>  --
+git checkout -- <file>
 Example: git checkout -- myfile.txt
 
 Discard Uncommitted Changes (Hard Reset):
-git reset --hard --
+git reset --hard
 Discards all changes in the working directory.
 
 Amending Commits:
 Amend the Last Commit:
-git commit --amend --
+git commit --amend
 Combines staged changes with the previous commit.
 
 Reverting Commits:
 Revert a Commit:
-git revert <commit_hash> --
+git revert <commit_hash>
 Creates a new commit that undoes the changes introduced by a previous commit.
 
 Resetting to a Specific Commit:
 Reset to a Specific Commit:
-git reset --hard <commit_hash> --
+git reset --hard <commit_hash>
 Resets the branch and working directory to a specific commit.
 
 Soft Reset to a Specific Commit:
-git reset --soft <commit_hash> --
+git reset --soft <commit_hash>
 Resets the branch to a specific commit, keeping changes in the working directory staged.
 
 Clean Untracked Files:
-git clean -df --
+git clean -df
 Removes untracked files and directories from the working directory.
 
 Cherry-Picking Changes:
