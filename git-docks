@@ -272,59 +272,6 @@ Verify Tag GPG Signature:
 git tag -v <tag_name> 
 Example: git tag -v v1.0.0
 
-Tagging a Specific Commit with a Message:
-git tag -a <tag_name> -m "Tag message" <commit_hash>
-Example: git tag -a v1.0.0 -m "Release version 1.0.0" abc123
-
------------------------------------------------------------------------------
-Remote Branches:
-List Remote Branches:
-git branch -r
-Lists remote branches.
-
-Fetch Remote Branches:
-git fetch <remote>
-Example: git fetch origin
-
-Create and Checkout a Remote Tracking Branch:
-git checkout -t <remote>/<branch_name>
-Example: git checkout -t origin/feature-branch
-
-Show Remote Branch Information:
-git show-branch -a
-Shows information about remote branches.
-
-Show Remote Tracking Branches:
-git branch -a
-Lists both local and remote branches.
-
-Delete a Remote Branch:
-git push <remote> --delete <branch_name>
-Example: git push origin --delete feature-branch
-
-Push Local Branch to Remote:
-git push <remote> <local_branch>:<remote_branch>
-Example: git push origin feature-branch:feature-branch
-
-Set Upstream Branch:
-git branch --set-upstream-to=<remote>/<branch_name>
-Example: git branch --set-upstream-to=origin/master
-
-git push -u <remote> <branch_name>
-Example: git push -u origin feature-branch
-
-Fetch Changes from a Remote Branch:
-git fetch <remote> <branch_name>
-Example: git fetch origin feature-branch
-
-Pull Changes from a Remote Branch:
-git pull <remote> <branch_name>
-Example: git pull origin feature-branch
-
-Rename a Remote Branch:
-git push <remote> <old_branch_name>:<new_branch_name> && git push <remote> --delete <old_branch_name>
-Example: git push origin feature-branch:new-feature && git push origin --delete feature-branch
-
 -----------------------------------------------------------------------------
 Stashing:
 git stash
