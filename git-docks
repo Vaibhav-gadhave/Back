@@ -99,6 +99,7 @@ Cherry-Pick a Commit:
 git cherry-pick <commit_hash>
 Applies the changes introduced by a specific commit.
 
+-----------------------------------------------------------------------------
 Remote Repositories:
 Configuring Remote Repositories:
 Add a Remote Repository:
@@ -189,6 +190,7 @@ Unstage a File:
 git reset <file>
 Example: git reset myfile.txt
 
+-----------------------------------------------------------------------------
 Discarding Changes:
 Discard Changes in Working Directory:
 git checkout -- <file>
@@ -217,7 +219,6 @@ Soft Reset to a Specific Commit:
 git reset --soft <commit_hash>
 Resets the branch to a specific commit, keeping changes in the working directory staged.
 
-Cleaning Untracked Files:
 Clean Untracked Files:
 git clean -df
 Removes untracked files and directories from the working directory.
@@ -227,6 +228,7 @@ Cherry-Pick a Commit:
 git cherry-pick <commit_hash>
 Applies the changes introduced by a specific commit.
 
+-----------------------------------------------------------------------------
 Tagging:
 Creating Tags:
 Create Lightweight Tag:
@@ -289,6 +291,7 @@ Tagging a Specific Commit with a Message:
 git tag -a <tag_name> -m "Tag message" <commit_hash>
 Example: git tag -a v1.0.0 -m "Release version 1.0.0" abc123
 
+-----------------------------------------------------------------------------
 Remote Branches:
 List Remote Branches:
 git branch -r
@@ -337,6 +340,7 @@ Rename a Remote Branch:
 git push <remote> <old_branch_name>:<new_branch_name> && git push <remote> --delete <old_branch_name>
 Example: git push origin feature-branch:new-feature && git push origin --delete feature-branch
 
+-----------------------------------------------------------------------------
 Stashing:
 git stash
 Stashes the changes in your working directory.
