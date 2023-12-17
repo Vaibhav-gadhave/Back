@@ -277,7 +277,6 @@ git tag -a <tag_name> -m "Tag message" <commit_hash>
 Example: git tag -a v1.0.0 -m "Release version 1.0.0" abc123
 
 -----------------------------------------------------------------------------
-<<<<<<< HEAD
 Remote Branches:
 List Remote Branches:
 git branch -r
@@ -327,8 +326,6 @@ git push <remote> <old_branch_name>:<new_branch_name> && git push <remote> --del
 Example: git push origin feature-branch:new-feature && git push origin --delete feature-branch
 
 -----------------------------------------------------------------------------
-=======
->>>>>>> 22f2186 (git-docks updated)
 Stashing:
 git stash
 Stashes the changes in your working directory.
