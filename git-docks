@@ -60,7 +60,7 @@ Example: git rebase master
 Similar to merge but it will create a new commit while earising the old commits.
 
 Interactive Rebase:
-git rebase -i <commit_hash> ##
+git rebase -i <commit_hash>
 Allows interactive rebase for squashing, reordering, and editing commits.
 
 Delete a Branch (locally):
