@@ -1,7 +1,7 @@
 Things that we need to do after the intallation on git.
 -----------------------------------------------------------------------------
 ## Always keep your ssh file backup 
-## Restore it when required
+## Restore it when system formated
 
 mkdir test1
 
