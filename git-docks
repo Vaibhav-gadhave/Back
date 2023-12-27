@@ -1,5 +1,7 @@
 Things that we need to do after the intallation on git.
 -----------------------------------------------------------------------------
+## Always keep your ssh file backup 
+## Restore it when required
 
 mkdir test1
 
@@ -10,6 +12,12 @@ git init .
 git config --global user.name "Vaibhav-gadhave"
 
 git config --global user.email "vvgadhave@gmail.com"
+
+git remote set-url origin git@github.com:Vaibhav-gadhave/Back.git
+
+chmod 700 ~/.ssh
+
+chmod 600 ~/.ssh/*
 
 touch qwerty
 
