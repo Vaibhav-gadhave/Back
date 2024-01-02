@@ -42,6 +42,23 @@ vagrant box remove <name> -- deletes a box from the machine
 vagrant package -- packages a running virtualbox env in a reusable box
 
 ---------------------------------------------------------------------------------
+Snapshots
+
+List Snapshots
+vagrant snapshot list
+
+Create a Snapshot
+vagrant snapshot save SNAPSHOTNAME
+vagrant snapshot save snapshot01
+
+Restore a Snapshot
+vagrant snapshot restore SNAPSHOTNAME
+vagrant snapshot restore snapshot01
+
+Delete a Snapshot
+vagrant snapshot delete SNAPSHOTNAME
+vagrant snapshot delete snapshot01
+---------------------------------------------------------------------------------
 Saving Progress
 -vagrant snapshot save [options] [vm-name] <name> -- vm-name is often default. Allows us to save so that we can rollback at a later time
 
