@@ -1,19 +1,8 @@
 #!/bin/bash
-#Purpose : 
-#Created date :  2020-10-30 07:19:59 PM IST
+#Created date :  2024-01-05 04:47:11 PM
 #Modified date : 
 #Author: Vaibhav Gadhave
-#Start
-<< mycomment 
-
-NAME[0]="vaibhav"
-NAME[1]="suraj"
-NAME[2]="rishab"
-NAME[3]="sangam"
-NAME[4]="nikhil"
-NAME[5]="rajesh"
-
-mycomment
+#Start 
 
 Friends=(vaibhav rishab suraj sangam nikhil rajesh)
 
