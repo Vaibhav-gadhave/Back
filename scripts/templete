@@ -1,15 +1,17 @@
 #!/bin/bash
 
+path=/media/vaibhavg/Backup/REPOS/StudyMaterial/scripts-learned
 read -p "Please provide the file name that you want to create: " filename
-touch /run/media/vaibhavg/Backup/PC/DOCS/scripts/$filename
-chmod -R 777 $filename
-echo '#!/bin/bash' > /run/media/vaibhavg/Backup/PC/DOCS/scripts/$filename
-echo '#Purpose : ' >> /run/media/vaibhavg/Backup/PC/DOCS/scripts/$filename
-echo '#Created date : ' `date +"%Y-%m-%d %r"` >> /run/media/vaibhavg/Backup/PC/DOCS/scripts/$filename
-echo '#Modified date : ' >> /run/media/vaibhavg/Backup/PC/DOCS/scripts/$filename
-echo '#Author: Vaibhav Gadhave' >> /run/media/vaibhavg/Backup/PC/DOCS/scripts/$filename
-echo '#Start' >> /run/media/vaibhavg/Backup/PC/DOCS/scripts/$filename
-echo '#End' >> /run/media/vaibhavg/Backup/PC/DOCS/scripts/$filename
+touch $path/$filename\a.sh
+chmod -R 777 $filename\a.sh
+echo '#!/bin/bash' > $path/$filename\a.sh
+echo '#Created date : ' `date +"%Y-%m-%d %r"` >> $path/$filename\a.sh
+echo '#Modified date : ' >> $path/$filename\a.sh
+echo '#Author: Vaibhav Gadhave' >> $path/$filename\a.sh
+echo '#Start' >> $path/$filename\a.sh
+
+
+echo '#End' >> $path/$filename\a.sh
 sleep 1 
-vim $filename
+vim $path/$filename\a.sh
 
