@@ -22,4 +22,8 @@ echo -e "List of given paramaters are $@"
 
 echo -e "Exit value of last command is $?"
 
+echo -e "Stores the PID of the most recently executed background process :- $!"
+
+echo "'$*' output is $*"
+
 #End
