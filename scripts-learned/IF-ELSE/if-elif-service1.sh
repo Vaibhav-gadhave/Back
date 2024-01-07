@@ -10,7 +10,7 @@ read -p "Do you want to check wether the service is Active or Deactive (yes or n
 
 if [ "${statuss}" == "yes" ]
 then	
-	systemctl status docker | awk 'NR==3{print $2}'
+	systemctl status $service | awk 'NR==3{print $2}'
 fi
 
 if [ "${statuss}" == "no" ]
@@ -18,7 +18,7 @@ then
 	echo -e "ok"
 fi
 
-read -p "Do you wnat to turn it ON or OFF (On or OFF or keep):" action
+read -p "Do you want to turn it ON or OFF (On or OFF or keep):" action
 
 if [ "${action}" == "On" ]
 then	
@@ -36,7 +36,7 @@ then
 
 elif [ "${action}" == "keep" ]
 then
-	echo -e "keeping the script as it is"
+	echo -e "keeping the service as it is"
 
 else
 	echo -e "invalid option"
