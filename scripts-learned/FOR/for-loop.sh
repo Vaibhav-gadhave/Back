@@ -1,9 +1,9 @@
 #!/bin/bash
-#Purpose : 
-#Created date :  2020-10-28 06:05:51 PM IST
+#Created date :  2024-01-10 05:41:26 AM
 #Modified date : 
 #Author: Vaibhav Gadhave
-#Start
+#Start 
+echo -e "Information generated according to script"
 
 for each in $(seq 1 10)
 do
