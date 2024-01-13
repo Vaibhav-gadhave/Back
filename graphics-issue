@@ -1,0 +1,13 @@
+############ Reinstall Gnome service#################
+
+sudo apt update
+sudo apt upgrade
+sudo apt autoremove
+
+sudo apt remove ubuntu-desktop
+sudo apt autoremove
+sudo apt install ubuntu-desktop
+sudo apt install ubuntu-gnome-desktop
+
+dpkg-reconfigure gdm3
+
