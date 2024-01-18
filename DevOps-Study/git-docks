@@ -1,7 +1,7 @@
-Things that we need to do after the intallation on git.
+Things that we need to do after the installation on git.
 -----------------------------------------------------------------------------
 ## Always keep your ssh file backup 
-## Restore it when system formated
+## Restore it when system formatted
 
 mkdir test1
 
@@ -31,7 +31,7 @@ git push --set-upstream origin master
 
 -----------------------------------------------------------------------------
 ? == untracked
-big dot == file staged
+big dot == file unstaged
 + == file committed
 -----------------------------------------------------------------------------
 Branching:
@@ -65,7 +65,7 @@ It will store both the commits ie. mainbranch and subbranch
 Rebase Branch:
 git rebase <branch_name> 
 Example: git rebase master
-Similar to merge but it will create a new commit while earising the old commits.
+Similar to merge but it will create a new commit while erasing the old commits.
 
 Interactive Rebase:
 git rebase -i <commit_hash>
@@ -122,6 +122,12 @@ Lists the names and URLs of the remote repositories.
 Remove a Remote Repository:
 git remote remove <name>
 Example: git remote remove origin
+Removes the remote and its references from your local repository.
+
+Add a Remote Repository
+git remote add origin <url>
+git remote add origin git@github.com:Vaibhav-gadhave/test.git
+Adds a new origin in repository   Note: you can have multiple origin by this command
 
 Rename a Remote Repository:
 git remote rename <old_name> <new_name>

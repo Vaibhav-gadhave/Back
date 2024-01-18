@@ -1,0 +1,124 @@
+
+Reference :
+https://docs.ansible.com/ansible/latest/index.html 
+
+Sample ansible.cfg can also be stored in your project folder
+cd /ansible/projects1/
+
+vim ansible.cfg
+
+[defaults]
+
+inventory      = ./inventory
+forks          = 5
+host_key_checking = False
+log_path = /var/log/ansible.log
+
+[privilege_escalation]
+become=True
+become_method=sudo
+become_ask_pass=False
+
+---------------------------------------------------------------------------
+vim /etc/ansible/hosts    Note: you can store the inventry any where, you just need to mention the path
+      
+[all]
+172.19.0.3
+172.19.0.4
+
+[kaka]
+172.19.0.3
+
+[boka]
+172.19.0.4
+
+----------------------------OR--------------------------------
+vim /ansible/Project1/inventory
+
+all:
+  hosts:
+    server1:
+      ansible_host: 172.19.0.3 
+      ansible_user: root
+      ansible_ssh_private_key_file: clientkey.pem
+    server2:
+      ansible_host: 172.19.0.4 
+      ansible_user: root
+      ansible_ssh_private_key_file: clientkey.pem
+
+  children:
+    webservers:
+      hosts:
+        server1:
+    dbserver:
+      hosts:
+        server2:
+
+--------------------------------------------------------------
+ansible -m ping kaka
+ansible server1 -m ping -i /ansible/Project1/inventory  ## only individual server in list
+ansible all -m ping -i /ansible/Project1/inventory  ## all the hosts at a time
+ansible webservers -m ping -i /ansible/Project1/inventory  ## ping any specific group
+ansible all -m ansible.builtin.yum -a "name=httpd state=present"  ##Install any package via yum, present is used for installing the package
+ansible all -m ansible.builtin.yum -a "name=httpd state=absent" --become ##uninstall any package via yum with sudo preveledge, absent is used for uninstalling the package
+ansible all -i /etc/ansible/hosts --list-hosts
+ansible webservers -m command -a "uname -r" -i /ansible/Project1/inventory -v ## to use any command, it will get the hosts from the given path with verbose option
+
+
+  
+
+Playbook commands:-
+ansible-playbook -i inventory install_httpd.yml ##Install https on all the systems, also make it active and enabled 
+ansible-playbook -i inventory install_httpd.yml -C ## just a dry run before execution, dont rely on this it dont provide any Guarantee that file will execute only.
+ansible-playbook -i inventory install_httpd.yml --syntax-check ## this checks wether our synat is correct or not.
+
+------------------------------------
+Playbook
+
+1. Install https on all the systems, also make it active and enabled
+
+---
+- name: Install and configure Apache HTTP server
+  hosts: all
+  become: true  # Run tasks as a privileged user (e.g., root)
+
+  tasks:
+    - name: Install Apache HTTP server
+      package:
+        name: httpd
+        state: present
+
+    - name: Ensure Apache service is started and enabled
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+
+
+------------------------------------
+
+
+
+ansible Test -m setup | less  >> To check the host system’s info
+ansible Test -m copy -a "src=/home/vaibhavg/Desktop/test.txt dest=/tmp/" >> to copy any file
+ansible Test -m user -a "name=ansible password=<Encryptes password>" >> to create a new user  | openssl passwd -1 -stdin <<< Passwd@123# >> to create encryped password
+ansible Test -m user -a "name=ansible state-absent" >> to delete a user >> to delete a user | this will not work on basic ansible
+ansible Test -m yum -a "name=epel-release state=latest" -u root >> Install/update any package
+ansible Test -m yum -a "name=httpd state=present" -u root >> to check if a package is installed but not to update it
+ansible Test -m yum -a "name=httpd-1.8  state=latest" -u root >> to check if a package is of a specific version
+ansible Test -m service -a "name=httpd state=started" >> to start a service
+ansible Test -m service -a "name=httpd state=restarted" >> to restart a service
+ansible Test -m service -a "name=httpd state=stopped" >> to stop a service
+ansible Test -m copy -a "src=/etc/hosts dest=/tmp/hosts" >> to Transfer a file directly to many servers 
+ansible Test -m file -a "dest=/srv/foo/a.txt mode=600" >> to change the ownership and permissions on files OR
+ansible Test -m file -a "dest=/srv/foo/b.txt mode=600 owner=example group=example" 
+ansible Test -m file -a "dest=/path/to/c mode=755 owner=example group=example state=directory" >> to create directories 
+ansible Test -m file -a "dest=/path/to/c state=absent" >> to delete directories (recursively) and delete files
+
+
+
+
+
+
+
+
