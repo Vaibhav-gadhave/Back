@@ -1,0 +1,74 @@
+version: '3.0'
+
+services:
+  cert-generator:
+    image: elasticsearch:8.12.0
+    command: >
+      /bin/sh -c "elasticsearch-certutil cert --silent --pem --self-signed --in /certs/instance && chown -R 1000:1000 /certs/instance"
+    volumes:
+      - ./certs:/certs
+    environment:
+      - ELASTIC_USERNAME=elastic
+      - ELASTIC_PASSWORD=changeme
+    networks:
+      - es-network
+
+  node01:
+    image: elasticsearch:8.12.0
+    container_name: node01
+    environment:
+      - node.name=node01
+      - cluster.name=es-cluster-8
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms500m -Xmx500m"
+      - ELASTIC_USERNAME=elastic
+      - ELASTIC_PASSWORD=changeme
+      - xpack.security.enabled=true
+      - xpack.security.transport.ssl.enabled=true
+      - xpack.security.transport.ssl.verification_mode=certificate
+      - xpack.security.transport.ssl.keystore.path=/usr/share/elasticsearch/config/certs/elastic-certificates.p12
+      - xpack.security.transport.ssl.truststore.path=/usr/share/elasticsearch/config/certs/elastic-certificates.p12
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - es-data01:/usr/share/elasticsearch/data
+      - ./certs:/usr/share/elasticsearch/config/certs
+    ports:
+      - 9200:9200
+    networks:
+      - es-network
+
+  kibana:
+    image: kibana:8.12.0
+    environment:
+      ELASTIC_HOSTS: http://node01:9200
+      ELASTIC_USERNAME: elastic
+      ELASTIC_PASSWORD: changeme
+    ports:
+      - 5601:5601
+    networks:
+      - es-network
+    depends_on:
+      - node01
+
+  heartbeat:
+    image: elastic/heartbeat:8.12.0
+    environment:
+      ELASTIC_HOSTS: http://node01:9200
+    volumes:
+      - ./heartbeat.yml:/usr/share/heartbeat/heartbeat.yml:ro
+    networks:
+      - es-network
+    depends_on:
+      - node01
+
+volumes:
+  es-data01:
+    driver: local
+
+networks:
+  es-network:
+    driver: bridge
+
