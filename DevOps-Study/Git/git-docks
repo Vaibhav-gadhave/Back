@@ -112,8 +112,6 @@ It is mainly us if you dont want to merge the whole branch but you just want to 
 Remote Repositories:
 Configuring Remote Repositories:
 Add a Remote Repository:
-git remote add <name> <url>
-Example: git remote add origin https://github.com/user/repo.git
 
 List Remote Repositories:
 git remote -v
