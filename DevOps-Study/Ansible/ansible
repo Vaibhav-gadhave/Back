@@ -90,7 +90,7 @@ ansible all -i /etc/ansible/hosts --list-hosts ## lists the available hosts ment
 ansible webservers -m command -a "uname -r" -i /ansible/Project1/inventory -v ## to use any command, it will get the hosts from the given path with verbose option
 ansible server1 -m setup | less  ## To check the host system’s info
 ansible server2 -m ansible.builtin.copy -a "src=/home/vaibhavg/Desktop/test.txt dest=/tmp/" ## to copy any file from ansible server to hosts
-ansible all -m ansible.builtin.user -a "name=ansible password=<Encryptes password>" ## to create a new user  | openssl passwd -1 -stdin <<< Passwd@123# >> to create encryped password
+ansible all -m ansible.builtin.user -a "name=ansible password=<Encryptes password>" ## to create a new user  | openssl passwd -crypt Passwd@123# >> to create encryped password
 ansible server1 -m ansible.builtin.user -a "name=ansible state=absent" ## to delete a user 
 ansible all -m ansible.builtin.service -a "name=httpd state=started" ## to start a service
 ansible all -m ansible.builtin.service -a "name=httpd state=restarted" ## to restart a service
