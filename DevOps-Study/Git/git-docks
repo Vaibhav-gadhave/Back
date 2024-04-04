@@ -49,7 +49,7 @@ Switch to a Branch:
 git checkout <branch_name>
 Example: git checkout feature-branch
 (Note: In Git version 2.23 and later, you can use git switch <branch_name> instead.)
-This command will help to swith from one branch to other
+This command will help to switch from one branch to other
 
 Create and Switch to a New Branch:
 git checkout -b <branch_name>
