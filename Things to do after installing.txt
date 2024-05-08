@@ -1,0 +1,5 @@
+Things to do after installing Ubuntu
+
+1. Install IMP Softwares like Google-Chrome, Gparted, Virtual Box, Visual Studio Code, Extension manager, Tweak tool, Mainline kernel, Office-365 Web.
+2. Install Basic things like OH-MY-ZSH, flatpak, vagrant, git, vim, openssh-server, openssh-client, screen, htop.
+3. (Optional) 6Use below youtube video to update system: https://www.youtube.com/watch?v=vLm2EHIaxOo

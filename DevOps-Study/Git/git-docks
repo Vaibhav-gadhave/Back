@@ -30,9 +30,16 @@ git remote set-url origin https://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@githu
 git push --set-upstream origin master
 
 -----------------------------------------------------------------------------
-? == untracked
-big dot == file unstaged
-+ == file committed
+Understanding Git Status Symbols:
+
+Q: What does '?' indicate in the Git status?
+A: '?' indicates untracked files.
+
+Q: What does a big dot signify in Git status?
+A: A big dot represents files unstaged.
+
+Q: What does '+' denote in Git status?
+A: '+' indicates files committed.
 -----------------------------------------------------------------------------
 Branching:
 
@@ -43,7 +50,7 @@ Lists all local branches.
 Create a New Branch:
 git branch <branch_name>
 Example: git branch feature-branch
-Create a new branch
+Creates a new branch
 
 Switch to a Branch:
 git checkout <branch_name>
