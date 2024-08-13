@@ -1,9 +1,8 @@
 #!/bin/bash
-#Created date :  2024-01-07 11:51:08 AM
+#Created date :  2024-08-13 04:35:55 PM
 #Modified date : 
 #Author: Vaibhav Gadhave
 #Start 
-
 set `date`
 echo "Count = $#"
 echo "$1 $2 $3 $4 $5 $6"
