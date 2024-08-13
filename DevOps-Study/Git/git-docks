@@ -118,6 +118,12 @@ It is mainly us if you dont want to merge the whole branch but you just want to 
 -----------------------------------------------------------------------------
 Remote Repositories:
 
+Difference before and after
+git diff myfile.txt
+
+Difference before and after if file staged
+git diff --cached
+
 List Remote Repositories:
 git remote -v
 Lists the names and URLs of the remote repositories.
@@ -196,6 +202,9 @@ Example: git reset myfile.txt
 
 -----------------------------------------------------------------------------
 Discarding Changes:
+Removing file from staging area
+git restore --staged myfile.txt
+
 Discard Changes in Working Directory:
 git checkout -- <file>
 Example: git checkout -- myfile.txt
