@@ -42,7 +42,7 @@ echo -e "\033[104mi am Devops Engineer I study Everyday\033[0m"
 
 echo "-------------------------------------------------------------------"
 echo "########### Quotes  #############"
-echo -e "i am Devops Engineer I study Everyday, my favourite number is \$3"
+echo -e "i am Devops Engineer I study Everyday, my favourite number is \$top"
 
 echo "-------------------------------------------------------------------"
 echo "   For more info please do {man echo}   "
