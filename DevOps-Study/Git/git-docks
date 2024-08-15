@@ -30,17 +30,24 @@ git remote set-url origin https://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@githu
 git push --set-upstream origin master
 
 -----------------------------------------------------------------------------
-Understanding Git Status Symbols:
 
-Q: What does '?' indicate in the Git status?
-A: '?' indicates untracked files.
+Clone a Repository:
+git clone <repository>
+Example: git clone https://github.com/user/repo.git
 
-Q: What does a big dot signify in Git status?
-A: A big dot represents files unstaged.
+Updating and Undoing:
+Add All Changes to Staging Area:
+git add .
+or
+git add -A
+Adds all changes to the staging area.
 
-Q: What does '+' denote in Git status?
-A: '+' indicates files committed.
+Commit Staged Changes:
+git commit -m "Commit message"
+Example: git commit -m "Add new feature"
+
 -----------------------------------------------------------------------------
+
 Branching:
 
 List Branches:
@@ -72,7 +79,7 @@ It will store both the commits ie. mainbranch and subbranch
 Rebase Branch:
 git rebase <branch_name> 
 Example: git rebase master
-Similar to merge but it will create a new commit while erasing the old commits.
+Merge preserves the original history and adds a merge commit, while rebase rewrites history to make it look like the changes were applied in a straight line.
 
 Interactive Rebase:
 git rebase -i <commit_hash>
@@ -86,10 +93,6 @@ Example: git branch -d feature-branch
 Remote Branching:
 List Remote Branches:
 git branch -r
-
-Fetch Remote Branches:
-git fetch <remote>
-Example: git fetch origin
 
 Delete a Remote Branch:
 git push <remote> --delete <branch_name>
@@ -124,14 +127,12 @@ git diff myfile.txt
 Difference before and after if file staged
 git diff --cached
 
+Difference before and after if file commited
+git diff <current-commit-id> <previous-commit-id>
+
 List Remote Repositories:
 git remote -v
 Lists the names and URLs of the remote repositories.
-
-Remove a Remote Repository:
-git remote remove <name>
-Example: git remote remove origin
-Removes the remote and its references from your local repository.
 
 Add a Remote Repository
 git remote add origin <url>
@@ -142,25 +143,32 @@ Rename a Remote Repository:
 git remote rename <old_name> <new_name>
 Example: git remote rename origin upstream
 
+-----------------------------------------------------------------------------
 Fetching and Pulling Changes:
+
 Fetch Changes from a Remote Repository:
 git fetch <remote>
-Example: git fetch origin
+Example: git fetch
 
 Pull Changes from a Remote Repository:
 git pull <remote> <branch>
-Example: git pull origin master
+Example: git pull
+
+Git fetch will only download the data in local repo and not merge into working directory
+so we need to use two commands for this
+git fetch + git merge = git pull
+
+Instead of Git fetch we can use git pull to integrate the changes in working directory
+We use git fetch for only for notification purpose just to know weather there are any changes or not
+
 Pushing Changes:
 
 Push Changes to a Remote Repository:
 git push <remote> <branch>
 Example: git push origin master
 
-Push Tags to a Remote Repository:
-git push <remote> --tags
-Example: git push origin --tags
-
-Remote Branch Management:
+-----------------------------------------------------------------------------
+Remote Management:
 
 Remote URL Management:
 Show Remote URL:
@@ -171,12 +179,11 @@ Change Remote URL:
 git remote set-url <remote> <new_url>
 Example: git remote set-url origin https://new-url.git
 
-Cloning:
-Clone a Repository:
-git clone <repository>
-Example: git clone https://github.com/user/repo.git
+git remote remove <name>
+Example: git remote remove origin
+Removes the remote and its references from your local repository.
 
-Prune Remote Tracking Branches:
+Cleans up old information from a specific remote hat are no longer available in the main library (remote repository)
 git remote prune <remote>
 Example: git remote prune origin
 
@@ -184,26 +191,15 @@ Show Remote Repository Information:
 git remote show <remote>
 Example: git remote show origin
 
-Updating and Undoing:
-Add All Changes to Staging Area:
-git add .
-or
-git add -A
-Adds all changes to the staging area.
-
-Commit Staged Changes:
-git commit -m "Commit message"
-Example: git commit -m "Add new feature"
-
-Unstaging Changes:
-Unstage a File:
-git reset <file>
-Example: git reset myfile.txt
-
 -----------------------------------------------------------------------------
 Discarding Changes:
+
 Removing file from staging area
-git restore --staged myfile.txt
+git restore --staged myfile.txt 
+
+Restoring the file if deleted in working directory
+git restore myfile.txt
+Restore is safer, as it only affects the staging area.
 
 Discard Changes in Working Directory:
 git checkout -- <file>
@@ -211,9 +207,8 @@ Example: git checkout -- myfile.txt
 
 Discard Uncommitted Changes (Hard Reset):
 git reset --hard
-Discards all changes in the working directory.
+Reset is more drastic, as it overwrites changes in the working directory..
 
-Amending Commits:
 Amend the Last Commit:
 git commit --amend
 Combines staged changes with the previous commit.
@@ -223,7 +218,6 @@ Revert a Commit:
 git revert <commit_hash>
 Creates a new commit that undoes the changes introduced by a previous commit.
 
-Resetting to a Specific Commit:
 Reset to a Specific Commit:
 git reset --hard <commit_hash>
 Resets the branch and working directory to a specific commit.

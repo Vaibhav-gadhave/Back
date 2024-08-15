@@ -3,6 +3,7 @@
 #Modified date : 
 #Author: Vaibhav Gadhave
 #Start 
+# bc is being used here to perform arithmetic operations, potentially involving floating-point numbers or more complex calculations.
 
 read -p "Enter the first number " a
 read -p "Enter the secound number " b
