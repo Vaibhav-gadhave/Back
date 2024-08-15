@@ -34,6 +34,8 @@ git push --set-upstream origin master
 Clone a Repository:
 git clone <repository>
 Example: git clone https://github.com/user/repo.git
+  OR if your public keys are stored in github then you can also
+git clone ssh@github.com:Vaibhav-gadhave/Test.git   
 
 Updating and Undoing:
 Add All Changes to Staging Area:
@@ -118,9 +120,6 @@ Cherry-Pick a Commit:
 git cherry-pick <commit_hash>
 It is mainly us if you dont want to merge the whole branch but you just want to some commits from that branch.
 
------------------------------------------------------------------------------
-Remote Repositories:
-
 Difference before and after
 git diff myfile.txt
 
@@ -129,19 +128,6 @@ git diff --cached
 
 Difference before and after if file commited
 git diff <current-commit-id> <previous-commit-id>
-
-List Remote Repositories:
-git remote -v
-Lists the names and URLs of the remote repositories.
-
-Add a Remote Repository
-git remote add origin <url>
-git remote add origin git@github.com:Vaibhav-gadhave/test.git
-Adds a new origin in repository   Note: you can have multiple origin by this command
-
-Rename a Remote Repository:
-git remote rename <old_name> <new_name>
-Example: git remote rename origin upstream
 
 -----------------------------------------------------------------------------
 Fetching and Pulling Changes:
@@ -170,10 +156,18 @@ Example: git push origin master
 -----------------------------------------------------------------------------
 Remote Management:
 
-Remote URL Management:
-Show Remote URL:
-git remote show <remote>
-Example: git remote show origin
+List Remote Repositories:
+git remote -v
+Lists the names and URLs of the remote repositories.
+
+Add a Remote Repository
+git remote add origin <url>
+git remote add origin git@github.com:Vaibhav-gadhave/test.git
+Adds a new origin in repository   Note: you can have multiple origin by this command
+
+Rename a Remote Repository:
+git remote rename <old_name> <new_name>
+Example: git remote rename origin upstream
 
 Change Remote URL:
 git remote set-url <remote> <new_url>
@@ -205,10 +199,6 @@ Discard Changes in Working Directory:
 git checkout -- <file>
 Example: git checkout -- myfile.txt
 
-Discard Uncommitted Changes (Hard Reset):
-git reset --hard
-Reset is more drastic, as it overwrites changes in the working directory..
-
 Amend the Last Commit:
 git commit --amend
 Combines staged changes with the previous commit.
@@ -217,6 +207,10 @@ Reverting Commits:
 Revert a Commit:
 git revert <commit_hash>
 Creates a new commit that undoes the changes introduced by a previous commit.
+
+Discard Uncommitted Changes (Hard Reset):
+git reset --hard
+This discards all changes that were made in the working directory since the specified commit.
 
 Reset to a Specific Commit:
 git reset --hard <commit_hash>
@@ -230,13 +224,9 @@ Clean Untracked Files:
 git clean -df
 Removes untracked files and directories from the working directory.
 
-Cherry-Picking Changes:
-Cherry-Pick a Commit:
-git cherry-pick <commit_hash>
-Applies the changes introduced by a specific commit.
-
 -----------------------------------------------------------------------------
 Tagging:
+
 Creating Tags:
 Create Lightweight Tag:
 git tag <tag_name>
@@ -299,6 +289,7 @@ git stash
 Stashes the changes in your working directory.
 
 Stash Changes with a Message:
+git add .
 git stash save "Your stash message"
 Stashes changes with a descriptive message.
 
