@@ -41,6 +41,12 @@ log_path = /var/log/ansible.log
 become=True
 become_method=sudo
 become_ask_pass=False
+---------------------------------------------------------------------------
+Variable highest priority
+
+1. command line using -e
+2. variables desclared in playbook
+3. variables in group_vars folder
 
 ---------------------------------------------------------------------------
 vim /etc/ansible/hosts    Note: you can store the inventry any where, you just need to mention the path
