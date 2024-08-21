@@ -7,7 +7,7 @@ Vagrant.configure("2") do |config|
   #Docker Master Node
   config.vm.define "docker-master1" do |master|
     master.vm.hostname = "master"
-    master.vm.box = "ubuntu/focal64"
+    master.vm.box = "alvistack/ubuntu-24.04"
     master.vm.network :private_network, ip: "192.168.56.103"
 
     # Provisioning script for updating and upgrading
@@ -18,7 +18,6 @@ Vagrant.configure("2") do |config|
       sudo add-apt-repository universe
       sudo add-apt-repository multiverse
       sudo apt update
-      sudo hostnamectl set-hostname fedora.cn.lan
     SHELL
   end
 
