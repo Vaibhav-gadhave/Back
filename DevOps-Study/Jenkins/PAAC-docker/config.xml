@@ -1,0 +1,78 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<flow-definition plugin="workflow-job@1436.vfa_244484591f">
+  <actions>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobAction plugin="pipeline-model-definition@2.2205.vc9522a_9d5711"/>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction plugin="pipeline-model-definition@2.2205.vc9522a_9d5711">
+      <jobProperties/>
+      <triggers/>
+      <parameters/>
+      <options/>
+    </org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction>
+  </actions>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@3943.v3519a_3260660">
+    <script>pipeline {
+    
+    agent any
+    
+    environment {
+        imageName = &quot;jenkins&quot;
+        registryCredentials = &quot;nexuslogin&quot;
+        registry = &quot;192.168.56.102:8085&quot;
+        dockerImage = &apos;&apos;
+    }
+    
+     stages{
+        stage(&apos;Fetch code&apos;) {
+          steps{
+              git branch: &apos;master&apos;, url:&apos;https://github.com/Vaibhav-gadhave/Test.git&apos;
+          }  
+        }
+    
+    // Building Docker images
+    stage(&apos;Building image&apos;) {
+      steps{
+        script {
+          dockerImage = docker.build imageName
+        }
+      }
+    }
+    
+        stage(&apos;Save Docker Image&apos;) {
+            steps {
+                script {
+                    sh &apos;mkdir -p target&apos;  // Create the target directory if it doesn&apos;t exist
+                    sh &quot;docker save ${imageName} &gt; target/jenkins.tar&quot;  // Save the image as a .tar file
+                }
+            }
+        }
+
+    // Uploading Docker images into Nexus Registry
+    stage(&quot;UploadArtifact&quot;){
+            steps{
+                nexusArtifactUploader(
+                  nexusVersion: &apos;nexus3&apos;,
+                  protocol: &apos;http&apos;,
+                  nexusUrl: &apos;192.168.56.102:8081&apos;,
+                  groupId: &apos;DEVOPS&apos;,
+                  version: &quot;${env.BUILD_ID}-${env.BUILD_TIMESTAMP}&quot;,
+                  repository: &apos;docker-repoo&apos;,
+                  credentialsId: &apos;nexuslogin&apos;,
+                  artifacts: [
+                    [artifactId: &apos;vvg-apps&apos;,
+                     classifier: &apos;&apos;,
+                     file: &apos;target/jenkins.tar&apos;,
+                     type: &apos;tar&apos;]
+    ]
+ )
+            }
+        }
+    }
+}</script>
+    <sandbox>true</sandbox>
+  </definition>
+  <triggers/>
+  <disabled>false</disabled>
+</flow-definition>

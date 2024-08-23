@@ -1,0 +1,77 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<flow-definition plugin="workflow-job@1436.vfa_244484591f">
+  <actions>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobAction plugin="pipeline-model-definition@2.2205.vc9522a_9d5711"/>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction plugin="pipeline-model-definition@2.2205.vc9522a_9d5711">
+      <jobProperties/>
+      <triggers/>
+      <parameters/>
+      <options/>
+    </org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction>
+  </actions>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@3943.v3519a_3260660">
+    <script>pipeline {
+    agent any
+    tools {
+	    maven &quot;MAVEN3&quot;
+	    jdk &quot;OracleJDK8&quot;
+	}
+    stages{
+        stage(&apos;Fetch code&apos;) {
+          steps{
+              git branch: &apos;vp-rem&apos;, url:&apos;https://github.com/devopshydclub/vprofile-repo.git&apos;
+          }  
+        }
+
+        stage(&apos;Build&apos;) {
+            steps {
+                sh &apos;mvn clean install -DskipTests&apos;
+            }
+            post {
+                success {
+                    echo &quot;Now Archiving.&quot;
+                    archiveArtifacts artifacts: &apos;**/*.war&apos;
+                }
+            }
+        }
+        stage(&apos;Test&apos;){
+            steps {
+                sh &apos;mvn test&apos;
+            }
+
+        }
+
+        stage(&apos;Checkstyle Analysis&apos;){
+            steps {
+                sh &apos;mvn checkstyle:checkstyle&apos;
+            }
+        }
+
+        stage(&apos;Sonar Analysis&apos;) {
+            environment {
+                scannerHome = tool &apos;sonar4.7&apos;
+            }
+            steps {
+               withSonarQubeEnv(&apos;sonar&apos;) {
+                   sh &apos;&apos;&apos;${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=vprofile \
+                   -Dsonar.projectName=vprofile \
+                   -Dsonar.projectVersion=1.0 \
+                   -Dsonar.sources=src/ \
+                   -Dsonar.java.binaries=target/test-classes/com/visualpathit/account/controllerTest/ \
+                   -Dsonar.junit.reportsPath=target/surefire-reports/ \
+                   -Dsonar.jacoco.reportsPath=target/jacoco.exec \
+                   -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml&apos;&apos;&apos;
+              }
+            }
+        }
+
+    }
+}</script>
+    <sandbox>true</sandbox>
+  </definition>
+  <triggers/>
+  <disabled>false</disabled>
+</flow-definition>
