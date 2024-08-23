@@ -6,13 +6,10 @@ Vagrant.configure("2") do |config|
 
   # Jenkins Master Node
   config.vm.define "master" do |master|
-    master.vm.hostname = "master"
+    master.vm.hostname = "node1"
     master.vm.box = "alvistack/ubuntu-24.04"
     master.vm.network :private_network, ip: "192.168.56.101"
     
-    # Prevent IP conflicts by assigning a fixed MAC address (Optional)
-    master.vm.network :private_network, ip: "192.168.56.101", mac: "080027D14C66"
-
     # Provisioning script for updating and upgrading
     master.vm.provision "shell", inline: <<-SHELL
       sudo apt update
@@ -29,9 +26,6 @@ Vagrant.configure("2") do |config|
     node.vm.hostname = "master"
     node.vm.box = "alvistack/ubuntu-24.04"
     node.vm.network :private_network, ip: "192.168.56.102"
-
-    # Prevent IP conflicts by assigning a fixed MAC address (Optional)
-    node.vm.network :private_network, ip: "192.168.56.102", mac: "080027D14C67"
 
     # Provisioning script for updating and upgrading
     node.vm.provision "shell", inline: <<-SHELL
@@ -51,9 +45,6 @@ Vagrant.configure("2") do |config|
     sonar.vm.box = "alvistack/ubuntu-24.04"
     sonar.vm.network :private_network, ip: "192.168.56.103"
     
-    # Prevent IP conflicts by assigning a fixed MAC address (Optional)
-    sonar.vm.network :private_network, ip: "192.168.56.103", mac: "080027D14C68"
-
     # Provisioning script for updating and upgrading
     sonar.vm.provision "shell", inline: <<-SHELL
       sudo apt update

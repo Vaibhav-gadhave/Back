@@ -1,0 +1,15 @@
+Plugins import to test and store the repos
+
+Nexus Artifact Uploader
+SonarQube Scanner
+Build Timestamp
+Pipeline Maven Integration
+Pipeline Utility Steps
+
+Types of triggers
+
+Git Webhook
+Pool SCM
+Scheduled jobs
+rimote triger
+Build the job if first job is completed
