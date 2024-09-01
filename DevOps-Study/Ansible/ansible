@@ -91,7 +91,7 @@ ansible server1 -m ping -i /ansible/Project1/inventory  ## only individual serve
 ansible all -m ping -i /ansible/Project1/inventory  ## all the hosts at a time
 ansible webservers -m ping -i /ansible/Project1/inventory  ## ping any specific group
 ansible all -m ansible.builtin.yum -a "name=httpd state=present"  ##Install any package via yum, present is used for installing the package
-ansible all -m ansible.builtin.yum -a "name=httpd state=absent" --become ##uninstall any package via yum with sudo preveledge, absent is used for uninstalling the package
+ansible all -m ansible.builtin.yum -a "name=httpd state=absent" --become ##uninstall any package via yum with sudo privilege, absent is used for uninstalling the package
 ansible all -i /etc/ansible/hosts --list-hosts ## lists the available hosts mentioned in host file
 ansible webservers -m command -a "uname -r" -i /ansible/Project1/inventory -v ## to use any command, it will get the hosts from the given path with verbose option
 ansible server1 -m setup | less  ## To check the host system’s info
