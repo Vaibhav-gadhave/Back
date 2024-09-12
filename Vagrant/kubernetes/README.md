@@ -1,36 +1,31 @@
-# Kubernetes 1.30.2 Cluster Setup on Ubuntu 22.04 LTS
-This guide provides step-by-step instructions to set up a Kubernetes 1.30.2 cluster on Ubuntu 22.04 LTS.
-
-## Prerequisites
-
-- Ubuntu 22.04 LTS installed on all nodes.
-- Access to the internet.
-- User with `sudo` privileges.
-
 ## Step-by-Step Installation
+
+URL:  https://nvtienanh.info/blog/cai-dat-kubernetes-cluster-tren-ubuntu-server-22-04
 
 ### Step 1: Disable Swap on All Nodes
 
-swapoff -a
-sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+sudo swapoff -a
+sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
 
 ### Step 2: Enable IPv4 Packet Forwarding
 
-#### sysctl params required by setup, params persist across reboots
+sudo tee /etc/modules-load.d/containerd.conf <<EOF
+overlay
+br_netfilter
+EOF
 
-cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
+sudo modprobe overlay
+sudo modprobe br_netfilter
+
+sudo tee /etc/sysctl.d/kubernetes.conf <<EOF
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
 net.ipv4.ip_forward = 1
 EOF
 
-#### Apply sysctl params without reboot
-
 sudo sysctl --system
 
-### Step 3: Verify IPv4 Packet Forwarding
-
-sysctl net.ipv4.ip_forward
-
-### Step 4: Install containerd
+### Step 3: Install containerd
 
 # Add Docker's official GPG key:
 sudo apt-get update
@@ -44,46 +39,18 @@ echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
   $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt-get update && sudo apt-get install containerd.io && systemctl enable --now containerd
-
-### Step 5: Install CNI Plugin
-
-wget https://github.com/containernetworking/plugins/releases/download/v1.4.0/cni-plugins-linux-amd64-v1.4.0.tgz
-mkdir -p /opt/cni/bin
-tar Cxzvf /opt/cni/bin cni-plugins-linux-amd64-v1.4.0.tgz
-
-### Step 6: Forward IPv4 and Configure iptables
-
-cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
-overlay
-br_netfilter
-EOF
-sudo modprobe overlay
-sudo modprobe br_netfilter
-
-cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
-net.bridge.bridge-nf-call-iptables = 1
-net.bridge.bridge-nf-call-ip6tables = 1
-net.ipv4.ip_forward = 1
-EOF
-
-sudo sysctl --system
-sysctl net.bridge.bridge-nf-call-iptables net.bridge.bridge-nf-call-ip6tables net.ipv4.ip_forward
-modprobe br_netfilter
-sysctl -p /etc/sysctl.conf
+sudo apt-get update && sudo apt-get install containerd.io && sudo systemctl enable --now containerd
 
 
-### Step 7: Modify containerd Configuration for systemd Support
-sudo containerd config default | sudo tee /etc/containerd/config.toml
+### Step 4: Modify containerd Configuration for systemd Support
+sudo containerd config default | sudo tee /etc/containerd/config.toml >/dev/null 2>&1
+sudo sed -i 's/SystemdCgroup \= false/SystemdCgroup \= true/g' /etc/containerd/config.toml
 
-sudo vim /etc/containerd/config.toml    
-# search for SystemdCgroup = false and make it SystemdCgroup = true
+### Step 5: Restart containerd and Check the Status
 
-### Step 8: Restart containerd and Check the Status
+sudo systemctl restart containerd && sudo systemctl enable containerd && systemctl status containerd
 
-sudo systemctl restart containerd && systemctl status containerd
-
-### Step 9: Install kubeadm, kubelet, and kubectl
+### Step 6: Install kubeadm, kubelet, and kubectl
 
 sudo apt-get update
 sudo apt-get install -y apt-transport-https ca-certificates curl gpg
@@ -97,13 +64,12 @@ sudo apt-get install -y kubelet kubeadm kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
 
 
-### Step 10: Initialize the Cluster and Install CNI
+### Step 7: Initialize the Cluster
 
 sudo kubeadm config images pull
-sudo kubeadm init --pod-network-cidr 192.168.0.0/24 --control-plane-endpoint "192.168.57.101:6443" --upload-certs --v=5
+sudo kubeadm init --pod-network-cidr 10.10.0.0/16 --control-plane-endpoint "192.168.57.101:6443" --upload-certs --v=5
 
 #### After Initialzing the Cluster Connect to it and apply the CNI yaml (We're using Weave CNI in this guide)
-
 
 #To start using your cluster, you need to run the following as a regular user:
 
@@ -112,9 +78,38 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 
-### Step 11: Join Worker Nodes to the Cluster
+### Step 8: Join Worker Nodes to the Cluster
 #### Run the command generated after initializing the master node on each worker node. For example:
 
-kubeadm join 192.168.122.100:6443 --token zcijug.ye3vrct74itrkesp \
+kubeadm join 192.168.57.101:6443 --token zcijug.ye3vrct74itrkesp \
         --discovery-token-ca-cert-hash sha256:e9dd1a0638a5a1aa1850c16f4c9eeaa2e58d03f97fd0403f587c69502570c9cd
 
+### Step 9: Let's run the command to check the cluster status.
+
+kubectl cluster-info
+kubectl get nodes
+
+### Step 10: Install Calico Pod Network for Kubernetes cluster
+
+curl https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/calico.yaml -O
+
+### Step 11: Edit the line into this
+
+---
+# The default IPv4 pool to create on startup if none exists. Pod IPs will be
+# chosen from this range. Changing this value after installation will have
+# no effect. This should fall within `--cluster-cidr`.
+- name: CALICO_IPV4POOL_CIDR
+  value: '10.10.0.0/16'
+# Disable file logging so `kubectl logs` works.
+- name: CALICO_DISABLE_FILE_LOGGING
+  value: 'true'
+
+### Step 12: Then we install Calico on Kubernetes cluster:
+
+  kubectl apply -f calico.yaml
+
+### Step 13: Now check everything is working fine or not
+
+kubectl get pods -n kube-system
+kubectl get nodes

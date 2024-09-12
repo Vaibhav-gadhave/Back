@@ -1,0 +1,132 @@
+
+### Basic Commands:
+1. Check Kubernetes Cluster Status:
+   kubectl cluster-info
+   
+2. List All Nodes in the Cluster:
+   kubectl get nodes
+   
+3. Get Detailed Node Information:
+   kubectl describe node <node-name>
+   
+4. View all Namespaces:
+   kubectl get namespaces
+   
+5. Switch Namespace (Context):
+   kubectl config set-context --current --namespace=<namespace>
+
+6. Get all info of nodes as well as pods:
+   kubectl get all -A -o wide
+   
+### Pods:
+1. List Pods in a Namespace:
+   kubectl get pods -n <namespace>
+   
+2. Get Pod Details:
+   kubectl describe pod <pod-name> -n <namespace>
+   
+3. Check Pod Logs:
+   kubectl logs <pod-name> -n <namespace>
+   
+4. Access a Pod (Execute Command Inside):
+   kubectl exec -it <pod-name> -n <namespace> -- /bin/bash
+   
+5. Delete a Pod:
+   kubectl delete pod <pod-name> -n <namespace>
+
+6 Delte a pod frcefully
+   kubectl delete pods <pod-name> --grace-period=0 --force
+   
+### Deployments:
+1. List Deployments in a Namespace:
+   kubectl get deployments -n <namespace>
+   
+2. Get Deployment Details:
+   kubectl describe deployment <deployment-name> -n <namespace>
+   
+3. Scale a Deployment:
+   kubectl scale deployment <deployment-name> --replicas=<number-of-replicas> -n <namespace>
+   
+4. Apply/Update a Deployment:
+   kubectl apply -f <deployment.yaml>
+   
+5. Delete a Deployment:
+   kubectl delete deployment <deployment-name> -n <namespace>
+   
+### Services:
+1. List Services in a Namespace:
+   kubectl get svc -n <namespace>
+   
+2. Get Details of a Service:
+   kubectl describe svc <service-name> -n <namespace>
+   
+3. Expose a Deployment as a Service:
+   kubectl expose deployment <deployment-name> --type=LoadBalancer --name=<service-name>
+   
+### ConfigMaps & Secrets:
+1. List ConfigMaps in a Namespace:
+   kubectl get configmaps -n <namespace>
+   
+2. Get ConfigMap Details:
+   kubectl describe configmap <configmap-name> -n <namespace>
+   
+3. Create ConfigMap:
+   kubectl create configmap <configmap-name> --from-literal=<key>=<value>
+   
+4. List Secrets in a Namespace:
+   kubectl get secrets -n <namespace>
+   
+5. Get Secret Details (Encoded):   
+   kubectl describe secret <secret-name> -n <namespace>
+   
+6. Create Secret:
+   kubectl create secret generic <secret-name> --from-literal=<key>=<value>
+   
+### Persistent Volumes and Storage:
+1. List Persistent Volume Claims (PVCs) in a Namespace:
+   kubectl get pvc -n <namespace>
+   
+2. Get Details of a PVC:
+   kubectl describe pvc <pvc-name> -n <namespace>
+   
+3. Delete a PVC:
+   kubectl delete pvc <pvc-name> -n <namespace>
+   
+### Resources Management:
+1. View Resource Usage (CPU/Memory) of Pods:
+   kubectl top pods -n <namespace>
+   
+2. View Resource Usage (CPU/Memory) of Nodes:
+   kubectl top nodes
+   
+### Troubleshooting:
+1. View Events in the Cluster:
+   kubectl get events -n <namespace>
+   
+2. Troubleshoot a Pod with Describe:
+   kubectl describe pod <pod-name> -n <namespace>
+   
+3. Check Kubelet Logs on Node (SSH to Node):
+   journalctl -xeu kubelet
+   
+4. Debugging a Pod:
+   Create a temporary debugging pod:
+   kubectl run -i --tty busybox --image=busybox --restart=Never -- sh
+   
+### Miscellaneous:
+1. View Cluster Config (Kubeconfig):
+   kubectl config view
+   
+2. Apply Changes from a YAML File:
+   kubectl apply -f <file.yaml>
+   
+3. Delete Resources from a YAML File:
+   kubectl delete -f <file.yaml>
+   
+4. Get API Resources:
+   kubectl api-resources
+   
+5. Dry Run a Command (Check What Changes Will Be Made Without Applying):
+   kubectl apply -f <file.yaml> --dry-run=client
+   
+
