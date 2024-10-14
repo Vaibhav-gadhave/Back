@@ -209,9 +209,44 @@ sudo realm join -U Administrator cn.lan
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+To fix the issue where the home directory is being created as /vaibhavg@cn.lan instead of /home/vaibhavg, you need to modify the sssd.conf configuration on your Ubuntu machine.
 
+Edit the PAM configuration:
 
+Open /etc/pam.d/common-session (for Debian-based) or /etc/pam.d/system-auth (for RHEL-based).
+session required pam_mkhomedir.so skel=/etc/skel umask=0022
 
+Edit the /etc/sssd/sssd.conf (if you're using SSSD for authentication):
+default_domain_suffix = example.lan           #### only for ubuntu
+fallback_homedir = /home/%u                   ## centos & ubuntu
+use_fully_qualified_names = False             ## centos & ubuntu
+
+Restart the SSSD service:
+sudo systemctl restart sssd
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+To set up a floating home directory that can be accessed from multiple computers in a Samba Active Directory environment, you can use NFS to share the home directory across all systems. Here's how to set it up:
+
+#### Install on Samba machine#######
+sudo apt install nfs-kernel-server
+
+mkdir /data
+
+vim /etc/exports
+/data  *(rw,sync,no_root_squash)
+
+sudo exportfs -a
+
+sudo systemctl restart nfs-kernel-server
+
+#### Install on Client machine#######
+
+mkdir /user-data
+
+sudo apt install nfs-common
+
+mount -t nfs 192.168.56.129:/data /user-data/
 
 
 
