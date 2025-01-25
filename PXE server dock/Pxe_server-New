@@ -1,0 +1,162 @@
+*********************************steps for creating pxe server with kickstart and clone zilla******************************************
+
+****************************************************************************************
+Your ip should be 192.168.21.130 netmask 255.255.255.0 gateway 192.168.21.255
+****************************************************************************************
+
+////////// Also download clonezilla from  https://clonezilla.org/downloads/download.php?branch=stable ////////////
+
+rsync -arv clonezilla-live-3.2.0-5-amd64.zip Rocky-9.5-x86_64-dvd.iso root@192.168.21.130:/
+
+su
+dnf install epel-release -y
+dnf install htop atop screen -y
+dnf update -y
+hostnamectl set-hostname vaibhav-lab
+vim /etc/selinux/config 
+systemctl disable firewalld
+reboot
+dnf install dnsmasq -y
+mv /etc/dnsmasq.conf /etc/dnsmasq.conf-back
+vim /etc/dnsmasq.conf
+**************************************
+interface=enp0s3,lo
+#bind-interfaces 
+domain=vaibhav-lab
+# DHCP range-leases
+dhcp-range= enp0s3,192.168.21.200,192.168.21.253,255.255.255.0,1h
+# PXE
+dhcp-boot=pxelinux.0,pxeserver,192.168.21.2
+# Gateway
+dhcp-option=3,192.168.21.1
+# DNS
+dhcp-option=6,192.168.21.2 
+server=192.168.21.2
+# Broadcast Address
+dhcp-option=28, 192.168.21.255
+# NTP Server
+dhcp-option=42,0.0.0.0
+
+pxe-prompt="Press F8 for menu.", 60
+pxe-service=x86PC, "Install RHEL 9 from Network Server", pxelinux
+enable-tftp
+tftp-root=/var/lib/tftpboot
+**************************************
+
+dnf install syslinux tftp-server -y
+cp -rv /usr/share/syslinux/* /var/lib/tftpboot/
+ls /var/lib/tftpboot/
+mkdir /var/lib/tftpboot/pxelinux.cfg
+
+cd /
+mkdir /var/lib/tftpboot/clonezilla
+mv clonezilla-live-3.2.0-5-amd64.zip /var/lib/tftpboot/clonezilla/
+cd /var/lib/tftpboot/clonezilla/
+unzip clonezilla-live-3.2.0-5-amd64.zip 
+
+vim /var/lib/tftpboot/pxelinux.cfg/default
+**************************************
+default menu.c32 
+prompt 0
+timeout 300
+ONTIMEOUT local
+
+menu title ########## PXE Boot Menu ###
+
+label 1
+menu label ^1) Install Rhel 9 x64 with Local Repo FTP
+kernel rhel9/vmlinuz
+append initrd=rhel9/initrd.img inst.repo-ftp://192.168.21.130/pub/ devfs=nomount
+
+label 2
+menu label ^2) Install Rhel 9 x64 with HTTP
+kernel rhel9/vmlinuz
+append initrd=rhel9/initrd.img inst.repo=http://192.168.21.130/ ip=dhcp
+
+label 3
+menu label ^3) Install Red Hat Enterprise Linux 9 Kickstart
+kernel rhel9/vmlinuz
+append initrd=rhel9/initrd.img showopts inst.ks=nfs:192.168.21.130:/ks/rhel9.cfg ip-dhcp net.ifnames=0 biosdevname=0 
+
+label 4
+menu label ^4) Use CloneZilla
+KERNEL clonezilla/live/vmlinuz
+APPEND ramdisk_size=32768 initrd=clonezilla/live/initrd.img boot=live union=overlay username=user config components noswap edd=on nomodeset noeject locales=en_US.UTF-8 keyboard-layouts=NONE net.ifnames=0 ocs_live_extra_param="" ocs_live_keymap="NONE" ocs_live_batch="yes" ocs_lang="en_US.UTF-8" vga=788 nosplash  fetch=tftp://192.168.21.130/clonezilla/live/filesystem.squashfs
+
+label 5
+menu label ^5) Boot from local drive
+**************************************
+
+dnf install httpd -y
+mkdir /var/lib/tftpboot/rhel9
+cd /
+mount -o loop Rocky-9.5-x86_64-dvd.iso /mnt
+cd /mnt/images/pxeboot/
+cp -rv vmlinuz initrd.img /var/lib/tftpboot/rhel9/
+cd /mnt
+cp -rv * /var/www/html/
+systemctl enable httpd --now
+ls /var/lib/tftpboot/rhel9/
+dnf install vsftpd -y
+cp -rv /mnt/* /var/ftp/pub/
+chmod -R 755 /var/ftp/pub
+vim /etc/vsftpd/vsftpd.conf 
+**************************************
+anonymous_enable=YES
+**************************************
+
+dnf install nfs-utils
+mkdir /ks
+vim /etc/exports
+**************************************
+/ks	*(rw,sync,no_root_squash,no_all_squash)
+/var/ftp/pub	*(rw,sync,no_root_squash,no_all_squash)
+**************************************
+
+vim  /ks/rhel9.cfg
+**************************************
+#version=RHEL9
+#install
+url --url=http://192.168.21.130/BaseOS  # Replace with your HTTP server's IP and path
+lang en_US.UTF-8
+keyboard us
+timezone --utc America/New_York  # Adjust to your timezone
+rootpw --iscrypted $6$....  # Replace with a hashed root password (use `openssl passwd -6` to generate)
+user --name=rocky --password=$6$.... --gecos="Rocky User" --groups=wheel --ssh-key="ssh-rsa AAAA...."  # Add a user with SSH key authentication
+network --device=eth0 --bootproto=dhcp --noipv6 --activate  # Adjust network settings if needed
+firewall --enabled --service=ssh  # Enable firewall and allow SSH
+selinux --enforcing  # SELinux enforcement
+reboot
+
+# Disk partitioning
+# Clear all existing partitions and create new ones
+clearpart --all --initlabel
+autopart --type=lvm
+
+# Package selection -rv
+%packages
+@^minimal-environment
+@core
+@^development-tools
+@^graphical-server
+%end
+
+# Post-installation configuration
+%post
+# You can add post-installation commands here, like custom scripts
+echo "Welcome to Rocky Linux 9.5!" > /etc/motd
+%end
+**************************************
+
+exportfs -r
+exportfs -v
+systemctl enable nfs-server.service  --now
+systemctl enable dnsmasq.service --now
+systemctl enable vsftpd --now
+systemctl enable httpd --now
+systemctl status httpd
+systemctl status vsftpd
+systemctl status dnsmasq.service 
+tail -f /var/log/messages 
+
+
