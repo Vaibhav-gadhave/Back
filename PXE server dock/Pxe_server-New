@@ -4,6 +4,29 @@
 Your ip should be 192.168.21.130 netmask 255.255.255.0 gateway 192.168.21.255
 ****************************************************************************************
 
+****************************************************************************************
+Process to add pxe in existing DHCP
+
+Configuring Microsoft DHCP Server for PXE
+1. Open the DHCP Management Console
+Log in to your Microsoft DHCP Server.
+Open the Server Manager, then navigate to:
+Tools → DHCP.
+2. Set the Scope Options
+Expand your DHCP server node and select the relevant scope (e.g., 192.168.21.0/24).
+Right-click on the scope and select Scope Options.
+Add the following options:
+Option 66: Boot Server Host Name
+Value: Enter the PXE server's IP address (e.g., 192.168.21.130).
+Option 67: Bootfile Name
+Value: Enter the name of the bootloader file (e.g., pxelinux.0).
+
+Then disable the dnsmask or dhcp service from linux machine
+
+# systemctl disable dhcpd
+
+****************************************************************************************
+
 ////////// Also download clonezilla from  https://clonezilla.org/downloads/download.php?branch=stable ////////////
 
 rsync -arv clonezilla-live-3.2.0-5-amd64.zip Rocky-9.5-x86_64-dvd.iso root@192.168.21.130:/
@@ -159,4 +182,80 @@ systemctl status vsftpd
 systemctl status dnsmasq.service 
 tail -f /var/log/messages 
 
+##############################################################################################################################################################
 
+*******************************************************************
+ADD Windows in Pxe server
+********************************************************************
+
+# mkdir -p /data/winos/win10
+
+# 7z x Win10_22H2_English_x64v1.iso -o/mnt
+
+# cp -rv /mnt/test/* /data/winos/win10
+
+# chmod 755 /data/winos/win10/*
+
+# smbclient -U root -L 192.168.21.130
+
+# smbpasswd -a root
+
+# chown -R root:root /data
+
+Add this in samba.conf file
+# vim /etc/samba/smb.conf
+
+[winos]
+        comment = Install Windows Software
+        path = /data/winos
+        public = yes
+        browseable = Yes
+        writable = yes
+        printable = no
+	valid users = root
+	guest ok = yes
+        oplocks = no
+        level2 oplocks = no
+        locking = no
+	directory mask = 0755
+
+# systemctl start smb nmb
+
+# systemctl enable smb nmb
+
+# mount //192.168.21.130/winos /mnt
+
+#  cd /mnt/
+
+# ls
+
+#  cd win10/
+
+# mkdir /var/lib/tftpboot/networkboot-win10
+
+** Generate Windows PE iso file in Windows 10 operating system. Here we will generate two iso file, one for auto and another for custom installation.
+** ADK (Assessment and Deployment Kit) is required to create Windows PE iso. Download ADK kit from Microsoft site and install it on windows 10 system.
+** Once the installation done, run Deployment and Imaging Tools Environment as Administrator and execute below command to create working directories for Win PE.
+
+***************************************************************This steps for amd***************************
+copype amd64 C:\WinPE_amd64
+
+Dism /Mount-Image /ImageFile:"C:\WinPE_amd64\media\sources\boot.wim" /index:1 /MountDir:"C:\WinPE_amd64\mount"
+
+notepad c:\WinPE_amd64\mount\Windows\System32\Startnet.cmd
+
+    wpeinit
+    net use Z: \\192.168.21.130\winos\win10 /user:root Passwd@123#
+    Z:\setup.exe
+
+Dism /Unmount-Image /MountDir:"c:\WinPE_amd64\mount" /commit
+
+MakeWinPEMedia /ISO c:\WinPE_amd64 c:\winpe.iso
+
+**************************************************************************************************************
+
+*****************************************************Do this step in centos***********************************
+
+cp winpe.iso /var/lib/tftpboot/networkboot-win10auto
+
+tail -f /var/log/messages 

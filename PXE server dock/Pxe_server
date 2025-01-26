@@ -208,7 +208,7 @@ Add this in samba.conf file
         path = /data/winos
         public = yes
         browseable = Yes
-        writable = no
+        writable = yes
         printable = no
         valid users = test
         guest ok = yes
@@ -251,7 +251,7 @@ Dism /Unmount-Image /MountDir:"c:\WinPE_amd64\mount" /commit
 
 MakeWinPEMedia /ISO c:\WinPE_amd64 c:\winpeauto.iso
 
-**************************************************************************************************************
+**************************************************************************************************************i
 ***************************************************************This steps for custom***************************
 copype amd64 C:\WinPE_amd64
 
