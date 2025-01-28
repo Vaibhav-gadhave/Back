@@ -108,6 +108,9 @@ APPEND ramdisk_size=32768 initrd=clonezilla/live/initrd.img boot=live union=over
 
 label 5
 menu label ^5) Boot from local drive
+menu default
+localboot 0
+
 **************************************
 
 dnf install httpd -y
@@ -140,21 +143,37 @@ vim  /ks/rhel9.cfg
 **************************************
 #version=RHEL9
 #install
+
 url --url=http://192.168.21.130/BaseOS  # Replace with your HTTP server's IP and path
+
 lang en_US.UTF-8
+
 keyboard us
+
 timezone --utc America/New_York  # Adjust to your timezone
-rootpw --iscrypted $6$....  # Replace with a hashed root password (use `openssl passwd -6` to generate)
-user --name=rocky --password=$6$.... --gecos="Rocky User" --groups=wheel --ssh-key="ssh-rsa AAAA...."  # Add a user with SSH key authentication
+
+rootpw --iscrypted $6$3WPjaaSqGXSe8EBU$khexBVgpFDZqsf2JNjGnOE2ww2afSxd.nYkvcAaiD7y6icw9gM4T7kdPZ.7bCCf48ZEJjoUzazTv3.h1E/0AP/  # Replace with a hashed root password (use `openssl passwd -6` to generate)
+
+user --name=localadmin --password=$6$3WPjaaSqGXSe8EBU$khexBVgpFDZqsf2JNjGnOE2ww2afSxd.nYkvcAaiD7y6icw9gM4T7kdPZ.7bCCf48ZEJjoUzazTv3.h1E/0AP/ --iscrypted --gecos="Local Admin" --groups=wheel
+
+xconfig  --startxonboot
+
 network --device=eth0 --bootproto=dhcp --noipv6 --activate  # Adjust network settings if needed
+
 firewall --enabled --service=ssh  # Enable firewall and allow SSH
-selinux --enforcing  # SELinux enforcement
+
+selinux --disabled  # SELinux enforcement
+
+firstboot --disable
+
+bootloader --append="quiet" --location=mbr --timeout=1 --boot-drive=sda
+
 reboot
 
 # Disk partitioning
 # Clear all existing partitions and create new ones
-clearpart --all --initlabel
-autopart --type=lvm
+clearpart --all --initlabel --drives=sda
+ignoredisk --only-use=sda
 
 # Package selection -rv
 %packages
