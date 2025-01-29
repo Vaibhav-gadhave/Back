@@ -87,27 +87,23 @@ ONTIMEOUT local
 menu title ########## PXE Boot Menu ###
 
 label 1
-menu label ^1) Install Rhel 9 x64 with Local Repo FTP
-kernel rhel9/vmlinuz
-append initrd=rhel9/initrd.img inst.repo-ftp://192.168.21.130/pub/ devfs=nomount
-
-label 2
-menu label ^2) Install Rhel 9 x64 with HTTP
-kernel rhel9/vmlinuz
-append initrd=rhel9/initrd.img inst.repo=http://192.168.21.130/ ip=dhcp
-
-label 3
-menu label ^3) Install Red Hat Enterprise Linux 9 Kickstart
+menu label ^1) Install Red Hat Enterprise Linux 9 Kickstart
 kernel rhel9/vmlinuz
 append initrd=rhel9/initrd.img showopts inst.ks=nfs:192.168.21.130:/ks/rhel9.cfg ip-dhcp net.ifnames=0 biosdevname=0 
 
-label 4
-menu label ^4) Use CloneZilla
+label 2
+menu label ^2) Use CloneZilla
 KERNEL clonezilla/live/vmlinuz
 APPEND ramdisk_size=32768 initrd=clonezilla/live/initrd.img boot=live union=overlay username=user config components noswap edd=on nomodeset noeject locales=en_US.UTF-8 keyboard-layouts=NONE net.ifnames=0 ocs_live_extra_param="" ocs_live_keymap="NONE" ocs_live_batch="yes" ocs_lang="en_US.UTF-8" vga=788 nosplash  fetch=tftp://192.168.21.130/clonezilla/live/filesystem.squashfs
 
-label 5
-menu label ^5) Boot from local drive
+LABEL 3
+MENU LABEL ^3) WINDOWS 10 INSTALLATION
+kernel memdisk
+initrd networkboot-win10auto/winpeauto.iso
+append iso raw
+
+label 4
+menu label ^4) Boot from local drive
 menu default
 localboot 0
 
@@ -123,71 +119,17 @@ cd /mnt
 cp -rv * /var/www/html/
 systemctl enable httpd --now
 ls /var/lib/tftpboot/rhel9/
-dnf install vsftpd -y
-cp -rv /mnt/* /var/ftp/pub/
-chmod -R 755 /var/ftp/pub
-vim /etc/vsftpd/vsftpd.conf 
-**************************************
-anonymous_enable=YES
-**************************************
 
 dnf install nfs-utils
 mkdir /ks
 vim /etc/exports
 **************************************
 /ks	*(rw,sync,no_root_squash,no_all_squash)
-/var/ftp/pub	*(rw,sync,no_root_squash,no_all_squash)
 **************************************
 
 vim  /ks/rhel9.cfg
 **************************************
-#version=RHEL9
-#install
-
-url --url=http://192.168.21.130/BaseOS  # Replace with your HTTP server's IP and path
-
-lang en_US.UTF-8
-
-keyboard us
-
-timezone --utc America/New_York  # Adjust to your timezone
-
-rootpw --iscrypted $6$3WPjaaSqGXSe8EBU$khexBVgpFDZqsf2JNjGnOE2ww2afSxd.nYkvcAaiD7y6icw9gM4T7kdPZ.7bCCf48ZEJjoUzazTv3.h1E/0AP/  # Replace with a hashed root password (use `openssl passwd -6` to generate)
-
-user --name=localadmin --password=$6$3WPjaaSqGXSe8EBU$khexBVgpFDZqsf2JNjGnOE2ww2afSxd.nYkvcAaiD7y6icw9gM4T7kdPZ.7bCCf48ZEJjoUzazTv3.h1E/0AP/ --iscrypted --gecos="Local Admin" --groups=wheel
-
-xconfig  --startxonboot
-
-network --device=eth0 --bootproto=dhcp --noipv6 --activate  # Adjust network settings if needed
-
-firewall --enabled --service=ssh  # Enable firewall and allow SSH
-
-selinux --disabled  # SELinux enforcement
-
-firstboot --disable
-
-bootloader --append="quiet" --location=mbr --timeout=1 --boot-drive=sda
-
-reboot
-
-# Disk partitioning
-# Clear all existing partitions and create new ones
-clearpart --all --initlabel --drives=sda
-ignoredisk --only-use=sda
-
-# Package selection -rv
-%packages
-@^minimal-environment
-@core
-@^development-tools
-@^graphical-server
-%end
-
-# Post-installation configuration
-%post
-# You can add post-installation commands here, like custom scripts
-echo "Welcome to Rocky Linux 9.5!" > /etc/motd
-%end
+## copy from rehel9.cfg file
 **************************************
 
 exportfs -r
@@ -256,7 +198,7 @@ Add this in samba.conf file
 ** ADK (Assessment and Deployment Kit) is required to create Windows PE iso. Download ADK kit from Microsoft site and install it on windows 10 system.
 ** Once the installation done, run Deployment and Imaging Tools Environment as Administrator and execute below command to create working directories for Win PE.
 
-***************************************************************This steps for amd***************************
+***************************************************************This steps for 64 Bit processor***************************
 copype amd64 C:\WinPE_amd64
 
 Dism /Mount-Image /ImageFile:"C:\WinPE_amd64\media\sources\boot.wim" /index:1 /MountDir:"C:\WinPE_amd64\mount"
@@ -273,7 +215,7 @@ MakeWinPEMedia /ISO c:\WinPE_amd64 c:\winpe.iso
 
 **************************************************************************************************************
 
-*****************************************************Do this step in centos***********************************
+*****************************************************Do this step in rhel9***********************************
 
 cp winpe.iso /var/lib/tftpboot/networkboot-win10auto
 
