@@ -29,8 +29,6 @@ Then disable the dnsmask or dhcp service from linux machine
 
 ////////// Also download clonezilla from  https://clonezilla.org/downloads/download.php?branch=stable ////////////
 
-rsync -arv clonezilla-live-3.2.0-5-amd64.zip Rocky-9.5-x86_64-dvd.iso root@192.168.21.130:/
-
 su
 dnf install epel-release -y
 dnf install htop atop screen -y
@@ -73,9 +71,11 @@ mkdir /var/lib/tftpboot/pxelinux.cfg
 
 cd /
 mkdir /var/lib/tftpboot/clonezilla
+wget https://sourceforge.net/projects/clonezilla/files/clonezilla_live_stable/3.2.0-5/clonezilla-live-3.2.0-5-amd64.zip
 mv clonezilla-live-3.2.0-5-amd64.zip /var/lib/tftpboot/clonezilla/
 cd /var/lib/tftpboot/clonezilla/
 unzip clonezilla-live-3.2.0-5-amd64.zip 
+rm -rf clonezilla-live-3.2.0-5-amd64.zip
 
 vim /var/lib/tftpboot/pxelinux.cfg/default
 **************************************
@@ -87,7 +87,7 @@ ONTIMEOUT local
 menu title ########## PXE Boot Menu ###
 
 label 1
-menu label ^1) Install Red Hat Enterprise Linux 9 Kickstart
+menu label ^1) Install Rocky 9 Kickstart
 kernel rhel9/vmlinuz
 append initrd=rhel9/initrd.img showopts inst.ks=nfs:192.168.21.130:/ks/rhel9.cfg ip-dhcp net.ifnames=0 biosdevname=0 
 
@@ -129,18 +129,17 @@ vim /etc/exports
 
 vim  /ks/rhel9.cfg
 **************************************
-## copy from rehel9.cfg file
+## copy from rhel9.cfg file
 **************************************
 
 exportfs -r
 exportfs -v
 systemctl enable nfs-server.service  --now
 systemctl enable dnsmasq.service --now
-systemctl enable vsftpd --now
 systemctl enable httpd --now
+systemctl status nfs-server.service
+systemctl status dnsmasq.service
 systemctl status httpd
-systemctl status vsftpd
-systemctl status dnsmasq.service 
 tail -f /var/log/messages 
 
 ##############################################################################################################################################################
@@ -157,9 +156,9 @@ ADD Windows in Pxe server
 
 # chmod 755 /data/winos/win10/*
 
-# smbclient -U root -L 192.168.21.130
-
 # smbpasswd -a root
+
+# smbclient -U root -L 192.168.21.130
 
 # chown -R root:root /data
 
@@ -192,10 +191,17 @@ Add this in samba.conf file
 
 #  cd win10/
 
-# mkdir /var/lib/tftpboot/networkboot-win10
+# mkdir /var/lib/tftpboot/networkboot-win10auto
 
 ** Generate Windows PE iso file in Windows 10 operating system. Here we will generate two iso file, one for auto and another for custom installation.
 ** ADK (Assessment and Deployment Kit) is required to create Windows PE iso. Download ADK kit from Microsoft site and install it on windows 10 system.
+Direct link :- https://go.microsoft.com/fwlink/?linkid=2196127
+
+** Winpe also needed to download, without it copye will not work
+Direct link :- https://go.microsoft.com/fwlink/?linkid=2196224
+
+Or get from here
+Link : https://www.manageengine.com/products/desktop-central/os-imaging-deployment/how-to-install-winpe-tool.html
 ** Once the installation done, run Deployment and Imaging Tools Environment as Administrator and execute below command to create working directories for Win PE.
 
 ***************************************************************This steps for 64 Bit processor***************************
@@ -211,7 +217,7 @@ notepad c:\WinPE_amd64\mount\Windows\System32\Startnet.cmd
 
 Dism /Unmount-Image /MountDir:"c:\WinPE_amd64\mount" /commit
 
-MakeWinPEMedia /ISO c:\WinPE_amd64 c:\winpe.iso
+MakeWinPEMedia /ISO c:\WinPE_amd64 c:\winpeauto.iso
 
 **************************************************************************************************************
 
