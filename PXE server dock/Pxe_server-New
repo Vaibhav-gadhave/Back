@@ -140,6 +140,10 @@ systemctl enable httpd --now
 systemctl status nfs-server.service
 systemctl status dnsmasq.service
 systemctl status httpd
+<<<<<<< HEAD
+=======
+systemctl status dnsmasq.service 
+>>>>>>> 91f1863 (mistakes removed from pxe dockument)
 tail -f /var/log/messages 
 
 ##############################################################################################################################################################
