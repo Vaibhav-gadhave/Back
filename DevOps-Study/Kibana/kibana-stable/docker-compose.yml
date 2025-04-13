@@ -4,6 +4,9 @@
 # https://github.com/evermight/elastic-stack-docker-part-two/blob/main/docker-compose.yml
 
 
+# Username:- Elastic
+# Password:- Passwd@123#
+
 volumes:
   certs:
     driver: local
