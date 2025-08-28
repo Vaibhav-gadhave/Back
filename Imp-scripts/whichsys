@@ -1,0 +1,10 @@
+#!/bin/bash
+# Usage: ./whichsys <name>
+
+# Ask user for the file path
+read -p "Enter the file path: " FILE
+
+# Search for the input name (as a whole word) in the file and display the matching line
+echo -e "---------------------------------"
+grep -w "$1" "$FILE"
+echo -e "---------------------------------"
