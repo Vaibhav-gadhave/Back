@@ -7,7 +7,7 @@ Vagrant.configure("2") do |config|
   # Jenkins Master Node
   config.vm.define "master" do |master|
     master.vm.hostname = "master"
-    master.vm.box = "alvistack/ubuntu-24.04"
+    master.vm.box = "bento/ubuntu-22.04"
     master.vm.network :private_network, ip: "192.168.56.101"
     
     # Provisioning script for updating and upgrading
@@ -24,7 +24,7 @@ Vagrant.configure("2") do |config|
   # Slave and Nexus
   config.vm.define "node" do |node|
     node.vm.hostname = "node"
-    node.vm.box = "alvistack/ubuntu-24.04"
+    node.vm.box = "bento/ubuntu-22.04"
     node.vm.network :private_network, ip: "192.168.56.102"
 
     # Provisioning script for updating and upgrading
@@ -42,7 +42,7 @@ Vagrant.configure("2") do |config|
   # SonarQube
   config.vm.define "sonar_qube" do |sonar|
     sonar.vm.hostname = "sonar"
-    sonar.vm.box = "alvistack/ubuntu-24.04"
+    sonar.vm.box = "bento/ubuntu-22.04"
     sonar.vm.network :private_network, ip: "192.168.56.103"
     
     # Provisioning script for updating and upgrading

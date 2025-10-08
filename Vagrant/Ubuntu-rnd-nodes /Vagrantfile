@@ -7,7 +7,7 @@ Vagrant.configure("2") do |config|
   # Jenkins Master Node
   config.vm.define "master" do |master|
     master.vm.hostname = "master"
-    master.vm.box = "alvistack/ubuntu-24.04"
+    master.vm.box = "bento/ubuntu-22.04"
     master.vm.network :private_network, ip: "192.168.56.101"
     
     # Prevent IP conflicts by assigning a fixed MAC address (Optional)
@@ -45,7 +45,7 @@ Vagrant.configure("2") do |config|
   # SonarQube
   config.vm.define "sonar_qube" do |sonar|
     sonar.vm.hostname = "sonar"
-    sonar.vm.box = "alvistack/ubuntu-24.04"
+    sonar.vm.box = "bento/ubuntu-22.04"
     sonar.vm.network :private_network, ip: "192.168.56.103"
     
     # Prevent IP conflicts by assigning a fixed MAC address (Optional)
