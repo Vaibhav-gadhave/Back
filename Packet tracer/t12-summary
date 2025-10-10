@@ -1,0 +1,92 @@
+-----------------------------------------
+Router 1
+-----------------------------------------
+enable
+configure terminal
+
+interface GigabitEthernet0/0
+ ip address 192.168.1.1 255.255.255.0
+ no shutdown
+ exit
+ interface Serial0/1/0
+ ip address 11.0.0.2 255.255.0.0
+ exit
+ ip route 192.168.2.0 255.255.255.0 11.0.0.3
+ ip route 192.168.3.0 255.255.255.0 11.0.0.3
+ ip route 192.168.4.0 255.255.255.0 11.0.0.3
+
+ 
+ ---------------------------------------
+ Router 2
+ -----------------------------------------
+enable
+configure terminal
+
+interface GigabitEthernet0/0
+ ip address 192.168.2.1 255.255.255.0
+ no shutdown
+ exit
+ interface Serial0/1/0
+ ip address 11.0.0.3 255.255.0.0
+ exit
+ interface Serial0/1/1
+ ip address 12.0.0.2 255.255.0.0
+ exit
+ ip route 192.168.1.0 255.255.255.0 11.0.0.2
+ ip route 192.168.3.0 255.255.255.0 12.0.0.3
+ ip route 192.168.4.0 255.255.255.0 12.0.0.3
+
+ 
+ ---------------------------------------
+ Router 3
+ -----------------------------------------
+enable
+configure terminal
+
+interface GigabitEthernet0/0
+ ip address 192.168.3.1 255.255.255.0
+ no shutdown
+ exit
+ interface Serial0/1/0
+ ip address 12.0.0.3 255.255.0.0
+ exit
+ interface Serial0/1/1
+ ip address 13.0.0.2 255.255.0.0
+ exit
+ ip route 192.168.1.0 255.255.255.0 12.0.0.2
+ ip route 192.168.2.0 255.255.255.0 12.0.0.2
+ ip route 192.168.4.0 255.255.255.0 13.0.0.3
+ 
+ 
+ ---------------------------------------
+ Router 4
+ -----------------------------------------
+enable
+configure terminal
+
+interface GigabitEthernet0/0
+ ip address 192.168.4.1 255.255.255.0
+ no shutdown
+ exit
+ interface Serial0/1/0
+ ip address 11.0.0.2 255.255.0.0
+ exit
+ ip route 192.168.1.0 255.255.255.0 13.0.0.2
+ ip route 192.168.2.0 255.255.255.0 13.0.0.2
+ ip route 192.168.3.0 255.255.255.0 13.0.0.2
+
+ 
+ ---------------------------------------
+ 
+ IP on system 1
+ 
+ 192.168.1.10
+ 255.255.255.0
+ 192.168.1.1
+ 
+ 
+ IP on system 2
+ 
+ 192.168.2.10
+ 255.255.255.0
+ 192.168.2.1
