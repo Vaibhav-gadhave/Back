@@ -1,0 +1,94 @@
+-----------------------------------------
+Switch
+-----------------------------------------
+enable
+
+show vlan
+
+configure terminal
+
+vlan 10
+name tech
+exit
+
+vlan 11
+name data
+exit 
+
+vlan 12
+name thinclient
+exit
+ 
+interface FastEthernet0/1      # Replace with your port, e.g., Fa0/1
+switchport mode access
+switchport access vlan 10      # The VLAN ID you created above
+exit
+
+interface FastEthernet0/2      
+switchport mode access
+switchport access vlan 11      
+exit
+
+interface FastEthernet0/3      
+switchport mode access
+switchport access vlan 12      
+exit
+
+-------------------------------------------------------------------------------------
+
+interface range FastEthernet0/1 - 12   # Assigns Fa0/1 through Fa0/12
+switchport mode access
+switchport access vlan 10             # The same VLAN ID
+exit
+
+exit
+
+show vlan
+
+show mac address-table
+
+-------------------------------------- remove port fom vlan -----------------------------------------------
+ 
+enable
+configure terminal
+interface FastEthernet0/1
+no switchport access vlan 10
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+

@@ -1,0 +1,62 @@
+Basic Cisco Switch Commands
+1. Accessing the Switch
+Login to switch console
+
+enable — Enter Privileged EXEC mode
+
+configure terminal — Enter Global Configuration mode
+
+2. VLAN Configuration
+vlan <vlan-id> — Create VLAN
+
+name <vlan-name> — Name the VLAN
+
+show vlan — Show VLAN configuration and assignments
+
+exit — Exit VLAN configuration mode
+
+3. Port Configuration
+interface <interface-id> — Enter interface configuration mode (e.g., interface FastEthernet0/1)
+
+switchport mode access — Set port as access port
+
+switchport access vlan <vlan-id> — Assign port to VLAN
+
+shutdown — Disable interface
+
+no shutdown — Enable interface
+
+4. Viewing Status
+show running-config — Show current active configuration
+
+show startup-config — Show saved startup configuration
+
+show interfaces — Show interface status and statistics
+
+show mac address-table — Show MAC address table
+
+5. Saving Configuration
+copy running-config startup-config — Save current config to startup config
+
+write memory — Alternate command for saving (older IOS)
+
+6. Assigning IP Address (for management)
+interface vlan <vlan-id>
+
+ip address <ip> <subnet mask>
+
+no shutdown — Bring VLAN interface up
+
+7. Resetting and Troubleshooting
+reload — Reboot the switch
+
+ping <ip-address> — Test connectivity
+
+show cdp neighbors — Show connected Cisco devices (if CDP enabled)
+
+show arp — View ARP table
+
+8. Miscellaneous
+exit — Exit configuration or mode
+
+help or ? — Show available commands/help

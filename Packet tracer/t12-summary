@@ -9,13 +9,14 @@ interface GigabitEthernet0/0
  no shutdown
  exit
  interface Serial0/1/0
- ip address 11.0.0.2 255.255.0.0
+ ip address 11.0.0.2 255.0.0.0
  exit
+ ip route 12.0.0.0 255.0.0.0 11.0.0.3
+ ip route 13.0.0.0 255.0.0.0 12.0.0.3 
  ip route 192.168.2.0 255.255.255.0 11.0.0.3
  ip route 192.168.3.0 255.255.255.0 11.0.0.3
  ip route 192.168.4.0 255.255.255.0 11.0.0.3
 
- 
  ---------------------------------------
  Router 2
  -----------------------------------------
@@ -27,16 +28,16 @@ interface GigabitEthernet0/0
  no shutdown
  exit
  interface Serial0/1/0
- ip address 11.0.0.3 255.255.0.0
+ ip address 11.0.0.3 255.0.0.0
  exit
  interface Serial0/1/1
- ip address 12.0.0.2 255.255.0.0
+ ip address 12.0.0.2 255.0.0.0
  exit
+ ip route 13.0.0.0 255.0.0.0 12.0.0.3
  ip route 192.168.1.0 255.255.255.0 11.0.0.2
  ip route 192.168.3.0 255.255.255.0 12.0.0.3
  ip route 192.168.4.0 255.255.255.0 12.0.0.3
 
- 
  ---------------------------------------
  Router 3
  -----------------------------------------
@@ -48,15 +49,15 @@ interface GigabitEthernet0/0
  no shutdown
  exit
  interface Serial0/1/0
- ip address 12.0.0.3 255.255.0.0
+ ip address 12.0.0.3 255.0.0.0
  exit
  interface Serial0/1/1
- ip address 13.0.0.2 255.255.0.0
+ ip address 13.0.0.2 255.0.0.0
  exit
+ ip route 11.0.0.0 255.0.0.0 12.0.0.2
  ip route 192.168.1.0 255.255.255.0 12.0.0.2
  ip route 192.168.2.0 255.255.255.0 12.0.0.2
  ip route 192.168.4.0 255.255.255.0 13.0.0.3
- 
  
  ---------------------------------------
  Router 4
@@ -69,24 +70,144 @@ interface GigabitEthernet0/0
  no shutdown
  exit
  interface Serial0/1/0
- ip address 11.0.0.2 255.255.0.0
+ ip address 11.0.0.2 255.0.0.0
  exit
+ ip route 12.0.0.0 255.0.0.0 13.0.0.2
+ ip route 11.0.0.0 255.0.0.0 12.0.0.2
  ip route 192.168.1.0 255.255.255.0 13.0.0.2
  ip route 192.168.2.0 255.255.255.0 13.0.0.2
  ip route 192.168.3.0 255.255.255.0 13.0.0.2
 
  
- ---------------------------------------
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
  
- IP on system 1
+ -----------------------------------------------------Router0-----------------------------------------
+Router>enable
+Router#config t
+Enter configuration commands, one per line. End with CNTL/Z.
+Router(config)#int fa 0/0
+Router(config-if)#ip add 192.168.10.1 255.255.255.0
+Router(config-if)#no shut
+                       
+Router(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/0, changed state to up
+                                 
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
+
+Router(config-if)#ex
+Router(config)#int s 0/0/0
+Router(config-if)#ip add 10.0.0.2 255.0.0.0
+Router(config-if)#no shut
+
+%LINK-5-CHANGED: Interface Serial0/0/0, changed state to down
+Router(config-if)#ex
+
+Router(config)#ip route 192.168.11.0 255.255.255.0 10.0.0.3
+Router(config)#ip route 192.168.12.0 255.255.255.0 10.0.0.3
+Router(config)#ip route 11.0.0.0 255.0.0.0 10.0.0.3
+Router(config)#ex
+Router#
+
+
+-----------------------------------------------------Router1----------------------------------------------
+Router>enable
+Router#conf t
+Enter configuration commands, one per line. End with CNTL/Z.
+Router(config)#int fa 0/0
+Router(config-if)#ip add 192.168.11.1 255.255.255.0
+Router(config-if)#no shut
+Router(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/0, changed state to up
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
+Router(config-if)#ex
+Router(config)#int s 0/0/0
+Router(config-if)#ip add 10.0.0.3 255.0.0.0
+Router(config-if)#no shut
+%LINK-5-CHANGED: Interface Serial0/0/0, changed state to up
+Router(config-if)#ex
+Router(config)#int s 0/0/1
+Router(config-if)#ip add 11.0.0.2 255.0.0.0
+Router(config-if)#no shut
+%LINK-5-CHANGED: Interface Serial0/0/1, changed state to down
+Router(config-if)#ex
+
+Router(config)#ip route 192.168.10.0 255.255.255.0 10.0.0.2
+Router(config)#ip route 192.168.12.0 255.255.255.0 11.0.0.3
+Router(config)#ex
+Router#
+
+
+-----------------------------------------------------Router2----------------------------------------------
+Router>enable
+Router#conf t
+Enter configuration commands, one per line. End with CNTL/Z.
+Router(config)#int fa 0/0
+Router(config-if)#ip add 192.168.12.1 255.255.255.0
+Router(config-if)#no shut
+
+Router(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/0, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
+Router(config-if)#ex
+Router(config)#int s 0/0/0
+Router(config-if)#ip add 11.0.0.3 255.0.0.0
+Router(config-if)#no shut
+
+%LINK-5-CHANGED: Interface Serial0/0/0, changed state to up
+
+Router(config-if)#ex
+Router(config)#ip route 192.168.11.0 255.255.255.0 11.0.0.2
+Router(config)#ip route 192.168.10.0 255.255.255.0 11.0.0.2
+Router(config)#10.0.0.0 255.255.255.0 11.0.0.2
+Router(config)#ip route 10.0.0.0 255.0.0.0 11.0.0.2
+Router(config)#ex
  
- 192.168.1.10
- 255.255.255.0
- 192.168.1.1
  
  
- IP on system 2
  
- 192.168.2.10
- 255.255.255.0
- 192.168.2.1
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
