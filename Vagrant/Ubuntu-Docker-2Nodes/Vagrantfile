@@ -2,48 +2,33 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
+  config.vm.box = "bento/ubuntu-22.04"
   config.vm.box_check_update = false
 
-  # Ubuntu 22.04 Node 1
-  config.vm.define "node1" do |node1|
-    node1.vm.hostname = "node1"
-    node1.vm.box = "bento/ubuntu-22.04"
-    node1.vm.network :private_network, ip: "192.168.56.111"
+  # Define VM properties as a hash for scalability and easy updates
+  nodes = [    { name: "node1", ip: "192.168.56.111" },
+    { name: "node2", ip: "192.168.56.112" }
+  ]
 
-    node1.vm.provision "shell", inline: <<-SHELL
-      sudo apt update
-#      sudo apt upgrade -y
-      sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
-      curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-      echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-      sudo apt update
-      sudo apt install vim net-tools screen htop -y
-      sudo apt install -y docker-ce docker-ce-cli containerd.io
-      sudo usermod -aG docker vagrant
-      sudo systemctl enable docker
-      sudo systemctl start docker
-    SHELL
-  end
+  nodes.each do |node|
+    config.vm.define node[:name] do |n|
+      n.vm.hostname = node[:name]
+      n.vm.network :private_network, ip: node[:ip]
 
-  # Ubuntu 22.04 Node 2
-  config.vm.define "node2" do |node2|
-    node2.vm.hostname = "node2"
-    node2.vm.box = "bento/ubuntu-22.04"
-    node2.vm.network :private_network, ip: "192.168.56.112"
-
-    node2.vm.provision "shell", inline: <<-SHELL
-      sudo apt update
-#      sudo apt upgrade -y
-      sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
-      curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-      echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-      sudo apt update
-      sudo apt install vim net-tools screen htop -y
-      sudo apt install -y docker-ce docker-ce-cli containerd.io
-      sudo usermod -aG docker vagrant
-      sudo systemctl enable docker
-      sudo systemctl start docker
-    SHELL
+      n.vm.provision "shell", inline: <<-SHELL
+        sudo apt update
+        sudo apt upgrade -y
+        sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
+        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+        echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+        sudo apt update
+        sudo apt install vim net-tools screen htop -y
+        sudo apt install -y docker-ce docker-ce-cli containerd.io
+        sudo usermod -aG docker vagrant
+        sudo systemctl enable docker
+        sudo systemctl start docker
+      SHELL
+    end
   end
 
   config.vm.provider "virtualbox" do |vb|
@@ -51,4 +36,3 @@ Vagrant.configure("2") do |config|
     vb.cpus = 3
   end
 end
-
