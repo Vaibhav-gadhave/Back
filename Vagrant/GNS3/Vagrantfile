@@ -1,0 +1,29 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "bento/ubuntu-22.04"
+  config.vm.box_check_update = false
+
+  # Define VM properties as a hash for scalability and easy updates
+  nodes = [    { name: "node1", ip: "192.168.56.113" }
+  ]
+
+  nodes.each do |node|
+    config.vm.define node[:name] do |n|
+      n.vm.hostname = node[:name]
+      n.vm.network :private_network, ip: node[:ip]
+
+      n.vm.provision "shell", inline: <<-SHELL
+        sudo apt update
+        sudo apt upgrade -y
+        sudo apt install vim net-tools screen htop -y
+      SHELL
+    end
+  end
+
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = 10096
+    vb.cpus = 4
+  end
+end
